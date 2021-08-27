@@ -28,8 +28,8 @@ jobs:
           ~/.cabal/packages
           ~/.cabal/store
           ~/.cabal/bin
-          haskell/dist
-          haskell/dist-newstyle
+          dist
+          dist-newstyle
         key: ${{ runner.os }}-${{ matrix.ghc-ver }}-${{ matrix.cabal-ver }}-${{ hashFiles('**') }}
         restore-keys: ${{ runner.os }}-${{ matrix.ghc-ver }}-${{ matrix.cabal-ver }}-
 
