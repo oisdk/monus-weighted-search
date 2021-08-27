@@ -9,24 +9,19 @@ import Test.Tasty.QuickCheck hiding (tabulate)
 import Test.Tasty
 
 import Data.List (sort)
-import Data.Foldable (toList)
-import Control.Monad (ap,join)
-import Control.Applicative ((<|>),liftA2)
 
 import Data.WeightedGraph.AdjList
 
--- import qualified Data.Heap as H
--- import qualified Control.Monad.Dijkstra as M
--- import qualified Control.Monad.Heap as MH
+import qualified MonusWeightedSearch.Internal.Heap as H
+import qualified MonusWeightedSearch.Dijkstra as M
 
 
 import Data.Monus
 import Data.Monus.Prob
--- import Data.Monus.Dist
 
 
--- prop_monadDijkstra :: AdjList -> Property
--- prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
+prop_monadDijkstra :: AdjList -> Property
+prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
 
 prop_probOrdMonoid :: Prob -> Prob -> Property
 prop_probOrdMonoid x y = (x <= x <> y) .&&. (y <= x <> y)
