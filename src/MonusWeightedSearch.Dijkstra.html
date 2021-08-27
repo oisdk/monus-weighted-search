@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">MonusWeightedSearch.Dijkstra</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#unique"><span class="hs-identifier">unique</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#dijkstra"><span class="hs-identifier">dijkstra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Strict</span></span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Applicative</span></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Control.Monad.Star.html"><span class="hs-identifier">Control.Monad.Star</span></a></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Writer</span></span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Data.Monus.Dist.html"><span class="hs-identifier">Data.Monus.Dist</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Set</span></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Data.WeightedGraph.html"><span class="hs-identifier">Data.WeightedGraph</span></a></span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Control.Monad.Heap.html"><span class="hs-identifier">Control.Monad.Heap</span></a></span><span>
+</span><span id="line-15"></span><span>
+</span><span id="line-16"></span><span id="local-6989586621679079925"><span id="local-6989586621679079926"><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#unique"><span class="hs-identifier hs-type">unique</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679079926"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679079926"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Monad.Heap.html#HeapT"><span class="hs-identifier hs-type">HeapT</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679079925"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Set</span></span><span> </span><span class="annot"><a href="#local-6989586621679079926"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><a href="#local-6989586621679079926"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-17"></span><span id="unique"><span class="annot"><span class="annottext">unique :: forall a w. Ord a =&gt; a -&gt; HeapT w (State (Set a)) a
+</span><a href="MonusWeightedSearch.Dijkstra.html#unique"><span class="hs-identifier hs-var hs-var">unique</span></a></span></span><span> </span><span id="local-6989586621679079822"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079822"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-18"></span><span>  </span><span id="local-6989586621679079821"><span class="annot"><span class="annottext">Set a
+</span><a href="#local-6989586621679079821"><span class="hs-identifier hs-var">seen</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">HeapT w (State (Set a)) (Set a)
+forall s (m :: * -&gt; *). MonadState s m =&gt; m s
+</span><span class="hs-identifier hs-var">get</span></span><span>
+</span><span id="line-19"></span><span>  </span><span class="annot"><span class="annottext">Bool -&gt; HeapT w (State (Set a)) ()
+forall (f :: * -&gt; *). Alternative f =&gt; Bool -&gt; f ()
+</span><span class="hs-identifier hs-var">guard</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; Set a -&gt; Bool
+forall a. Ord a =&gt; a -&gt; Set a -&gt; Bool
+</span><span class="hs-identifier hs-var">Set.notMember</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079822"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Set a
+</span><a href="#local-6989586621679079821"><span class="hs-identifier hs-var">seen</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-20"></span><span>  </span><span class="annot"><span class="annottext">(Set a -&gt; Set a) -&gt; HeapT w (State (Set a)) ()
+forall s (m :: * -&gt; *). MonadState s m =&gt; (s -&gt; s) -&gt; m ()
+</span><span class="hs-identifier hs-var">modify</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; Set a -&gt; Set a
+forall a. Ord a =&gt; a -&gt; Set a -&gt; Set a
+</span><span class="hs-identifier hs-var">Set.insert</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079822"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-21"></span><span>  </span><span class="hs-identifier">pure</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079822"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-22"></span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#unique"><span class="hs-pragma hs-type">unique</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span id="local-6989586621679079891"><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#dijkstra"><span class="hs-identifier hs-type">dijkstra</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679079891"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Data.WeightedGraph.html#Graph"><span class="hs-identifier hs-type">Graph</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679079891"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679079891"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679079891"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Data.Monus.Dist.html#Dist"><span class="hs-identifier hs-type">Dist</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span></span><span>
+</span><span id="line-25"></span><span id="dijkstra"><span class="annot"><span class="annottext">dijkstra :: forall a. Ord a =&gt; Graph a -&gt; Graph a
+</span><a href="MonusWeightedSearch.Dijkstra.html#dijkstra"><span class="hs-identifier hs-var hs-var">dijkstra</span></a></span></span><span> </span><span id="local-6989586621679079802"><span class="annot"><span class="annottext">Graph a
+</span><a href="#local-6989586621679079802"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span id="local-6989586621679079801"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079801"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-26"></span><span>  </span><span class="annot"><span class="annottext">State (Set a) [(a, Dist)] -&gt; Set a -&gt; [(a, Dist)]
+forall s a. State s a -&gt; s -&gt; a
+</span><span class="hs-identifier hs-var">evalState</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">HeapT Dist (State (Set a)) a -&gt; State (Set a) [(a, Dist)]
+forall (m :: * -&gt; *) w a.
+(Monad m, Monus w) =&gt;
+HeapT w m a -&gt; m [(a, w)]
+</span><a href="Control.Monad.Heap.html#searchT"><span class="hs-identifier hs-var">searchT</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; HeapT Dist (State (Set a)) a)
+-&gt; a -&gt; HeapT Dist (State (Set a)) a
+forall (m :: * -&gt; *) a. MonadPlus m =&gt; (a -&gt; m a) -&gt; a -&gt; m a
+</span><a href="Control.Monad.Star.html#star"><span class="hs-identifier hs-var">star</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((a, Dist) -&gt; HeapT Dist (State (Set a)) a)
+-&gt; [(a, Dist)] -&gt; HeapT Dist (State (Set a)) a
+forall (f :: * -&gt; *) a b. Alternative f =&gt; (a -&gt; f b) -&gt; [a] -&gt; f b
+</span><a href="MonusWeightedSearch.Dijkstra.html#choices"><span class="hs-identifier hs-var">choices</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span id="local-6989586621679079796"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079796"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span id="local-6989586621679079795"><span class="annot"><span class="annottext">Dist
+</span><a href="#local-6989586621679079795"><span class="hs-identifier hs-var">w</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Dist -&gt; HeapT Dist (State (Set a)) ()
+forall w (m :: * -&gt; *). MonadWriter w m =&gt; w -&gt; m ()
+</span><span class="hs-identifier hs-var">tell</span></span><span> </span><span class="annot"><span class="annottext">Dist
+</span><a href="#local-6989586621679079795"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">HeapT Dist (State (Set a)) ()
+-&gt; HeapT Dist (State (Set a)) a -&gt; HeapT Dist (State (Set a)) a
+forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
+</span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; HeapT Dist (State (Set a)) a
+forall a w. Ord a =&gt; a -&gt; HeapT w (State (Set a)) a
+</span><a href="MonusWeightedSearch.Dijkstra.html#unique"><span class="hs-identifier hs-var">unique</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079796"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">([(a, Dist)] -&gt; HeapT Dist (State (Set a)) a)
+-&gt; Graph a -&gt; a -&gt; HeapT Dist (State (Set a)) a
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Graph a
+</span><a href="#local-6989586621679079802"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(a -&gt; HeapT Dist (State (Set a)) a)
+-&gt; HeapT Dist (State (Set a)) a -&gt; HeapT Dist (State (Set a)) a
+forall (m :: * -&gt; *) a b. Monad m =&gt; (a -&gt; m b) -&gt; m a -&gt; m b
+</span><span class="hs-operator hs-var">=&lt;&lt;</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; HeapT Dist (State (Set a)) a
+forall a w. Ord a =&gt; a -&gt; HeapT w (State (Set a)) a
+</span><a href="MonusWeightedSearch.Dijkstra.html#unique"><span class="hs-identifier hs-var">unique</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679079801"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Set a
+forall a. Set a
+</span><span class="hs-identifier hs-var">Set.empty</span></span><span>
+</span><span id="line-27"></span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#dijkstra"><span class="hs-pragma hs-type">dijkstra</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-28"></span><span>
+</span><span id="line-29"></span><span id="local-6989586621679079871"><span id="local-6989586621679079872"><span id="local-6989586621679079873"><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#choices"><span class="hs-identifier hs-type">choices</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alternative</span></span><span> </span><span class="annot"><a href="#local-6989586621679079873"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679079872"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679079873"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679079871"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679079872"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679079873"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679079871"><span class="hs-identifier hs-type">b</span></a></span></span></span></span><span>
+</span><span id="line-30"></span><span id="choices"><span class="annot"><span class="annottext">choices :: forall (f :: * -&gt; *) a b. Alternative f =&gt; (a -&gt; f b) -&gt; [a] -&gt; f b
+</span><a href="MonusWeightedSearch.Dijkstra.html#choices"><span class="hs-identifier hs-var hs-var">choices</span></a></span></span><span> </span><span id="local-6989586621679079785"><span class="annot"><span class="annottext">a -&gt; f b
+</span><a href="#local-6989586621679079785"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(a -&gt; f b -&gt; f b) -&gt; f b -&gt; [a] -&gt; f b
+forall (t :: * -&gt; *) a b.
+Foldable t =&gt;
+(a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b
+</span><span class="hs-identifier hs-var">foldr</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">f b -&gt; f b -&gt; f b
+forall (f :: * -&gt; *) a. Alternative f =&gt; f a -&gt; f a -&gt; f a
+</span><span class="hs-operator hs-var">(&lt;|&gt;)</span></span><span> </span><span class="annot"><span class="annottext">(f b -&gt; f b -&gt; f b) -&gt; (a -&gt; f b) -&gt; a -&gt; f b -&gt; f b
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; f b
+</span><a href="#local-6989586621679079785"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">f b
+forall (f :: * -&gt; *) a. Alternative f =&gt; f a
+</span><span class="hs-identifier hs-var">empty</span></span><span>
+</span><span id="line-31"></span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Dijkstra.html#choices"><span class="hs-pragma hs-type">choices</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-32"></span></pre></body></html>
