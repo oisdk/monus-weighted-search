@@ -24,11 +24,40 @@ import Control.Monad.Cont
 import Test.QuickCheck
 import MonusWeightedSearch.Internal.CoerceOperators
 import Data.Functor.Classes
+import Control.DeepSeq
+import GHC.Generics
+import Data.Data
 
 infixr 5 :-
-data ListCons a b = Nil | a :- b
-  deriving (Functor, Foldable, Traversable, Eq, Ord, Show, Read)
+data ListCons a b = Nil | a :- !b
+  deriving (Functor, Foldable, Traversable, Eq, Ord, Show, Read, Data, Typeable, Generic, Generic1)
 -- ^The list constructor
+
+instance (NFData a, NFData b) => NFData (ListCons a b) where
+  rnf Nil = ()
+  rnf (x :- xs) = rnf x `seq` rnf xs
+  {-# INLINE rnf #-}
+
+instance Eq2 ListCons where
+  liftEq2 lhs rhs Nil Nil = True
+  liftEq2 lhs rhs (x :- xs) (y :- ys) = lhs x y && rhs xs ys
+  liftEq2 _ _ _ _ = False
+  {-# INLINE liftEq2 #-}
+
+instance Eq a => Eq1 (ListCons a) where
+  liftEq = liftEq2 (==)
+  {-# INLINE liftEq #-}
+  
+instance Ord2 ListCons where
+  liftCompare2 lhs rhs Nil Nil = EQ
+  liftCompare2 lhs rhs (x :- xs) (y :- ys) = lhs x y <> rhs xs ys
+  liftCompare2 _ _ Nil _ = LT
+  liftCompare2 _ _ _ Nil = GT
+  {-# INLINE liftCompare2 #-}
+  
+instance Ord a => Ord1 (ListCons a) where
+  liftCompare = liftCompare2 compare
+  {-# INLINE liftCompare #-}
 
 instance Bifunctor ListCons where
   bimap f g Nil = Nil
@@ -37,33 +66,34 @@ instance Bifunctor ListCons where
   
 newtype ListT m a
   = ListT { runListT :: m (ListCons a (ListT m a)) }
+  deriving (Typeable, Generic)
 -- ^The list monad transformer
+
+instance (forall x. NFData x => NFData (m x), NFData a) => NFData (ListT m a) where
+  rnf = rnf .# runListT
+  {-# INLINE rnf #-}
   
 unfoldrM :: Functor m => (b -> m (Maybe (a, b))) -> b -> ListT m a
 unfoldrM f = ListT #. fmap (maybe Nil (uncurry (:-) . second (unfoldrM f))) . f
+{-# INLINE unfoldrM #-}
 
 instance (forall x. Show x => Show (m x), Show a) => Show (ListT m a) where
   showsPrec n (ListT xs) = showParen (n > 10) (showString "ListT " . showsPrec 11 xs)
   
 instance Eq1 m => Eq1 (ListT m) where
-  liftEq eq (ListT xs) (ListT ys) = liftEq f xs ys
-    where
-      f Nil Nil = True
-      f (x :- xs) (y :- ys) = eq x y && liftEq eq xs ys
-      f _ _ = False
+  liftEq eq (ListT xs) (ListT ys) = liftEq (liftEq2 eq (liftEq eq)) xs ys
   {-# INLINE liftEq #-}
       
 instance Ord1 m => Ord1 (ListT m) where
-  liftCompare cmp (ListT xs) (ListT ys) = liftCompare f xs ys
-    where
-      f Nil Nil = EQ
-      f (x :- xs) (y :- ys) = cmp x y <> liftCompare cmp xs ys
-      f Nil _ = LT
-      f _ Nil = GT
+  liftCompare cmp (ListT xs) (ListT ys) = liftCompare (liftCompare2 cmp (liftCompare cmp)) xs ys
   {-# INLINE liftCompare #-}
 
-instance (Eq1 m, Eq a) => Eq (ListT m a) where (==) = eq1
-instance (Ord1 m, Ord a) => Ord (ListT m a) where compare = compare1
+instance (Eq1 m, Eq a) => Eq (ListT m a) where
+  (==) = eq1
+  {-# INLINE (==) #-}
+instance (Ord1 m, Ord a) => Ord (ListT m a) where
+  compare = compare1
+  {-# INLINE compare #-}
 
 instance (Arbitrary1 m, Arbitrary a) => Arbitrary (ListT m a) where
   arbitrary = arbitrary1
@@ -108,7 +138,9 @@ instance Monad m => Applicative (ListT m) where
       h x y xs = pure (f x y :- ListT xs)
   {-# INLINE liftA2 #-}
   (*>) = liftA2 (const id)
+  {-# INLINE (*>)#-}
   (<*) = liftA2 const
+  {-# INLINE (<*) #-}
   
 instance Monad m => Monad (ListT m) where
   xs >>= f = ListT (foldrListT g (pure Nil) xs)

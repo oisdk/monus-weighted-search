@@ -9,9 +9,6 @@ module Control.Monad.Heap
   , pattern Heap
   , runHeap
 
-    -- * Recursion schemes
-  , HeapF(..)
-
     -- * Popping the smallest element
   , popMin
   , popMinT
@@ -48,10 +45,40 @@ import Test.QuickCheck
 import MonusWeightedSearch.Internal.CoerceOperators
 import MonusWeightedSearch.Internal.TestHelpers
 import Data.Functor.Classes
+import Data.Data
+import GHC.Generics
+import Control.DeepSeq
 
 infixr 5 :<
 data Node w a b = Leaf a | !w :< b
-  deriving (Show, Eq, Ord, Functor, Foldable, Traversable)
+  deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
+
+instance (NFData w, NFData a, NFData b) => NFData (Node w a b) where
+  rnf (Leaf x) = rnf x
+  rnf (x :< xs) = rnf x `seq` rnf xs
+  {-# INLINE rnf #-}
+  
+instance Eq w => Eq2 (Node w) where
+  liftEq2 eq _ (Leaf a) (Leaf b) = eq a b
+  liftEq2 _ _ (_ :< _) (Leaf _) = False
+  liftEq2 _ _ (Leaf _) (_ :< _) = False
+  liftEq2 _ eq (x :< xs) (y :< ys) = (x == y) && eq xs ys
+  {-# INLINE liftEq2 #-}
+  
+instance (Eq w, Eq a) => Eq1 (Node w a) where
+  liftEq = liftEq2 (==)
+  {-# INLINE liftEq #-}
+  
+instance Ord w => Ord2 (Node w) where
+  liftCompare2 cmp _ (Leaf a) (Leaf b) = cmp a b
+  liftCompare2 _ _ (_ :< _) (Leaf _) = GT
+  liftCompare2 _ _ (Leaf _) (_ :< _) = LT
+  liftCompare2 _ cmp (x :< xs) (y :< ys) = compare x y <> cmp xs ys
+  {-# INLINE liftCompare2 #-}
+  
+instance (Ord w, Ord a) => Ord1 (Node w a) where
+  liftCompare = liftCompare2 compare
+  {-# INLINE liftCompare #-}
 
 instance Bifunctor (Node w) where
   bimap f g (Leaf x) = Leaf (f x)
@@ -68,6 +95,11 @@ instance Bifunctor (Node w) where
   {-# INLINE second #-}
 
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
+  deriving (Typeable, Generic)
+
+instance (forall x. NFData x => NFData (m x), NFData w, NFData a) => NFData (HeapT w m a) where
+  rnf = rnf .# runHeapT
+  {-# INLINE rnf #-}
 
 instance (Arbitrary1 m, Arbitrary w, Arbitrary a) => Arbitrary (HeapT w m a) where
   arbitrary = arbitrary1
@@ -80,9 +112,6 @@ instance (Arbitrary1 m, Arbitrary w) => Arbitrary1 (HeapT w m) where
       go2f n ns = ListT <#$> liftArbitrary (liftA2 (:-) (go3 n) ns)
       go3 n | n <= 1 = fmap Leaf arb
       go3 n = frequency [(1, fmap Leaf arb), (n, liftA2 (:<) arbitrary (go1 n))]
-
-newtype HeapF w m a r = HeapF { runHeapF :: ListT m (Node w a r) } deriving Functor
-
 
 type Heap w = HeapT w Identity
 
@@ -104,20 +133,11 @@ instance (forall x. Show x => Show (m x), Show a, Show w) => Show (HeapT w m a) 
   showsPrec n (HeapT xs) = showParen (n > 10) (showString "HeapT " . showsPrec 11 xs)
   
 instance (Eq w, Eq1 m) => Eq1 (HeapT w m) where
-  liftEq eq (HeapT xs) (HeapT ys) = liftEq f xs ys
-    where
-      f (Leaf x) (Leaf y) = eq x y
-      f (x :< xs) (y :< ys) = (x == y) && liftEq eq xs ys
-      f _ _ = False
+  liftEq eq (HeapT xs) (HeapT ys) = liftEq (liftEq2 eq (liftEq eq)) xs ys
   {-# INLINE liftEq #-}
   
 instance (Ord w, Ord1 m) => Ord1 (HeapT w m) where
-  liftCompare cmp (HeapT xs) (HeapT ys) = liftCompare f xs ys
-    where
-      f (Leaf x) (Leaf y) = cmp x y
-      f (x :< xs) (y :< ys) = compare x y <> liftCompare cmp xs ys
-      f (Leaf _) _ = LT
-      f _ (Leaf _) = GT
+  liftCompare cmp (HeapT xs) (HeapT ys) = liftCompare (liftCompare2 cmp (liftCompare cmp)) xs ys
   {-# INLINE liftCompare #-}
 
 instance Functor m => Functor (HeapT w m) where

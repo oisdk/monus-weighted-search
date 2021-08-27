@@ -12,9 +12,11 @@ import GHC.Generics
 
 import Control.Applicative
 
+import Control.DeepSeq
+
 newtype Prob = Prob { runProb :: Ratio Natural }
   deriving stock (Eq, Data, Generic, Typeable)
-  deriving (Num, Fractional, Show, Read, Real, RealFrac) via Ratio Natural
+  deriving (Num, Fractional, Show, Read, Real, RealFrac, NFData) via Ratio Natural
   deriving Ord via Down (Ratio Natural)
   deriving (Semigroup, Monoid) via Product (Ratio Natural)
 
