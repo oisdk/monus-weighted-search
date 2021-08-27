@@ -1,4 +1,4 @@
-module Data.Coerce.Operators where
+module MonusWeightedSearch.Internal.CoerceOperators where
 
 import Data.Coerce
 

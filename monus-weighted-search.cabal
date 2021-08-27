@@ -12,7 +12,9 @@ library
                      , Data.Monus.Prob
                      , Data.Monus.Dist
                      , Control.Monad.Heap.List
-  other-modules:       Data.Coerce.Operators
+                     , Control.Monad.Heap
+                     , MonusWeightedSearch.Internal.CoerceOperators
+                     , MonusWeightedSearch.Internal.TestHelpers
   build-depends:       base >=4.13 && <5
                      , containers >=0.6.4 && <0.6.5
                      , QuickCheck >=2.14 && <2.15

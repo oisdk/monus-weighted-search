@@ -22,7 +22,7 @@ import Control.Monad.Reader
 import Control.Monad.Writer
 import Control.Monad.Cont
 import Test.QuickCheck
-import Data.Coerce.Operators
+import MonusWeightedSearch.Internal.CoerceOperators
 import Data.Functor.Classes
 
 infixr 5 :-
@@ -51,6 +51,7 @@ instance Eq1 m => Eq1 (ListT m) where
       f Nil Nil = True
       f (x :- xs) (y :- ys) = eq x y && liftEq eq xs ys
       f _ _ = False
+  {-# INLINE liftEq #-}
       
 instance Ord1 m => Ord1 (ListT m) where
   liftCompare cmp (ListT xs) (ListT ys) = liftCompare f xs ys
@@ -59,6 +60,7 @@ instance Ord1 m => Ord1 (ListT m) where
       f (x :- xs) (y :- ys) = cmp x y <> liftCompare cmp xs ys
       f Nil _ = LT
       f _ Nil = GT
+  {-# INLINE liftCompare #-}
 
 instance (Eq1 m, Eq a) => Eq (ListT m a) where (==) = eq1
 instance (Ord1 m, Ord a) => Ord (ListT m a) where compare = compare1
