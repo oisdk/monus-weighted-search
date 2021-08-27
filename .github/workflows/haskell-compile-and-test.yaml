@@ -54,4 +54,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3.7.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist-newstyle/build/x86_64-linux/ghc-${{ matrix.ghc-ver }}/haskell-0.1.0.0/doc/html/haskell
+        publish_dir: dist-newstyle/build/x86_64-linux/ghc-${{ matrix.ghc-ver }}/haskell-0.1.0.0/doc/html
