@@ -8,57 +8,17 @@ maintainer:          mail@doisinkidney.com
 build-type:          Simple
 
 library
-  exposed-modules:     Control.Monad.Search
-                     , Control.Monad.Dijkstra
-                     , Control.Monad.Heap
-                     , Control.Monad.Star
-                     , Control.Monad.List.Trans
-                     , Control.Monad.Sampling
-                     , Control.Monad.Levels
-                     , Control.Applicative.Free
-                     , Control.Applicative.Parallel
-                     , Control.Applicative.Exp
-                     , Data.Tree.Leafy
-                     , Data.Tree.Semiring
-                     , Data.Bag
-                     , Data.Poly.Display
-                     , Data.Dist
-                     , Data.Heap
-                     , Data.Monus
-                     , Data.Prob
-                     , Data.WeightedGraph
-                     , Data.WeightedGraph.AdjList
-                     , Data.Functor.Day.LiftA2
-                     , Data.Coerce.Operators
-                     , TestHelpers
-                     , Hyper
-                     , Control.Monad.LevelsT.Fold
-                     , Control.Monad.LevelsT.Concrete
-                     , Data.List.Display
-                     , Control.Monad.Heap.Display
-                     , Data.Traversable.Display
-                     , Control.Monad.Writer.Display
-                     , Data.Semiring
-                     , Data.Semiring.Literals
-                     , Data.Node
-                     , Control.Monad.State.Display
-                     , Control.Monad.Display
-                     , Control.Monad.Free.Display
+  exposed-modules:     Data.Monus
                      , Data.Monus.Prob
+                     , Data.Monus.Dist
   build-depends:       base >=4.13 && <5
                      , containers >=0.6.4 && <0.6.5
                      , QuickCheck >=2.14 && <2.15
                      , deepseq >= 1.4
                      , transformers >= 0.5
                      , mtl >= 2.2
-                     , binary-tree >=0.1
-                     , comonad >=5
-                     , recursion-schemes >=5.2
-                     , free >=5
                      , random >= 1.0
                      , array >= 0.5
-                     , hashtables >= 1.2.3.4
-                     , hashable >= 1.2.1
   default-language:    Haskell2010
   default-extensions:  DeriveFunctor
                      , DeriveFoldable
@@ -101,35 +61,3 @@ library
                -Wno-name-shadowing
                -Wno-unused-matches
                -O2
-
-benchmark bench
-  type: exitcode-stdio-1.0
-  main-is: bench.hs
-  hs-source-dirs:
-      bench
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -O2
-  build-depends:
-      base >=4.7 && <5
-    , monus-weighted-search
-    , containers
-    , criterion
-    , deepseq
-    , random
-  default-language: Haskell2010
-
-test-suite monus-weighted-search-tests
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  hs-source-dirs:
-      test
-  ghc-options: -Wall -fwarn-incomplete-record-updates -fwarn-incomplete-uni-patterns -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      QuickCheck >= 2.14
-    , monus-weighted-search
-    , base >= 4.13
-    , tasty-quickcheck >= 0.10
-    , tasty >= 1.4
-    , array >= 0.5
-  if impl(ghc >= 8.0)
-    ghc-options: -fwarn-redundant-constraints -Wcompat
-  default-language: Haskell2010
