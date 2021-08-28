@@ -36,7 +36,7 @@ jobs:
         restore-keys: ${{ runner.os }}-${{ matrix.ghc-ver }}-${{ matrix.cabal-ver }}-
 
     - name: Install ghc and cabal
-      uses: actions/setup-haskell@v1.2.2
+      uses: haskell/actions/setup@v1.2.2
       with:
         ghc-version: ${{ matrix.ghc-ver }}
         cabal-version: ${{ matrix.cabal-ver }}
