@@ -19,6 +19,7 @@ library
                      , MonusWeightedSearch.Dijkstra
                      , MonusWeightedSearch.Sampling
                      , MonusWeightedSearch.SubsetSum
+                     , MonusWeightedSearch.Sort
                      , Data.WeightedGraph
                      , Data.WeightedGraph.AdjList
                      , Control.Monad.Star
