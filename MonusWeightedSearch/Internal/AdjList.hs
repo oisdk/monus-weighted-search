@@ -1,4 +1,4 @@
-module Data.WeightedGraph.AdjList
+module MonusWeightedSearch.Internal.AdjList
   ( AdjList(..)
   , randAdjList
   , alSize
@@ -6,7 +6,7 @@ module Data.WeightedGraph.AdjList
   , fromGraph
   ) where
 
-import Data.WeightedGraph
+import MonusWeightedSearch.WeightedGraph
 import Data.Array.Unboxed
 import Control.DeepSeq
 import Test.QuickCheck

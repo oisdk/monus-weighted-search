@@ -1,7 +1,7 @@
 module MonusWeightedSearch.Internal.Heap where
 
 import Data.Monus
-import Data.WeightedGraph
+import MonusWeightedSearch.WeightedGraph
 
 import qualified Data.Set as Set
 

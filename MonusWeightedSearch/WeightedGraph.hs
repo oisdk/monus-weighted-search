@@ -1,4 +1,4 @@
-module Data.WeightedGraph (Graph) where
+module MonusWeightedSearch.WeightedGraph (Graph) where
 
 import Data.Monus.Dist
 

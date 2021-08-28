@@ -1,15 +1,14 @@
-module MonusWeightedSearch.Dijkstra (unique, dijkstra, shortestPaths, pathed) where
+module MonusWeightedSearch.Dijkstra where
 
 import Control.Monad.State.Strict
 import Control.Applicative
-import Control.Monad.Star
 import Control.Monad.Writer
 
 import Data.Monus.Dist
 import Data.Set (Set)
 import qualified Data.Set as Set
 
-import Data.WeightedGraph
+import MonusWeightedSearch.WeightedGraph
 import Data.List.NonEmpty
 
 import Control.Monad.Heap
@@ -39,3 +38,7 @@ choices f = foldr ((<|>) . f) empty
 pathed :: MonadPlus m => (a -> m a) -> a -> m (NonEmpty a)
 pathed f = star (\ ~(x :| xs) -> fmap (:|x:xs) (f x)) . (:| [])
 {-# INLINE pathed #-}
+
+star :: MonadPlus m => (a -> m a) -> a -> m a
+star f x = pure x <|> (f x >>= star f)
+{-# INLINE star #-}

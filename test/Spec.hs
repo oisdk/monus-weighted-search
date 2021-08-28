@@ -13,7 +13,7 @@ import Data.Bifoldable
 
 import Control.Monad.Heap.List
 
-import Data.WeightedGraph.AdjList
+import MonusWeightedSearch.Internal.AdjList
 
 import qualified MonusWeightedSearch.Internal.Heap as H
 import qualified MonusWeightedSearch.Dijkstra as M
