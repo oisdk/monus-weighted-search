@@ -8,9 +8,12 @@ import Test.QuickCheck hiding (tabulate)
 import Test.Tasty.QuickCheck hiding (tabulate)
 import Test.Tasty
 
+import Control.Monad.Writer
 import Data.List (sort)
 import Data.Bifoldable
+import Data.Foldable
 
+import Control.Monad.Heap
 import Control.Monad.Heap.List
 
 import MonusWeightedSearch.Internal.AdjList
@@ -20,6 +23,7 @@ import qualified MonusWeightedSearch.Dijkstra as M
 
 import Data.Monus
 import Data.Monus.Prob
+import Data.Monus.Dist
 
 prop_monadDijkstra :: AdjList -> Property
 prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
@@ -35,6 +39,10 @@ prop_probMonus x y
 prop_bifoldlListCons :: Property
 prop_bifoldlListCons =
   bifoldr (:) (:) [] (True :- False) === reverse (bifoldl (flip (:)) (flip (:)) [] (True :- False))
+
+prop_fromList :: [(Word,Dist)] -> Property
+prop_fromList xs = (fromList xs :: Heap Dist Word) === asum (map writer xs)
+
 
 return []
 

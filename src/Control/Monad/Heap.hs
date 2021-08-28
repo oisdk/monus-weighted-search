@@ -38,6 +38,9 @@ module Control.Monad.Heap
     -- ** Node Constructor
   , Node(..)
 
+    -- * Constructing Heaps
+  , fromList
+
     -- * Popping the smallest element
   , popMin
   , popMinT
@@ -139,10 +142,22 @@ instance Bitraversable (Node w) where
 -- This weights the computation @xs@ with @4@.
 --
 -- Depending on the 'Monus' used, the order of the search can be specified.
--- For instance, 
+-- For instance, using the 'Monus' in "Data.Monus.Dist", we have the following:
+--
+-- >>> search (writer ('a', 5) <|> writer ('b', 3) <|> writer ('c', 6))
+-- [('b', 3), ('a', 5), ('c', 6)]
+--
+-- >>> search (writer ('b', 3) <|> writer ('a', 5) <|> writer ('c', 6))
+-- [('b', 3), ('a', 5), ('c', 6)]
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (HeapT w m) a
+
+fromList :: Applicative m => [(a,w)] -> HeapT w m a
+fromList = HeapT #. foldr f (ListT (pure Nil))
+  where
+    f (x,w) xs = ListT (pure ((w :< HeapT (ListT (pure (Leaf x :- ListT (pure Nil))))) :- xs))
+{-# INLINE fromList #-}
 
 instance Foldable m => Foldable (HeapT w m) where
   foldr f = flip go
