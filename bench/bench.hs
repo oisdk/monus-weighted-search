@@ -10,7 +10,7 @@ import MonusWeightedSearch.Internal.AdjList
 import Data.Monus.Dist
 
 import qualified MonusWeightedSearch.Dijkstra as M
-import qualified MonusWeighted.Sort as M
+import qualified MonusWeightedSearch.Sort as M
 import qualified MonusWeightedSearch.Internal.Heap as H
 
 onG :: (Graph Word -> Graph Word) -> AdjList -> AdjList

@@ -1,9 +1,28 @@
 {-# LANGUAGE UndecidableInstances #-}
 
+--------------------------------------------------------------------------------
+-- |
+-- Module      : Control.Monad.Heap
+-- Copyright   : (c) Donnacha Oisín Kidney 2021
+-- Maintainer  : mail@doisinkidney.com
+-- Stability   : experimental
+-- Portability : non-portable
+--
+-- The Heap monad: a monad for efficient weighted search.
+--
+-- This module provides an implementation of the Heap monad transformer as
+-- described in:
+--
+-- * Donnacha Oisín Kidney and Nicolas Wu. 2021. /Algebras for weighted search/.
+--   Proc. ACM Program. Lang. 5, ICFP, Article 72 (August 2021), 30 pages.
+--   DOI:<https://doi.org/10.1145/3473577>
+-- 
+--------------------------------------------------------------------------------
+
 module Control.Monad.Heap
   ( -- * Type definition
-    Node(..)
-  , HeapT(..)
+    HeapT(..)
+  , Node(..)
     -- * Non-transformer form
   , Heap
   , pattern Heap
