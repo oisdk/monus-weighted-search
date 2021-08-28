@@ -20,6 +20,8 @@ library
                      , MonusWeightedSearch.Sampling
                      , MonusWeightedSearch.SubsetSum
                      , MonusWeightedSearch.Sort
+                     , MonusWeightedSearch.Viterbi
+                     , MonusWeightedSearch.Parsing
                      , Data.WeightedGraph
                      , Data.WeightedGraph.AdjList
                      , Control.Monad.Star
