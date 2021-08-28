@@ -17,9 +17,8 @@ jobs:
 
     steps:
 
-# Download this git repo
-    - name: Checkout main
-      uses: actions/checkout@v2
+    - name: Checkout repo
+      uses: actions/checkout@v2.3.4
 
 # Install GHC & Cabal
     - uses: actions/cache@v2
