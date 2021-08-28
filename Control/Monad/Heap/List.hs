@@ -13,6 +13,9 @@ module Control.Monad.Heap.List
   ) where
 
 import Data.Bifunctor
+import Data.Bifoldable
+import Data.Bitraversable
+
 import Control.Monad
 import Control.Applicative
 import Control.Monad.Trans
@@ -41,6 +44,32 @@ instance Bifunctor ListCons where
   bimap f g Nil = Nil
   bimap f g (x :- xs) = f x :- g xs
   {-# INLINE bimap #-}
+
+instance Bifoldable ListCons where
+  bifold Nil = mempty
+  bifold (x :- xs) = x <> xs
+
+  bifoldMap f g Nil = mempty
+  bifoldMap f g (x :- xs) = f x <> g xs
+
+  bifoldr f g b Nil = b
+  bifoldr f g b (x :- xs) = f x (g xs b)
+
+  bifoldl f g b Nil = b
+  bifoldl f g b (x :- xs) = g (f b x) xs
+
+instance Arbitrary2 ListCons where
+  liftArbitrary2 xs ys = sized (\n -> frequency ((1, pure Nil) : [(n, liftA2 (:-) xs ys) | n >= 1]))
+  liftShrink2 xs ys Nil = []
+  liftShrink2 xs ys (x :- y) = Nil : map (uncurry (:-)) (liftShrink2 xs ys (x,y))
+  
+instance Arbitrary a => Arbitrary1 (ListCons a) where
+  liftArbitrary = liftArbitrary2 arbitrary
+  liftShrink = liftShrink2 shrink
+  
+instance (Arbitrary a, Arbitrary b) => Arbitrary (ListCons a b) where
+  arbitrary = arbitrary2
+  shrink = shrink2
   
 newtype ListT m a
   = ListT { runListT :: m (ListCons a (ListT m a)) }
@@ -110,6 +139,9 @@ instance Foldable m => Foldable (ListT m) where
       g Nil ys = ys
       g (y :- ys) zs = f y (foldr f zs ys)
   {-# INLINE foldr #-}
+
+-- instance Traversable m => Traversable (ListT m) where
+--   traverse f = fmap ListT . (traverse _ .# runListT)
   
 toListT :: Monad m => ListT m a -> m [a]
 toListT = foldrListT (fmap . (:)) (pure [])
