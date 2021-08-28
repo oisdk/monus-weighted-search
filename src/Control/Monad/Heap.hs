@@ -16,17 +16,27 @@
 -- * Donnacha Oisín Kidney and Nicolas Wu. 2021. /Algebras for weighted search/.
 --   Proc. ACM Program. Lang. 5, ICFP, Article 72 (August 2021), 30 pages.
 --   DOI:<https://doi.org/10.1145/3473577>
--- 
+--
+-- This monad transformer can be used to implement search algorithms like
+-- Dijkstra's algorithm (see "MonusWeightedSearch.Dijkstra"), or the Viterbi
+-- algorithm ("MonusWeightedSearch.Viterbi"), or probabilistic parsing
+-- ("MonusWeightedSearch.Parsing").
+--
+-- The type supports nondeterminism (using the 'Alternative' and 'MonadPlus'
+-- interfaces), where each branch in a computation can be weighted by some
+-- 'Monus'. A 'Monus' is an ordered 'Monoid' with some pseudo-subtraction
+-- operator, see the "Data.Monus" module for more details.
 --------------------------------------------------------------------------------
 
 module Control.Monad.Heap
-  ( -- * Type definition
+  ( -- * Heap Type
     HeapT(..)
-  , Node(..)
-    -- * Non-transformer form
+    -- ** Non-transformer form
   , Heap
   , pattern Heap
   , runHeap
+    -- ** Node Constructor
+  , Node(..)
 
     -- * Popping the smallest element
   , popMin
@@ -115,6 +125,21 @@ instance Bitraversable (Node w) where
   bitraverse _ f (x :< xs) = fmap (x :<) (f xs)
   {-# INLINE bitraverse #-}
 
+-- | The 'HeapT' monad transformer: a monad for weighted search.
+--
+-- This monad supports nondeterminism through the 'Alternative' and
+-- 'MonadPlus' classes, but different branches in the computation may be
+-- weighted by the @w@ parameter. A computation can be given a specific weight
+-- using the 'MonadWriter' interface:
+--
+-- @
+--   'tell' 4 '>>' xs
+-- @
+--
+-- This weights the computation @xs@ with @4@.
+--
+-- Depending on the 'Monus' used, the order of the search can be specified.
+-- For instance, 
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (HeapT w m) a
