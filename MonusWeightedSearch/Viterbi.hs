@@ -8,8 +8,8 @@ import Data.Maybe
 
 type Viterbi = Heap Prob
 
-data Obs = Normal | Cold | Dizzy deriving (Show, Eq, Ord)
-data States = Healthy | Fever deriving (Show, Eq, Ord)
+data Obs = Normal | Cold | Dizzy deriving (Show, Eq)
+data States = Healthy | Fever deriving (Show, Eq)
 
 start :: Viterbi States
 start = asum [writer (Healthy, 0.6), writer (Fever, 0.4)]
