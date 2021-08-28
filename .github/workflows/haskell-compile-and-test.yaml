@@ -45,11 +45,11 @@ jobs:
 # Compile Local Haskell
     - name: Build and Test Haskell
       run: |
-        ls dist
-        ls dist-newstyle
+        ls
         cabal build
         cabal test
         cabal -v new-haddock --haddock-hyperlink-source --haddock-html-location='https://hackage.haskell.org/package/$pkg-$version/docs' --enable-documentation
+        ls
 
 # Deploy Haskell docs to site
     - name: Deploy haddocks to github pages

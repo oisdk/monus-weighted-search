@@ -73,6 +73,7 @@ instance Bifunctor (Node w) where
 
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
+  deriving (Semigroup, Monoid) via Alt (HeapT w m) a
 
 instance (forall x. NFData x => NFData (m x), NFData w, NFData a) => NFData (HeapT w m a) where
   rnf = rnf .# runHeapT
