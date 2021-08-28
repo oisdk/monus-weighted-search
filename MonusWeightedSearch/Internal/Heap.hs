@@ -42,7 +42,7 @@ mergeHeaps [] = Leaf
 mergeHeaps (x : xs) = go x xs
   where
     go x [] = x
-    go x1 (x2 : []) = x1 <> x2
+    go x1 [x2] = x1 <> x2
     go x1 (x2 : x3 : xs) = (x1 <> x2) <> go x3 xs
 {-# INLINE mergeHeaps #-}
 
@@ -72,5 +72,6 @@ dijkstra g s = go Set.empty (Node mempty s [])
             f (y, w') = Node (w <> w') y []
 {-# INLINE dijkstra #-}
 
-dsort :: [Dist] -> [Dist]
-dsort = map fst . unfoldr minView . foldMap (\x -> singleton x ())
+monusSort :: [Dist] -> [Dist]
+monusSort = map fst . unfoldr minView . foldMap (`singleton` ())
+{-# INLINE monusSort #-}
