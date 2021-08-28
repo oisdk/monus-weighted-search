@@ -27,11 +27,14 @@ module Control.Monad.Heap
   )
   where
 
+import Data.Bifunctor
+import Data.Bifoldable
+import Data.Bitraversable
+
 import Control.Monad.Heap.List
 import Control.Monad
 import Control.Applicative
 import Control.Monad.Trans
-import Data.Bifunctor
 import Data.Monus
 import Control.Monad.Writer
 import Control.Monad.State
@@ -71,9 +74,43 @@ instance Bifunctor (Node w) where
   {-# INLINE first #-}
   {-# INLINE second #-}
 
+instance Bifoldable (Node w) where
+  bifold (Leaf x) = x
+  bifold (_ :< x) = x
+  {-# INLINE bifold #-}
+
+  bifoldMap f _ (Leaf x) = f x
+  bifoldMap _ f (_ :< x) = f x
+  {-# INLINE bifoldMap #-}
+
+  bifoldr f _ b (Leaf x) = f x b
+  bifoldr _ f b (_ :< x) = f x b
+  {-# INLINE bifoldr #-}
+
+  bifoldl f _ b (Leaf x) = f b x
+  bifoldl _ f b (_ :< x) = f b x
+  {-# INLINE bifoldl #-}
+
+instance Bitraversable (Node w) where
+  bitraverse f _ (Leaf x) = fmap Leaf (f x)
+  bitraverse _ f (x :< xs) = fmap (x :<) (f xs)
+  {-# INLINE bitraverse #-}
+
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (HeapT w m) a
+
+instance Foldable m => Foldable (HeapT w m) where
+  foldr f = flip go
+    where
+      go = flip (foldr (flip (bifoldr f go))) .# runHeapT
+  {-# INLINE foldr #-}
+
+instance Traversable m => Traversable (HeapT w m) where
+  traverse f = go
+    where
+      go = fmap HeapT . (traverse (bitraverse f go) .# runHeapT)
+  {-# INLINE traverse #-}
 
 deriving newtype instance (forall x. NFData x => NFData (m x), NFData w, NFData a) => NFData (HeapT w m a) 
 
