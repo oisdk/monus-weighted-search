@@ -144,15 +144,16 @@ instance Bitraversable (Node w) where
 -- Depending on the 'Monus' used, the order of the search can be specified.
 -- For instance, using the 'Monus' in "Data.Monus.Dist", we have the following:
 --
--- >>> search (writer ('a', 5) <|> writer ('b', 3) <|> writer ('c', 6))
+-- >>> search (fromList [('a', 5), ('b', 3), ('c', 6)])
 -- [('b', 3), ('a', 5), ('c', 6)]
 --
--- >>> search (writer ('b', 3) <|> writer ('a', 5) <|> writer ('c', 6))
+-- >>> search (fromList [('b', 3), ('a', 5), ('c', 6)])
 -- [('b', 3), ('a', 5), ('c', 6)]
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (HeapT w m) a
 
+-- | Build a heap from a list of values paired with their weights.
 fromList :: Applicative m => [(a,w)] -> HeapT w m a
 fromList = HeapT #. foldr f (ListT (pure Nil))
   where
@@ -164,6 +165,10 @@ instance Foldable m => Foldable (HeapT w m) where
     where
       go = flip (foldr (flip (bifoldr f go))) .# runHeapT
   {-# INLINE foldr #-}
+  foldMap f = go
+    where
+      go = foldMap (bifoldMap f go) .# runHeapT
+  {-# INLINE foldMap #-}
 
 instance Traversable m => Traversable (HeapT w m) where
   traverse f = go

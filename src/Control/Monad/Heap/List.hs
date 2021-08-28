@@ -143,13 +143,14 @@ instance Monad m => Monad (ListT m) where
   {-# INLINE (>>=) #-}
   
 instance Foldable m => Foldable (ListT m) where
-  foldr f  = go
+  foldr f = flip go
     where
-      go b = foldr g b .# runListT
-      
-      g Nil ys = ys
-      g (y :- ys) zs = f y (go zs ys)
+      go = flip (foldr (flip (bifoldr f go))) .# runListT
   {-# INLINE foldr #-}
+  foldMap f = go
+    where
+      go = foldMap (bifoldMap f go) .# runListT
+  {-# INLINE foldMap #-}
 
 instance Traversable m => Traversable (ListT m) where
   traverse f = go
