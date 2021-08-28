@@ -23,8 +23,10 @@ emit Healthy = asum [writer (Normal, 0.5), writer (Cold, 0.4), writer (Dizzy, 0.
 emit Fever   = asum [writer (Normal, 0.1), writer (Cold, 0.3), writer (Dizzy, 0.6)]
 
 iterateM :: Monad m => Int -> (a -> m a) -> m a -> m [a]
-iterateM 0 _ _  = pure []
-iterateM n f xs = xs >>= \x -> fmap (x:) (iterateM (n-1) f (f x))
+iterateM n f = go n id
+  where
+    go 0 k xs = pure (k [])
+    go n k xs = xs >>= \x -> go (n-1) (k . (x:)) (f x)
 
 likely :: (Prob, [States])
 likely = fromJust $ best $ do
