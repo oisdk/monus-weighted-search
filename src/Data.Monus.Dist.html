@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679076381"><span id="local-6989586621679076382"></span></span><span class="hs-comment">-- | </span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679076567"><span id="local-6989586621679076568"></span></span><span class="hs-comment">-- | </span><span>
 </span><span id="line-2"></span><span>
 </span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Data.Monus.Dist</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-4"></span><span>
@@ -12,16 +12,16 @@
 </span><span id="line-12"></span><span>
 </span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.DeepSeq</span></span><span>
 </span><span id="line-14"></span><span>
-</span><span id="line-15"></span><span id="local-6989586621679076379"><span id="local-6989586621679076380"></span></span><span class="hs-keyword">newtype</span><span> </span><span id="Dist"><span class="annot"><a href="Data.Monus.Dist.html#Dist"><span class="hs-identifier hs-var">Dist</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Dist"><span class="annot"><a href="Data.Monus.Dist.html#Dist"><span class="hs-identifier hs-var">Dist</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="runDist"><span class="annot"><span class="annottext">Dist -&gt; Natural
+</span><span id="line-15"></span><span id="local-6989586621679076565"><span id="local-6989586621679076566"></span></span><span class="hs-keyword">newtype</span><span> </span><span id="Dist"><span class="annot"><a href="Data.Monus.Dist.html#Dist"><span class="hs-identifier hs-var">Dist</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Dist"><span class="annot"><a href="Data.Monus.Dist.html#Dist"><span class="hs-identifier hs-var">Dist</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="runDist"><span class="annot"><span class="annottext">Dist -&gt; Natural
 </span><a href="Data.Monus.Dist.html#runDist"><span class="hs-identifier hs-var hs-var">runDist</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span> </span><span class="hs-special">}</span><span>
-</span><span id="line-16"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679076371"><span id="local-6989586621679076375"><span class="annot"><span class="annottext">Dist -&gt; Dist -&gt; Bool
+</span><span id="line-16"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679076557"><span id="local-6989586621679076561"><span class="annot"><span class="annottext">Dist -&gt; Dist -&gt; Bool
 (Dist -&gt; Dist -&gt; Bool) -&gt; (Dist -&gt; Dist -&gt; Bool) -&gt; Eq Dist
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 /= :: Dist -&gt; Dist -&gt; Bool
 $c/= :: Dist -&gt; Dist -&gt; Bool
 == :: Dist -&gt; Dist -&gt; Bool
 $c== :: Dist -&gt; Dist -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076348"><span id="local-6989586621679076350"><span id="local-6989586621679076353"><span id="local-6989586621679076356"><span id="local-6989586621679076359"><span id="local-6989586621679076362"><span id="local-6989586621679076366"><span class="annot"><span class="annottext">Eq Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076534"><span id="local-6989586621679076536"><span id="local-6989586621679076539"><span id="local-6989586621679076542"><span id="local-6989586621679076545"><span id="local-6989586621679076548"><span id="local-6989586621679076552"><span class="annot"><span class="annottext">Eq Dist
 Eq Dist
 -&gt; (Dist -&gt; Dist -&gt; Ordering)
 -&gt; (Dist -&gt; Dist -&gt; Bool)
@@ -58,7 +58,7 @@ $c&lt;= :: Dist -&gt; Dist -&gt; Bool
 $c&lt; :: Dist -&gt; Dist -&gt; Bool
 compare :: Dist -&gt; Dist -&gt; Ordering
 $ccompare :: Dist -&gt; Dist -&gt; Ordering
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076314"><span id="local-6989586621679076316"><span id="local-6989586621679076318"><span id="local-6989586621679076320"><span id="local-6989586621679076322"><span id="local-6989586621679076324"><span id="local-6989586621679076326"><span id="local-6989586621679076328"><span id="local-6989586621679076330"><span id="local-6989586621679076332"><span id="local-6989586621679076334"><span id="local-6989586621679076336"><span id="local-6989586621679076339"><span id="local-6989586621679076343"><span class="annot"><span class="annottext">Typeable Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076500"><span id="local-6989586621679076502"><span id="local-6989586621679076504"><span id="local-6989586621679076506"><span id="local-6989586621679076508"><span id="local-6989586621679076510"><span id="local-6989586621679076512"><span id="local-6989586621679076514"><span id="local-6989586621679076516"><span id="local-6989586621679076518"><span id="local-6989586621679076520"><span id="local-6989586621679076522"><span id="local-6989586621679076525"><span id="local-6989586621679076529"><span class="annot"><span class="annottext">Typeable Dist
 Typeable Dist
 -&gt; (forall (c :: * -&gt; *).
     (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
@@ -220,7 +220,7 @@ forall a.
 $cto :: forall x. Rep Dist x -&gt; Dist
 $cfrom :: forall x. Dist -&gt; Rep Dist x
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Typeable</span></span><span class="hs-special">)</span><span>
-</span><span id="line-17"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679076282"><span id="local-6989586621679076286"><span id="local-6989586621679076290"><span id="local-6989586621679076294"><span id="local-6989586621679076298"><span id="local-6989586621679076302"><span id="local-6989586621679076307"><span class="annot"><span class="annottext">Integer -&gt; Dist
+</span><span id="line-17"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679076468"><span id="local-6989586621679076472"><span id="local-6989586621679076476"><span id="local-6989586621679076480"><span id="local-6989586621679076484"><span id="local-6989586621679076488"><span id="local-6989586621679076493"><span class="annot"><span class="annottext">Integer -&gt; Dist
 Dist -&gt; Dist
 Dist -&gt; Dist -&gt; Dist
 (Dist -&gt; Dist -&gt; Dist)
@@ -254,7 +254,7 @@ $c* :: Dist -&gt; Dist -&gt; Dist
 $c- :: Dist -&gt; Dist -&gt; Dist
 + :: Dist -&gt; Dist -&gt; Dist
 $c+ :: Dist -&gt; Dist -&gt; Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Num</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076247"><span id="local-6989586621679076251"><span id="local-6989586621679076255"><span id="local-6989586621679076259"><span id="local-6989586621679076263"><span id="local-6989586621679076267"><span id="local-6989586621679076271"><span id="local-6989586621679076276"><span class="annot"><span class="annottext">Int -&gt; Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Num</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076433"><span id="local-6989586621679076437"><span id="local-6989586621679076441"><span id="local-6989586621679076445"><span id="local-6989586621679076449"><span id="local-6989586621679076453"><span id="local-6989586621679076457"><span id="local-6989586621679076462"><span class="annot"><span class="annottext">Int -&gt; Dist
 Dist -&gt; Int
 Dist -&gt; [Dist]
 Dist -&gt; Dist
@@ -295,7 +295,7 @@ pred :: Dist -&gt; Dist
 $cpred :: Dist -&gt; Dist
 succ :: Dist -&gt; Dist
 $csucc :: Dist -&gt; Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Enum</span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076211"><span id="local-6989586621679076215"><span id="local-6989586621679076219"><span id="local-6989586621679076223"><span id="local-6989586621679076227"><span id="local-6989586621679076231"><span id="local-6989586621679076236"><span class="annot"><span class="annottext">Enum Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Enum</span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076397"><span id="local-6989586621679076401"><span id="local-6989586621679076405"><span id="local-6989586621679076409"><span id="local-6989586621679076413"><span id="local-6989586621679076417"><span id="local-6989586621679076422"><span class="annot"><span class="annottext">Enum Dist
 Real Dist
 Real Dist
 -&gt; Enum Dist
@@ -335,7 +335,7 @@ rem :: Dist -&gt; Dist -&gt; Dist
 $crem :: Dist -&gt; Dist -&gt; Dist
 quot :: Dist -&gt; Dist -&gt; Dist
 $cquot :: Dist -&gt; Dist -&gt; Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Integral</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076196"><span id="local-6989586621679076200"><span id="local-6989586621679076205"><span class="annot"><span class="annottext">Int -&gt; Dist -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Integral</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076382"><span id="local-6989586621679076386"><span id="local-6989586621679076391"><span class="annot"><span class="annottext">Int -&gt; Dist -&gt; ShowS
 [Dist] -&gt; ShowS
 Dist -&gt; String
 (Int -&gt; Dist -&gt; ShowS)
@@ -348,7 +348,7 @@ show :: Dist -&gt; String
 $cshow :: Dist -&gt; String
 showsPrec :: Int -&gt; Dist -&gt; ShowS
 $cshowsPrec :: Int -&gt; Dist -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076177"><span id="local-6989586621679076181"><span id="local-6989586621679076185"><span id="local-6989586621679076190"><span class="annot"><span class="annottext">ReadPrec [Dist]
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076363"><span id="local-6989586621679076367"><span id="local-6989586621679076371"><span id="local-6989586621679076376"><span class="annot"><span class="annottext">ReadPrec [Dist]
 ReadPrec Dist
 Int -&gt; ReadS Dist
 ReadS [Dist]
@@ -365,14 +365,14 @@ readList :: ReadS [Dist]
 $creadList :: ReadS [Dist]
 readsPrec :: Int -&gt; ReadS Dist
 $creadsPrec :: Int -&gt; ReadS Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Read</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076167"><span class="annot"><span class="annottext">Num Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Read</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076353"><span class="annot"><span class="annottext">Num Dist
 Ord Dist
 Num Dist -&gt; Ord Dist -&gt; (Dist -&gt; Rational) -&gt; Real Dist
 Dist -&gt; Rational
 forall a. Num a -&gt; Ord a -&gt; (a -&gt; Rational) -&gt; Real a
 toRational :: Dist -&gt; Rational
 $ctoRational :: Dist -&gt; Rational
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Real</span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076138"><span id="local-6989586621679076142"><span id="local-6989586621679076146"><span id="local-6989586621679076150"><span id="local-6989586621679076154"><span id="local-6989586621679076159"><span class="annot"><span class="annottext">Ord Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Real</span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076324"><span id="local-6989586621679076328"><span id="local-6989586621679076332"><span id="local-6989586621679076336"><span id="local-6989586621679076340"><span id="local-6989586621679076345"><span class="annot"><span class="annottext">Ord Dist
 Ord Dist
 -&gt; ((Dist, Dist) -&gt; [Dist])
 -&gt; ((Dist, Dist) -&gt; Dist -&gt; Int)
@@ -406,7 +406,7 @@ index :: (Dist, Dist) -&gt; Dist -&gt; Int
 $cindex :: (Dist, Dist) -&gt; Dist -&gt; Int
 range :: (Dist, Dist) -&gt; [Dist]
 $crange :: (Dist, Dist) -&gt; [Dist]
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ix</span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076045"><span id="local-6989586621679076049"><span id="local-6989586621679076053"><span id="local-6989586621679076057"><span id="local-6989586621679076061"><span id="local-6989586621679076065"><span id="local-6989586621679076069"><span id="local-6989586621679076073"><span id="local-6989586621679076077"><span id="local-6989586621679076081"><span id="local-6989586621679076085"><span id="local-6989586621679076089"><span id="local-6989586621679076093"><span id="local-6989586621679076097"><span id="local-6989586621679076101"><span id="local-6989586621679076105"><span id="local-6989586621679076109"><span id="local-6989586621679076113"><span id="local-6989586621679076117"><span id="local-6989586621679076121"><span id="local-6989586621679076125"><span id="local-6989586621679076130"><span class="annot"><span class="annottext">Eq Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ix</span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076231"><span id="local-6989586621679076235"><span id="local-6989586621679076239"><span id="local-6989586621679076243"><span id="local-6989586621679076247"><span id="local-6989586621679076251"><span id="local-6989586621679076255"><span id="local-6989586621679076259"><span id="local-6989586621679076263"><span id="local-6989586621679076267"><span id="local-6989586621679076271"><span id="local-6989586621679076275"><span id="local-6989586621679076279"><span id="local-6989586621679076283"><span id="local-6989586621679076287"><span id="local-6989586621679076291"><span id="local-6989586621679076295"><span id="local-6989586621679076299"><span id="local-6989586621679076303"><span id="local-6989586621679076307"><span id="local-6989586621679076311"><span id="local-6989586621679076316"><span class="annot"><span class="annottext">Eq Dist
 Dist
 Eq Dist
 -&gt; (Dist -&gt; Dist -&gt; Dist)
@@ -509,13 +509,13 @@ $cxor :: Dist -&gt; Dist -&gt; Dist
 $c.|. :: Dist -&gt; Dist -&gt; Dist
 .&amp;. :: Dist -&gt; Dist -&gt; Dist
 $c.&amp;. :: Dist -&gt; Dist -&gt; Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Bits</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076039"><span class="annot"><span class="annottext">Dist -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Bits</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076225"><span class="annot"><span class="annottext">Dist -&gt; ()
 (Dist -&gt; ()) -&gt; NFData Dist
 forall a. (a -&gt; ()) -&gt; NFData a
 rnf :: Dist -&gt; ()
 $crnf :: Dist -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">via</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span>
-</span><span id="line-18"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679076019"><span id="local-6989586621679076026"><span id="local-6989586621679076032"><span class="annot"><span class="annottext">NonEmpty Dist -&gt; Dist
+</span><span id="line-18"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679076205"><span id="local-6989586621679076212"><span id="local-6989586621679076218"><span class="annot"><span class="annottext">NonEmpty Dist -&gt; Dist
 Dist -&gt; Dist -&gt; Dist
 (Dist -&gt; Dist -&gt; Dist)
 -&gt; (NonEmpty Dist -&gt; Dist)
@@ -533,7 +533,7 @@ sconcat :: NonEmpty Dist -&gt; Dist
 $csconcat :: NonEmpty Dist -&gt; Dist
 &lt;&gt; :: Dist -&gt; Dist -&gt; Dist
 $c&lt;&gt; :: Dist -&gt; Dist -&gt; Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Semigroup</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679075997"><span id="local-6989586621679076002"><span id="local-6989586621679076008"><span class="annot"><span class="annottext">Semigroup Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Semigroup</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076183"><span id="local-6989586621679076188"><span id="local-6989586621679076194"><span class="annot"><span class="annottext">Semigroup Dist
 Dist
 Semigroup Dist
 -&gt; Dist
@@ -550,7 +550,7 @@ mappend :: Dist -&gt; Dist -&gt; Dist
 $cmappend :: Dist -&gt; Dist -&gt; Dist
 mempty :: Dist
 $cmempty :: Dist
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Monoid</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679075986"><span class="annot"><span class="annottext">Ord Dist
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Monoid</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679076172"><span class="annot"><span class="annottext">Ord Dist
 Monoid Dist
 Ord Dist -&gt; Monoid Dist -&gt; (Dist -&gt; Dist -&gt; Dist) -&gt; Monus Dist
 Dist -&gt; Dist -&gt; Dist
