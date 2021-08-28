@@ -17,6 +17,7 @@ library
                      , MonusWeightedSearch.Internal.TestHelpers
                      , MonusWeightedSearch.Internal.Heap
                      , MonusWeightedSearch.Dijkstra
+                     , MonusWeightedSearch.Sampling
                      , Data.WeightedGraph
                      , Data.WeightedGraph.AdjList
                      , Control.Monad.Star
