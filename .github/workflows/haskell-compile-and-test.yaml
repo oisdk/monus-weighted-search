@@ -12,8 +12,6 @@ jobs:
       matrix:
         ghc-ver: ["9.0.1"]
         cabal-ver: ["3.4.0.0"]
-    env:
-      CONFIG: "--enable-tests"
 
     steps:
 
@@ -48,8 +46,8 @@ jobs:
 # Compile Local Haskell
     - name: Build and Test Haskell
       run: |
-        cabal build $CONFIG
-        cabal test $CONFIG
+        cabal build
+        cabal test
         cabal -v new-haddock --haddock-hyperlink-source --haddock-html-location='https://hackage.haskell.org/package/$pkg-$version/docs' --enable-documentation
 
 # Deploy Haskell docs to site
