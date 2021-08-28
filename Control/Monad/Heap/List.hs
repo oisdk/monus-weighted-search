@@ -45,12 +45,10 @@ instance Bifunctor ListCons where
 newtype ListT m a
   = ListT { runListT :: m (ListCons a (ListT m a)) }
   deriving (Typeable, Generic)
--- ^The list monad transformer
+  deriving (Semigroup, Monoid) via Alt (ListT m) a
 
-instance (forall x. NFData x => NFData (m x), NFData a) => NFData (ListT m a) where
-  rnf = rnf .# runListT
-  {-# INLINE rnf #-}
-  
+deriving newtype instance (forall x. NFData x => NFData (m x), NFData a) => NFData (ListT m a)
+
 unfoldrM :: Functor m => (b -> m (Maybe (a, b))) -> b -> ListT m a
 unfoldrM f = ListT #. fmap (maybe Nil (uncurry (:-) . second (unfoldrM f))) . f
 {-# INLINE unfoldrM #-}
@@ -87,14 +85,6 @@ foldrListT f b = (>>= h) .# runListT
     h (x :- ListT xs) = f x (xs >>= h)
 {-# INLINE foldrListT #-}
 
-instance Monad m => Semigroup (ListT m a) where
-  xs <> ys = ListT (foldrListT (\z zs -> pure (z :- ListT zs)) (runListT ys) xs)
-  {-# INLINE (<>) #-}
-  
-instance Monad m => Monoid (ListT m a) where
-  mempty = ListT (pure Nil)
-  {-# INLINE mempty #-}
-  
 instance Monad m => Applicative (ListT m) where
   pure x = ListT (pure (x :- ListT (pure Nil)))
   {-# INLINE pure #-}
@@ -126,9 +116,9 @@ toListT = foldrListT (fmap . (:)) (pure [])
 {-# INLINE toListT #-}
 
 instance Monad m => Alternative (ListT m) where
-  (<|>) =(<>)
+  xs <|> ys = ListT (foldrListT (\z zs -> pure (z :- ListT zs)) (runListT ys) xs)
   {-# INLINE (<|>) #-}
-  empty = mempty
+  empty = ListT (pure Nil)
   {-# INLINE empty #-}
   
 instance Monad m => MonadPlus (ListT m)
@@ -176,7 +166,7 @@ instance MonadWriter w m => MonadWriter w (ListT m) where
       h Nil = (Nil, id)
       h ((x,f):-xs) = (x :- xs , f)
   {-# INLINE pass #-}
-      
+
 instance MonadCont m => MonadCont (ListT m) where
   callCC f = ListT (callCC (\c -> runListT (f (ListT . c . (:- empty)))))
   {-# INLINE callCC #-}
