@@ -18,6 +18,7 @@ library
                      , MonusWeightedSearch.Internal.Heap
                      , MonusWeightedSearch.Dijkstra
                      , MonusWeightedSearch.Sampling
+                     , MonusWeightedSearch.SubsetSum
                      , Data.WeightedGraph
                      , Data.WeightedGraph.AdjList
                      , Control.Monad.Star
