@@ -110,7 +110,19 @@ instance (forall x. Show x => Show (m x), Show a, Show w) => Show (HeapT w m a) 
   showsPrec n (HeapT xs) = showParen (n > 10) (showString "HeapT " . showsPrec 11 xs)
   
 deriving instance (forall x. Eq x => Eq (m x), Eq a, Eq w) => Eq (HeapT w m a)
-deriving instance (Ord w, Ord a, Eq (HeapT w m a) ,forall x. Ord x => Ord (m x), Eq (ListT m (Node w a (HeapT w m a)))) => Ord (HeapT w m a)
+-- Some special incantations are needed to make this work:
+-- In my mind, the following *should* work:
+-- @
+-- deriving instance (Ord w, Ord a, forall x. Ord x => Ord (m x)) => Ord (HeapT w m a)
+-- @
+-- But for reasons described here
+-- https://downloads.haskell.org/~ghc/9.0.1/docs/html/users_guide/9.0.1-notes.html#language
+-- You need the following slightly more complicated thing:
+deriving instance ( Ord w, Ord a
+                  , forall x. Ord x => Ord (m x)
+                  , Eq (HeapT w m a)                       -- These two are needed
+                  , Eq (ListT m (Node w a (HeapT w m a)))  -- for reasons I do not understand!
+                  ) => Ord (HeapT w m a)
 
 instance Functor m => Functor (HeapT w m) where
   fmap f = HeapT #. (fmap (bimap f (fmap f)) .# runHeapT)
