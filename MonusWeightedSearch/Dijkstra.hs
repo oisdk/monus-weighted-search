@@ -1,4 +1,4 @@
-module MonusWeightedSearch.Dijkstra (unique, dijkstra, shortestPaths) where
+module MonusWeightedSearch.Dijkstra (unique, dijkstra, shortestPaths, pathed) where
 
 import Control.Monad.State.Strict
 import Control.Applicative
@@ -35,3 +35,7 @@ shortestPaths g x =
 choices :: Alternative f => (a -> f b) -> [a] -> f b
 choices f = foldr ((<|>) . f) empty
 {-# INLINE choices #-}
+
+pathed :: MonadPlus m => (a -> m a) -> a -> m (NonEmpty a)
+pathed f = star (\ ~(x :| xs) -> fmap (:|x:xs) (f x)) . (:| [])
+{-# INLINE pathed #-}

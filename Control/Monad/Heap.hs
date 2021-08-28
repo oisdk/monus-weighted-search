@@ -251,18 +251,18 @@ search :: Monus w => Heap w a -> [(a, w)]
 search = runIdentity #. searchT
 {-# INLINE search #-}
 
-bestT :: (Monad m, Monus w) => HeapT w m a -> m (Maybe a)
-bestT = runMaybeT . go
+bestT :: (Monad m, Monus w) => HeapT w m a -> m (Maybe (w, a))
+bestT = runMaybeT . go mempty
   where
-    go xs = do
+    go a xs = do
       (y,ys) <- lift (popMinT xs)
       case y of
-        z:_ -> pure z
+        z:_ -> pure (a, z)
         [] -> do
           (w', zs) <- MaybeT (pure ys)
-          go zs
+          go (a <> w') zs
 {-# INLINE bestT #-}
-best :: Monus w => Heap w a -> Maybe a
+best :: Monus w => Heap w a -> Maybe (w, a)
 best = runIdentity #. bestT
 {-# INLINE best #-}
 
