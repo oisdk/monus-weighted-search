@@ -44,7 +44,6 @@ import Test.QuickCheck
 
 import MonusWeightedSearch.Internal.CoerceOperators
 import MonusWeightedSearch.Internal.TestHelpers
-import Data.Functor.Classes
 import Data.Data
 import GHC.Generics
 import Control.DeepSeq
@@ -57,28 +56,6 @@ instance (NFData w, NFData a, NFData b) => NFData (Node w a b) where
   rnf (Leaf x) = rnf x
   rnf (x :< xs) = rnf x `seq` rnf xs
   {-# INLINE rnf #-}
-  
-instance Eq w => Eq2 (Node w) where
-  liftEq2 eq _ (Leaf a) (Leaf b) = eq a b
-  liftEq2 _ _ (_ :< _) (Leaf _) = False
-  liftEq2 _ _ (Leaf _) (_ :< _) = False
-  liftEq2 _ eq (x :< xs) (y :< ys) = (x == y) && eq xs ys
-  {-# INLINE liftEq2 #-}
-  
-instance (Eq w, Eq a) => Eq1 (Node w a) where
-  liftEq = liftEq2 (==)
-  {-# INLINE liftEq #-}
-  
-instance Ord w => Ord2 (Node w) where
-  liftCompare2 cmp _ (Leaf a) (Leaf b) = cmp a b
-  liftCompare2 _ _ (_ :< _) (Leaf _) = GT
-  liftCompare2 _ _ (Leaf _) (_ :< _) = LT
-  liftCompare2 _ cmp (x :< xs) (y :< ys) = compare x y <> cmp xs ys
-  {-# INLINE liftCompare2 #-}
-  
-instance (Ord w, Ord a) => Ord1 (Node w a) where
-  liftCompare = liftCompare2 compare
-  {-# INLINE liftCompare #-}
 
 instance Bifunctor (Node w) where
   bimap f g (Leaf x) = Leaf (f x)
@@ -132,13 +109,12 @@ pattern Heap { runHeap } <- (runHeapIdent -> runHeap)
 instance (forall x. Show x => Show (m x), Show a, Show w) => Show (HeapT w m a) where
   showsPrec n (HeapT xs) = showParen (n > 10) (showString "HeapT " . showsPrec 11 xs)
   
-instance (Eq w, Eq1 m) => Eq1 (HeapT w m) where
-  liftEq eq (HeapT xs) (HeapT ys) = liftEq (liftEq2 eq (liftEq eq)) xs ys
-  {-# INLINE liftEq #-}
-  
-instance (Ord w, Ord1 m) => Ord1 (HeapT w m) where
-  liftCompare cmp (HeapT xs) (HeapT ys) = liftCompare (liftCompare2 cmp (liftCompare cmp)) xs ys
-  {-# INLINE liftCompare #-}
+deriving instance (forall x. Eq x => Eq (m x), Eq a, Eq w) => Eq (HeapT w m a)
+-- deriving instance (Ord w, Ord a
+--                   ,forall x. Eq x => Eq (m x)
+--                   ,Eq (HeapT w m a)
+--                   ,forall x. Ord x => Ord (m x))
+--                    => Ord (HeapT w m a)
 
 instance Functor m => Functor (HeapT w m) where
   fmap f = HeapT #. (fmap (bimap f (fmap f)) .# runHeapT)
