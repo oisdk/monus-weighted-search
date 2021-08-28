@@ -48,15 +48,24 @@ instance Bifunctor ListCons where
 instance Bifoldable ListCons where
   bifold Nil = mempty
   bifold (x :- xs) = x <> xs
+  {-# INLINE bifold #-}
 
   bifoldMap f g Nil = mempty
   bifoldMap f g (x :- xs) = f x <> g xs
+  {-# INLINE bifoldMap #-}
 
   bifoldr f g b Nil = b
   bifoldr f g b (x :- xs) = f x (g xs b)
+  {-# INLINE bifoldr #-}
 
   bifoldl f g b Nil = b
   bifoldl f g b (x :- xs) = g (f b x) xs
+  {-# INLINE bifoldl #-}
+  
+instance Bitraversable ListCons where
+  bitraverse f g Nil = pure Nil
+  bitraverse f g (a :- b) = liftA2 (:-) (f a) (g b)
+  {-# INLINE bitraverse #-}
 
 instance Arbitrary2 ListCons where
   liftArbitrary2 xs ys = sized (\n -> frequency ((1, pure Nil) : [(n, liftA2 (:-) xs ys) | n >= 1]))
@@ -140,8 +149,9 @@ instance Foldable m => Foldable (ListT m) where
       g (y :- ys) zs = f y (foldr f zs ys)
   {-# INLINE foldr #-}
 
--- instance Traversable m => Traversable (ListT m) where
---   traverse f = fmap ListT . (traverse _ .# runListT)
+instance Traversable m => Traversable (ListT m) where
+  traverse f = fmap ListT . (traverse (bitraverse f (traverse f)) .# runListT)
+  {-# INLINE traverse #-}
   
 toListT :: Monad m => ListT m a -> m [a]
 toListT = foldrListT (fmap . (:)) (pure [])
