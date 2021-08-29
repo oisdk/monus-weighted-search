@@ -180,7 +180,7 @@ instance Traversable m => Traversable (ListT m) where
   traverse f = fmap ListT . (traverse h .# runListT)
     where
       h Nil = pure Nil
-      h (x :- ListT xs) = liftA2 (\y ys -> y :- ListT ys) (f x) (traverse h xs)
+      h (x :- ListT xs) = liftA2 ((. ListT) #. (:-)) (f x) (traverse h xs)
   {-# INLINE traverse #-}
 
 -- | Flatten all of the effects in the list and collect the results.

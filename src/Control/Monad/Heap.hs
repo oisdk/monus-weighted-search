@@ -179,7 +179,7 @@ instance Traversable m => Traversable (HeapT w m) where
       h :: ListCons (Node w a (HeapT w m a)) (ListT m (Node w a (HeapT w m a))) -> 
            f (ListCons (Node w b (HeapT w m b)) (ListT m (Node w b (HeapT w m b))))
       h Nil = pure Nil
-      h (x :- ListT xs) = liftA2 (\y ys -> y :- ListT ys) (g x) (traverse h xs)
+      h (x :- ListT xs) = liftA2 ((. ListT) #. (:-)) (g x) (traverse h xs)
       
       g :: Node w a (HeapT w m a) -> f (Node w b (HeapT w m b))
       g (Leaf x) = fmap Leaf (f x)
