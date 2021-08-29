@@ -24,7 +24,7 @@
 -- 'State'. This means that each branch of the search proceeds with a different
 -- state; if we switch the order (to @'StateT' s ('Heap' w) a@, for example), we
 -- get "global" state, which has the semantics of a /parser/. For an example
--- of that, see the module "MonusWeightedSearch.Examples.Pairsing", where the
+-- of that, see the module "MonusWeightedSearch.Examples.Parsing", where the
 -- heap is used to implement a probabilistic parser.
 
 module MonusWeightedSearch.Examples.Dijkstra where
