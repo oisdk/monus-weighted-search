@@ -1,5 +1,14 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 
+-- |
+-- Module      : MonusWeightedSearch.Internal.TestHelpers
+-- Copyright   : (c) Donnacha Oisín Kidney 2021
+-- Maintainer  : mail@doisinkidney.com
+-- Stability   : experimental
+-- Portability : non-portable
+--
+-- Some utility functions for implementing 'Arbitrary' etc.
+
 module MonusWeightedSearch.Internal.TestHelpers where
 
 import Test.QuickCheck
