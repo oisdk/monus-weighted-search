@@ -62,29 +62,35 @@ module Control.Monad.Heap
 -- >>> import Data.Monus.Dist
 -- >>> default (Dist,Integer,Double)
 
-import Data.Bifunctor
-import Data.Bifoldable
-import Data.Bitraversable
-
+import Data.Bifunctor ( Bifunctor(..) )
+import Data.Bifoldable ( Bifoldable(..) )
+import Data.Bitraversable ( Bitraversable(..) )
 import Control.Monad.Heap.List
-import Control.Monad
+    ( catMaybesT, toListT, ListCons(..), ListT(..) )
+import Control.Monad ( MonadPlus, ap )
 import Control.Applicative
-import Control.Monad.Trans
-import Data.Monus
-import Control.Monad.Writer
-import Control.Monad.State
-import Control.Monad.Except
-import Control.Monad.Reader
-import Control.Monad.Cont
-import Data.Functor.Identity
-import Control.Monad.Trans.Maybe
+    ( Applicative(liftA2), Alternative(empty, (<|>)) )
+import Control.Monad.Trans ( MonadTrans(..) )
+import Data.Monus ( Monus(..) )
+import Control.Monad.Writer ( MonadWriter(..), Alt(Alt) )
+import Control.Monad.State ( MonadState(..) )
+import Control.Monad.Except ( MonadError(..) )
+import Control.Monad.Reader ( MonadReader(..) )
+import Control.Monad.Cont ( MonadCont(..) )
+import Data.Functor.Identity ( Identity(..) )
+import Control.Monad.Trans.Maybe ( MaybeT(MaybeT, runMaybeT) )
 import Test.QuickCheck
-
+    ( arbitrary1,
+      frequency,
+      sized,
+      Arbitrary(arbitrary),
+      Arbitrary1(liftArbitrary) )
 import MonusWeightedSearch.Internal.CoerceOperators
-import MonusWeightedSearch.Internal.TestHelpers
-import Data.Data
-import GHC.Generics
-import Control.DeepSeq
+    ( (<#$>), (.#), (#.), under )
+import MonusWeightedSearch.Internal.TestHelpers ( sumsTo )
+import Data.Data ( Data, Typeable )
+import GHC.Generics ( Generic, Generic1 )
+import Control.DeepSeq ( NFData(..) )
 
 infixr 5 :<
 -- | A 'Heap' is a list of 'Node's of 'Heap's.

@@ -24,24 +24,34 @@ module Control.Monad.Heap.List
   , listMmap
   ) where
 
-import Data.Bifunctor
-import Data.Bifoldable
-import Data.Bitraversable
-
-import Control.Monad
+import Data.Bifunctor ( Bifunctor(first, bimap) )
+import Data.Bifoldable ( Bifoldable(..) )
+import Data.Bitraversable ( Bitraversable(..) )
+import Control.Monad ( MonadPlus )
 import Control.Applicative
-import Control.Monad.Trans
-import Control.Monad.State
-import Control.Monad.Except
-import Control.Monad.Reader
-import Control.Monad.Writer
-import Control.Monad.Cont
+    ( Applicative(liftA2), Alternative((<|>), empty) )
+import Control.Monad.Trans ( MonadTrans(..) )
+import Control.Monad.State ( MonadState(..) )
+import Control.Monad.Except ( MonadError(..) )
+import Control.Monad.Reader ( MonadReader(..) )
+import Control.Monad.Writer ( Alt(Alt), MonadWriter(..) )
+import Control.Monad.Cont ( MonadCont(..) )
 import Test.QuickCheck
+    ( Arbitrary(..),
+      arbitrary1,
+      arbitrary2,
+      shrink1,
+      shrink2,
+      frequency,
+      sized,
+      Arbitrary1(..),
+      Arbitrary2(..) )
 import MonusWeightedSearch.Internal.CoerceOperators
-import Control.DeepSeq
-import GHC.Generics
-import Data.Data
-import Data.Coerce
+    ( (#.), (.#), (<#$>) )
+import Control.DeepSeq ( NFData(..) )
+import GHC.Generics ( Generic, Generic1 )
+import Data.Data ( Data, Typeable )
+import Data.Coerce ( coerce )
 
 infixr 5 :-
 -- | The list constructor.
