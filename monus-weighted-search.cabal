@@ -4,6 +4,7 @@ name:                monus-weighted-search
 version:             0.1.0.0
 license:             MIT
 license-file:        LICENSE
+category:            Data Structures
 synopsis:            Efficient search weighted by an ordered monoid with monus.
 author:              Donnacha Oisín Kidney
 maintainer:          mail@doisinkidney.com
@@ -86,7 +87,6 @@ library
                -Wno-unticked-promoted-constructors
                -Wno-name-shadowing
                -Wno-unused-matches
-               -O2
 
 test-suite monus-weighted-search-tests
   type: exitcode-stdio-1.0

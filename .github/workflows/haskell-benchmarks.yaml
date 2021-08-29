@@ -1,0 +1,58 @@
+name: Benchmark Haskell code
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        ghc-ver: ["9.0.1"]
+        cabal-ver: ["3.4.0.0"]
+
+    steps:
+
+# Download this git repo
+    - name: Checkout main
+      uses: actions/checkout@v2
+
+# Install GHC & Cabal
+    - uses: actions/cache@v2
+      name: Cache cabal packages
+      id: cache-cabal
+      with:
+        path: |
+          ~/.cabal/packages
+          ~/.cabal/store
+          ~/.cabal/bin
+          dist
+          dist-newstyle
+        key: bench-${{ runner.os }}-${{ matrix.ghc-ver }}-${{ matrix.cabal-ver }}-${{ hashFiles('**') }}
+        restore-keys: bench-${{ runner.os }}-${{ matrix.ghc-ver }}-${{ matrix.cabal-ver }}-
+
+    - name: Install ghc and cabal
+      uses: haskell/actions/setup@v1.2.2
+      with:
+        ghc-version: ${{ matrix.ghc-ver }}
+        cabal-version: ${{ matrix.cabal-ver }}
+
+    - name: Put cabal programs in PATH
+      run: echo "~/.cabal/bin" >> $GITHUB_PATH
+
+# Compile Local Haskell
+    - name: Build Haskell
+      run: cabal build --enable-benchmarks
+
+    - name: Run benchmarks
+      run: |
+        mkdir benchmark
+        cabal bench --benchmark-options='--csv benchmark/results.csv --output benchmark/results.html'
+
+# Deploy Haskell docs to site
+    - name: Deploy benchmark results to github pages
+      uses: peaceiris/actions-gh-pages@v3.7.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: benchmark
+        destination_dir: benchmark
