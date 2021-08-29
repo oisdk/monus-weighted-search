@@ -6,6 +6,9 @@ import Test.QuickCheck
 import Numeric.Natural
 import System.Random
 
+-- $setup
+-- >>> import Test.QuickCheck
+
 -- | @'sumsTo' n@ generates a list that sums to @n@.
 --
 -- prop> n >= 0 ==> forAll (sumsTo n) (\xs -> sum xs === n)

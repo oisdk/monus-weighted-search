@@ -82,6 +82,10 @@ import Data.Data
 import GHC.Generics
 import Control.DeepSeq
 
+-- $setup
+-- >>> import Data.Monus.Dist
+-- >>> default (Dist,Integer,Double)
+
 infixr 5 :<
 -- | A 'Heap' is a list of 'Node's of 'Heap's.
 data Node w a b = Leaf a | !w :< b
@@ -144,11 +148,11 @@ instance Bitraversable (Node w) where
 -- Depending on the 'Monus' used, the order of the search can be specified.
 -- For instance, using the 'Monus' in "Data.Monus.Dist", we have the following:
 --
--- >>> search (fromList [('a', 5), ('b', 3), ('c', 6)])
--- [('b', 3), ('a', 5), ('c', 6)]
+-- >>> search (fromList [('a',5), ('b', 3), ('c',6)])
+-- [('b',3),('a',5),('c',6)]
 --
--- >>> search (fromList [('b', 3), ('a', 5), ('c', 6)])
--- [('b', 3), ('a', 5), ('c', 6)]
+-- >>> search (fromList [('b',3), ('a',5), ('c',6)])
+-- [('b',3),('a',5),('c',6)]
 newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (HeapT w m) a
@@ -324,8 +328,8 @@ flattenT = ListT #. fmap (uncurry (:-) . bimap (mempty,) go) . popMinT
 --
 -- The weights returned are the /differences/, not the absolute weights.
 --
--- >>> flatten (fromList [('a', 5), ('b', 3), ('c', 6)])
--- [(3, "b"), (2, "a"), (1, "c")]
+-- >>> flatten (fromList [('a',5), ('b', 3), ('c',6)])
+-- [(0,""),(3,"b"),(2,"a"),(1,"c")]
 flatten :: Monus w => Heap w a -> [(w, [a])]
 flatten = runIdentity #. toListT . flattenT
 {-# INLINE flatten #-}
