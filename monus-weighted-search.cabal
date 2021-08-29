@@ -12,6 +12,7 @@ homepage:            https://github.com/oisdk/monus-weighted-search
 bug-reports:         https://github.com/oisdk/monus-weighted-search/issues
 tested-with:         GHC == 9.0.1
 extra-source-files:  README.md
+                   , CHANGELOG.md
 synopsis:            Efficient search weighted by an ordered monoid with monus.
 description:         
   This package contains the Haskell constructions from the paper "Algebras for
