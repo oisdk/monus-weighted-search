@@ -3,6 +3,7 @@ cabal-version:       >= 1.10
 name:                monus-weighted-search
 version:             0.1.0.0
 license:             MIT
+license-file:        LICENSE
 synopsis:            Efficient search weighted by an ordered monoid with monus.
 author:              Donnacha Oisín Kidney
 maintainer:          mail@doisinkidney.com
