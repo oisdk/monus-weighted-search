@@ -6,7 +6,7 @@ module MonusWeightedSearch.Internal.AdjList
   , fromGraph
   ) where
 
-import MonusWeightedSearch.WeightedGraph
+import Data.Monus.Dist
 import Data.Array.Unboxed
 import Control.DeepSeq
 import Test.QuickCheck

@@ -8,7 +8,6 @@ import Data.Monus.Dist
 import Data.Set (Set)
 import qualified Data.Set as Set
 
-import MonusWeightedSearch.WeightedGraph
 import Data.List.NonEmpty
 
 import Control.Monad.Heap

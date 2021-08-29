@@ -31,3 +31,9 @@ newtype Dist = Dist { runDist :: Natural }
 instance Arbitrary Dist where
   arbitrary = arbitrarySizedNatural
   shrink = shrinkIntegral
+
+-- | A simple graph with 'Dist'-weighted edges.
+--
+-- Note that the algorithms in this package can use any monus, not just 'Dist':
+-- we specialise here just for simplicity of presentation.
+type Graph a = a -> [(a, Dist)]

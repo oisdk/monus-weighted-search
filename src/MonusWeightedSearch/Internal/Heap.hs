@@ -10,11 +10,10 @@
 module MonusWeightedSearch.Internal.Heap (Heap(..),minView, singleton, dijkstra, monusSort) where
 
 import Data.Monus
-import MonusWeightedSearch.WeightedGraph
+import Data.Monus.Dist
 
 import qualified Data.Set as Set
 
-import Data.Monus.Dist
 import Data.List (unfoldr)
 
 import Data.List.NonEmpty (NonEmpty(..))

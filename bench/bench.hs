@@ -4,7 +4,6 @@ import Criterion.Main
 import Control.Monad
 import System.Random
 
-import MonusWeightedSearch.WeightedGraph
 import MonusWeightedSearch.Internal.AdjList
 
 import Data.Monus.Dist

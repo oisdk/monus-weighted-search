@@ -17,14 +17,13 @@ library
                      , MonusWeightedSearch.Internal.CoerceOperators
                      , MonusWeightedSearch.Internal.TestHelpers
                      , MonusWeightedSearch.Internal.Heap
+                     , MonusWeightedSearch.Internal.AdjList
                      , MonusWeightedSearch.Dijkstra
                      , MonusWeightedSearch.Sampling
                      , MonusWeightedSearch.SubsetSum
                      , MonusWeightedSearch.Sort
                      , MonusWeightedSearch.Viterbi
                      , MonusWeightedSearch.Parsing
-                     , MonusWeightedSearch.WeightedGraph
-                     , MonusWeightedSearch.Internal.AdjList
   build-depends:       base >=4.13 && <5
                      , containers >=0.6.4 && <0.6.5
                      , QuickCheck >=2.14 && <2.15
