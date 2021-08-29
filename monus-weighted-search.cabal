@@ -54,7 +54,7 @@ library
                      , MonusWeightedSearch.Internal.Heap
                      , MonusWeightedSearch.Internal.AdjList
   build-depends:       base >=4.13 && <5
-                     , containers >=0.6.4 && <0.6.5
+                     , containers >=0.1.0.0
                      , QuickCheck >=2.14 && <2.15
                      , deepseq >= 1.4
                      , transformers >= 0.5

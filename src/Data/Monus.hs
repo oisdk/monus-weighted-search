@@ -11,7 +11,7 @@
 
 module Data.Monus (Monus(..)) where
 
-import Data.Monoid
+import Data.Monoid (Sum(..))
 
 infixl 6 |-|
 -- | A class for (constructive) totally-ordered commutative monoids. These
@@ -35,7 +35,7 @@ class (Ord a, Monoid a) => Monus a where
   (|-|) :: a -> a -> a
 
 instance (Num a, Ord a) => Monus (Sum a) where
-  x |-| y
-    | x <= y = y - x
-    | otherwise = x - y
+  Sum x |-| Sum y
+    | x <= y = Sum (y - x)
+    | otherwise = Sum (x - y)
   {-# INLINE (|-|) #-}
