@@ -56,10 +56,10 @@ jobs:
 # Compile Local Haskell
     - name: Build and Test Haskell
       run: |
-        cabal build
+        cabal v2-build-all --enable-tests
         cabal test
-        cabal -v new-haddock --haddock-hyperlink-source --haddock-html-location='https://hackage.haskell.org/package/$pkg-$version/docs' --enable-documentation
         cabal-docspec --check-properties --property-variables n
+        cabal new-haddock --haddock-hyperlink-source --haddock-html-location='https://hackage.haskell.org/package/$pkg-$version/docs' --enable-documentation
 
 # Deploy Haskell docs to site
     - name: Deploy haddocks to github pages
