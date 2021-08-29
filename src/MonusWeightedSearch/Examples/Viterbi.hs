@@ -15,14 +15,15 @@
 
 module MonusWeightedSearch.Examples.Viterbi where
 
-import Control.Monad.Heap
-import Data.Monus.Prob
-import Control.Monad.Writer
-import Data.Maybe
 
 -- $setup
 -- >>> import Data.Bifunctor (first)
 -- >>> :set -XTypeApplications
+
+import Control.Monad.Heap
+import Data.Monus.Prob
+import Control.Monad.Writer
+import Data.Maybe
 
 -- | A heap of probabilities; similar to a probability monad, but prioritises
 -- likely outcomes.
