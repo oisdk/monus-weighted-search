@@ -8,6 +8,8 @@ author:              Donnacha Oisín Kidney
 maintainer:          mail@doisinkidney.com
 build-type:          Simple
 homepage:            https://github.com/oisdk/monus-weighted-search
+bug-reports:         https://github.com/oisdk/monus-weighted-search/issues
+tested-with:         GHC == 9.0.1
 
 library
   hs-source-dirs:      src
