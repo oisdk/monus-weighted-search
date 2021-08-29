@@ -10,6 +10,12 @@ build-type:          Simple
 homepage:            https://github.com/oisdk/monus-weighted-search
 bug-reports:         https://github.com/oisdk/monus-weighted-search/issues
 tested-with:         GHC == 9.0.1
+extra-source-files:  README.md
+
+source-repository head
+  type: git
+  location: git://github.com/oisdk/monus-weighted-search.git
+
 
 library
   hs-source-dirs:      src
