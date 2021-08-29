@@ -39,7 +39,7 @@ import Data.Monus.Dist
 import Data.Set (Set)
 import qualified Data.Set as Set
 
-import Data.List.NonEmpty (NonEmpty(..), head)
+import Data.List.NonEmpty (NonEmpty(..))
 
 import Control.Monad.Heap
 
