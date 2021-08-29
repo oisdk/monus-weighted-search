@@ -29,6 +29,7 @@
 
 module MonusWeightedSearch.Examples.Dijkstra where
 
+import Prelude hiding (head)
 import Control.Monad.State.Strict
 import Control.Applicative
 import Control.Monad.Writer
@@ -38,9 +39,13 @@ import Data.Monus.Dist
 import Data.Set (Set)
 import qualified Data.Set as Set
 
-import Data.List.NonEmpty (NonEmpty(..))
+import Data.List.NonEmpty (NonEmpty(..), head)
 
 import Control.Monad.Heap
+
+-- $setup
+-- >>> import Prelude hiding (head)
+-- >>> import Data.List.NonEmpty (head)
 
 -- | The example graph from
 -- <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm the Wikipedia article on Dijkstra's algorithm>.
@@ -81,11 +86,20 @@ pathed f = star (\ ~(x :| xs) -> fmap (:|x:xs) (f x)) . (:| [])
 --
 -- >>> dijkstra graph 1
 -- [(1,0),(2,7),(3,9),(6,11),(5,20),(4,20)]
+--
+-- A version which actually produces the paths is 'shortestPaths'
 dijkstra :: Ord a => Graph a -> a -> [(a, Dist)]
 dijkstra g x =
   evalState (searchT (star (asum . map (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
 {-# INLINE dijkstra #-}
 
+-- | Dijkstra's algorithm, which produces a path.
+--
+-- The only difference between this function and 'shortestPaths' is that this
+-- uses 'pathed' rather than 'star'.
+--
+-- >>> filter ((5==) . head . fst) (shortestPaths graph 1)
+-- [(5 :| [6,3,1],20)]
 shortestPaths :: Ord a => Graph a -> a -> [(NonEmpty a, Dist)]
 shortestPaths g x =
   evalState (searchT (pathed (asum . map (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
