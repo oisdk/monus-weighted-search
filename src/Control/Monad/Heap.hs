@@ -334,7 +334,7 @@ search = runIdentity #. searchT
 
 -- | The monadic variant of 'best'.
 bestT :: (Monad m, Monus w) => HeapT w m a -> m (Maybe (w, a))
-bestT = runMaybeT . go mempty
+bestT = runMaybeT #. go mempty
   where
     go a xs = do
       (y,ys) <- lift (popMinT xs)
@@ -373,11 +373,11 @@ instance (Monad m, Monus w) => MonadWriter w (HeapT w m) where
   {-# INLINE tell #-}
   listen = go mempty
     where
-      go !w = HeapT . fmap (h w) . runHeapT
+      go !w = HeapT #. (fmap (h w) .# runHeapT)
       h !w1 (Leaf x) = Leaf (x, w1)
       h !w1 (w2 :< xs) = w2 :< go (w1 <> w2) xs
   {-# INLINE listen #-}
-  pass = HeapT . catMaybesT (fmap (uncurry (:<)) . comb . uncurry (\w -> map (\(x,f) -> (f w, pure x)))) . flattenT
+  pass = HeapT #. catMaybesT (fmap (uncurry (:<)) . comb . uncurry (\w -> map (\(x,f) -> (f w, pure x)))) . flattenT
   {-# INLINE pass #-}
 
 instance MonadState s m => MonadState s (HeapT w m) where
