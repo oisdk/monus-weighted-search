@@ -20,6 +20,7 @@ import MonusWeightedSearch.Internal.AdjList
 
 import qualified MonusWeightedSearch.Internal.Heap as H
 import qualified MonusWeightedSearch.Examples.Dijkstra as M
+import qualified MonusWeightedSearch.Examples.Sort as M
 
 import Data.Monus
 import Data.Monus.Prob
@@ -27,6 +28,9 @@ import Data.Monus.Dist
 
 prop_monadDijkstra :: AdjList -> Property
 prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
+
+prop_monadSort :: [Dist] -> Property
+prop_monadSort xs = sort xs === M.monusSort xs
 
 prop_probOrdMonoid :: Prob -> Prob -> Property
 prop_probOrdMonoid x y = (x <= x <> y) .&&. (y <= x <> y)

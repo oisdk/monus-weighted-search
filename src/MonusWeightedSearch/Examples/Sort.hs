@@ -13,9 +13,17 @@
 
 module MonusWeightedSearch.Examples.Sort where
 
+-- $setup
+-- >>> import Data.Monus.Dist
+-- >>> default (Dist)
+
 import Data.Monus
 import Control.Monad.Heap
 
+-- | /O(n log n)/. Heapsort.
+--
+-- >>> monusSort [5,1,2,3,1,6,3,2,5,7]
+-- [1,1,2,2,3,3,5,5,6,7]
 monusSort :: Monus m => [m] -> [m]
 monusSort = map snd . search . fromList . map ((),) 
 {-# INLINE monusSort #-}
