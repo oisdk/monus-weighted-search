@@ -98,8 +98,12 @@ dijkstra g x =
 -- The only difference between this function and 'shortestPaths' is that this
 -- uses 'pathed' rather than 'star'.
 --
+-- The following finds the shortest path from vertex 1 to 5:
+--
 -- >>> filter ((5==) . head . fst) (shortestPaths graph 1)
 -- [(5 :| [6,3,1],20)]
+--
+-- And it is indeed @[1,3,6,5]@. (it's returned in reverse)
 shortestPaths :: Ord a => Graph a -> a -> [(NonEmpty a, Dist)]
 shortestPaths g x =
   evalState (searchT (pathed (asum . map (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
