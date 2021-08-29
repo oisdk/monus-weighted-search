@@ -22,3 +22,11 @@ The examples include:
 * Probabilistic sampling (`MonusWeightedSearch.Examples.Sampling`)
 * The Viterbi algorithm (`MonusWeightedSearch.Examples.Viterbi`)
 
+Thought he primary purpose of this package is to demonstrate the ideas in the
+paper, the heap monad has been packaged so it can be used as-is in "real" code.
+
+The documentation is compiled on every commit, it can be seen 
+[here](https://oisdk.github.io/monus-weighted-search/docs/).
+
+Benchmarks are run occasionally, their output can be seen 
+[here](https://oisdk.github.io/monus-weighted-search/benchmark/results.html).
