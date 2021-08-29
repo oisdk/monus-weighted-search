@@ -171,9 +171,18 @@ instance Foldable m => Foldable (HeapT w m) where
   {-# INLINE foldMap #-}
 
 instance Traversable m => Traversable (HeapT w m) where
-  traverse f = go
+  traverse :: forall f a b. Applicative f => (a -> f b) -> HeapT w m a -> f (HeapT w m b)
+  traverse f = fmap (HeapT #. ListT) . (traverse h .# (runListT . runHeapT))
     where
-      go = fmap HeapT . (traverse (bitraverse f go) .# runHeapT)
+      h :: ListCons (Node w a (HeapT w m a)) (ListT m (Node w a (HeapT w m a))) -> 
+           f (ListCons (Node w b (HeapT w m b)) (ListT m (Node w b (HeapT w m b))))
+      h Nil = pure Nil
+      h (x :- ListT xs) = liftA2 (\y ys -> y :- ListT ys) (g x) (traverse h xs)
+      
+      g :: Node w a (HeapT w m a) -> f (Node w b (HeapT w m b))
+      g (Leaf x) = fmap Leaf (f x)
+      g (x :< HeapT (ListT xs)) = fmap ((x :<) .# (HeapT . ListT)) (traverse h xs)
+      {-# INLINE g #-}
   {-# INLINE traverse #-}
 
 deriving newtype instance (forall x. NFData x => NFData (m x), NFData w, NFData a) => NFData (HeapT w m a) 
