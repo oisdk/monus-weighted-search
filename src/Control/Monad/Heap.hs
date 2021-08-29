@@ -31,12 +31,11 @@
 module Control.Monad.Heap
   ( -- * Heap Type
     HeapT(..)
+  , Node(..)
     -- ** Non-transformer form
   , Heap
   , pattern Heap
   , runHeap
-    -- ** Node Constructor
-  , Node(..)
 
     -- * Constructing Heaps
   , fromList

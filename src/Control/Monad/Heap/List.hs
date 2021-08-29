@@ -1,8 +1,20 @@
 {-# LANGUAGE UndecidableInstances #-}
+
+--------------------------------------------------------------------------------
+-- |
+-- Module      : Control.Monad.Heap.List
+-- Copyright   : (c) Donnacha Oisín Kidney 2021
+-- Maintainer  : mail@doisinkidney.com
+-- Stability   : experimental
+-- Portability : non-portable
+--
+-- A simple re-implementation of the list monad transformer, for use by the heap
+-- monad.
+--------------------------------------------------------------------------------
 module Control.Monad.Heap.List
   ( -- * Type Definition
-    ListCons(..)
-  , ListT(..)
+    ListT(..)
+  , ListCons(..)
     -- * Building the list
   , unfoldrM
     -- * Running the list
@@ -79,7 +91,8 @@ instance Arbitrary a => Arbitrary1 (ListCons a) where
 instance (Arbitrary a, Arbitrary b) => Arbitrary (ListCons a b) where
   arbitrary = arbitrary2
   shrink = shrink2
-  
+
+-- | A list monad transformer, "done right".
 newtype ListT m a
   = ListT { runListT :: m (ListCons a (ListT m a)) }
   deriving (Typeable, Generic)
