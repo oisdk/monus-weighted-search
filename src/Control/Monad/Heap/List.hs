@@ -171,9 +171,11 @@ instance Foldable m => Foldable (ListT m) where
   {-# INLINE foldMap #-}
 
 instance Traversable m => Traversable (ListT m) where
-  traverse f = go
+  traverse f = fmap ListT . go
     where
-      go = fmap ListT . (traverse (bitraverse f go) .# runListT)
+      go = traverse h .# runListT
+      h Nil = pure Nil
+      h (x :- xs) = liftA2 (\y ys -> y :- ListT ys) (f x) (go xs)
   {-# INLINE traverse #-}
 
 -- | Flatten all of the effects in the list and collect the results.
