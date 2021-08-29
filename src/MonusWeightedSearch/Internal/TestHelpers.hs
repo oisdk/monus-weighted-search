@@ -11,7 +11,7 @@ import System.Random
 
 -- | @'sumsTo' n@ generates a list that sums to @n@.
 --
--- prop> n >= 0 ==> forAll (sumsTo n) (\xs -> sum xs === n)
+-- prop> n >= 0 ==> forAll (sumsTo n) (\xs -> sum xs === 1 + n)
 sumsTo :: Int -> Gen [Int]
 sumsTo n = go [] n >>= shuffle
   where
