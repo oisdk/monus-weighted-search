@@ -11,19 +11,17 @@
 
 module Data.Monus.Prob where
 
-import Data.Ratio
-import Data.Monus
-import Numeric.Natural
-import Data.Ord
-import Data.Monoid
+import Data.Ratio ( Ratio, (%) )
+import Data.Monus ( Monus(..) )
+import Numeric.Natural ( Natural )
+import Data.Ord ( Down(Down) )
+import Data.Monoid ( Product(Product) )
 import Test.QuickCheck
-
-import Data.Data
-import GHC.Generics
-
-import Control.Applicative
-
-import Control.DeepSeq
+    ( Arbitrary(arbitrary), NonNegative(NonNegative) )
+import Data.Data ( Data, Typeable )
+import GHC.Generics ( Generic )
+import Control.Applicative ( Applicative(liftA2) )
+import Control.DeepSeq ( NFData )
 
 -- | A 'Monus' for probabilities, where the underlying 'Monoid' is the product
 -- monoid.

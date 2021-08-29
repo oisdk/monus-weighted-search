@@ -11,15 +11,16 @@
 
 module Data.Monus.Dist where
 
-import Numeric.Natural
-import Data.Bits
-import Data.Ix
-import Data.Data
-import GHC.Generics
-import Data.Monoid
-import Data.Monus
+import Numeric.Natural ( Natural )
+import Data.Bits ( Bits )
+import Data.Ix ( Ix )
+import Data.Data ( Data, Typeable )
+import GHC.Generics ( Generic )
+import Data.Monoid ( Sum(Sum) )
+import Data.Monus ( Monus )
 import Test.QuickCheck
-import Control.DeepSeq
+    ( arbitrarySizedNatural, shrinkIntegral, Arbitrary(..) )
+import Control.DeepSeq ( NFData )
 
 -- | A very simple 'Monus', based on the addition 'Monoid' on 'Natural' numbers.
 -- This represents discrete distances.
