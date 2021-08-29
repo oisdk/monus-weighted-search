@@ -41,11 +41,12 @@ import MonusWeightedSearch.Internal.CoerceOperators
 import Control.DeepSeq
 import GHC.Generics
 import Data.Data
+import Data.Coerce
 
 infixr 5 :-
+-- | The list constructor.
 data ListCons a b = Nil | a :- !b
   deriving (Functor, Foldable, Traversable, Eq, Ord, Show, Read, Data, Typeable, Generic, Generic1)
--- ^The list constructor
 
 instance (NFData a, NFData b) => NFData (ListCons a b) where
   rnf Nil = ()
@@ -100,8 +101,11 @@ newtype ListT m a
 
 deriving newtype instance (forall x. NFData x => NFData (m x), NFData a) => NFData (ListT m a)
 
+-- | Unfold, monadically, a list from a seed.
 unfoldrM :: Functor m => (b -> m (Maybe (a, b))) -> b -> ListT m a
-unfoldrM f = ListT #. fmap (maybe Nil (uncurry (:-) . second (unfoldrM f))) . f
+unfoldrM f = go
+  where
+    go = ListT #. fmap (maybe Nil (uncurry (:-) . second go)) . f
 {-# INLINE unfoldrM #-}
 
 instance (forall x. Show x => Show (m x), Show a) => Show (ListT m a) where
@@ -145,7 +149,7 @@ instance Monad m => Applicative (ListT m) where
       h x y xs = pure (f x y :- ListT xs)
   {-# INLINE liftA2 #-}
   (*>) = liftA2 (const id)
-  {-# INLINE (*>)#-}
+  {-# INLINE (*>) #-}
   (<*) = liftA2 const
   {-# INLINE (<*) #-}
   
@@ -154,6 +158,7 @@ instance Monad m => Monad (ListT m) where
     where
       g x xs = runListT (f x <> ListT xs)
   {-# INLINE (>>=) #-}
+  (>>) = (*>)
   
 instance Foldable m => Foldable (ListT m) where
   foldr f = flip go
@@ -170,13 +175,16 @@ instance Traversable m => Traversable (ListT m) where
     where
       go = fmap ListT . (traverse (bitraverse f go) .# runListT)
   {-# INLINE traverse #-}
-  
+
+-- | Flatten all of the effects in the list and collect the results.
 toListT :: Monad m => ListT m a -> m [a]
 toListT = foldrListT (fmap . (:)) (pure [])
 {-# INLINE toListT #-}
 
 instance Monad m => Alternative (ListT m) where
-  xs <|> ys = ListT (foldrListT (\z zs -> pure (z :- ListT zs)) (runListT ys) xs)
+  (<|>) = (coerce :: (ListT m a -> m (ListCons a (ListT m a)) -> m (ListCons a (ListT m a)))
+                  -> (ListT m a -> ListT m a -> ListT m a))
+          (flip (foldrListT (\z zs -> pure (z :- ListT zs))))
   {-# INLINE (<|>) #-}
   empty = ListT (pure Nil)
   {-# INLINE empty #-}
@@ -184,12 +192,16 @@ instance Monad m => Alternative (ListT m) where
 instance Monad m => MonadPlus (ListT m)
 
 instance MonadTrans ListT where
-  lift = ListT . fmap (\x -> x :- ListT (pure Nil))
+  lift = ListT #. fmap (:- ListT (pure Nil))
   {-# INLINE lift #-}
   
-listMmap :: Functor m => (m (ListCons a (ListT n b)) -> n (ListCons b (ListT n b))) -> ListT m a -> ListT n b
--- ^ Apply a function to every effect layered in the list transformer
-listMmap f = ListT #. f . (fmap (fmap (listMmap f)) .# runListT)
+-- | Apply a function to every effect layered in the list transformer.
+listMmap :: Functor m
+         => (m (ListCons a (ListT n b)) -> n (ListCons b (ListT n b)))
+         -> ListT m a -> ListT n b
+listMmap f = go
+  where
+    go = ListT #. f . (fmap (fmap go) .# runListT)
 {-# INLINE listMmap #-}
 
 instance MonadState s m => MonadState s (ListT m) where
@@ -228,9 +240,10 @@ instance MonadWriter w m => MonadWriter w (ListT m) where
   {-# INLINE pass #-}
 
 instance MonadCont m => MonadCont (ListT m) where
-  callCC f = ListT (callCC (\c -> runListT (f (ListT . c . (:- empty)))))
+  callCC f = ListT (callCC (\c -> runListT (f (ListT #. c . (:- empty)))))
   {-# INLINE callCC #-}
-  
+
+-- | Filter the list using. An analogue of mapMaybe on lists.
 catMaybesT :: Monad m => (a -> Maybe b) -> ListT m a -> ListT m b
-catMaybesT f xs = xs >>= (maybe empty pure . f)
+catMaybesT f = ListT #. foldrListT (\x xs -> maybe xs (pure . (:- ListT xs)) (f x)) (pure Nil)
 {-# INLINE catMaybesT #-}
