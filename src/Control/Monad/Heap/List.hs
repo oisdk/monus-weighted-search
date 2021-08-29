@@ -250,7 +250,7 @@ instance MonadCont m => MonadCont (ListT m) where
   callCC f = ListT (callCC (\c -> runListT (f (ListT #. c . (:- empty)))))
   {-# INLINE callCC #-}
 
--- | Filter the list using. An analogue of mapMaybe on lists.
+-- | Filter the list. An analogue of mapMaybe on lists.
 catMaybesT :: Monad m => (a -> Maybe b) -> ListT m a -> ListT m b
 catMaybesT f = ListT #. foldrListT (\x xs -> maybe xs (pure . (:- ListT xs)) (f x)) (pure Nil)
 {-# INLINE catMaybesT #-}
