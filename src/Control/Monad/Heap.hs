@@ -84,6 +84,7 @@ import GHC.Generics
 import Control.DeepSeq
 
 infixr 5 :<
+-- | A 'Heap' is a list of 'Node's of 'Heap's.
 data Node w a b = Leaf a | !w :< b
   deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
 
@@ -190,6 +191,7 @@ instance (Arbitrary1 m, Arbitrary w) => Arbitrary1 (HeapT w m) where
       go3 n | n <= 1 = fmap Leaf arb
       go3 n = frequency [(1, fmap Leaf arb), (n, liftA2 (:<) arbitrary (go1 n))]
 
+-- | The 'Heap' type, specialised to the 'Identity' monad.
 type Heap w = HeapT w Identity
 
 runHeapIdent :: Heap w a -> [Node w a (Heap w a)]
@@ -200,8 +202,9 @@ toHeapIdent :: [Node w a (Heap w a)] -> Heap w a
 toHeapIdent = HeapT #. foldr (\x xs -> ListT (Identity (x :- xs))) (ListT (Identity Nil))
 {-# INLINE toHeapIdent #-}
 
+-- | The constructor for the non-transformer 'Heap' type.
 pattern Heap :: [Node w a (Heap w a)] -> Heap w a
-pattern Heap { runHeap } <- (runHeapIdent -> runHeap)
+pattern Heap { runHeap } <- (runHeapIdent -> runHeap) 
   where
     Heap = toHeapIdent
 {-# COMPLETE Heap #-}
@@ -284,26 +287,39 @@ partition = foldr f ([],[])
     f (w :< x) (ys,zs) = (ys, (w, x) :zs)
 {-# INLINE partition #-}
 
+-- | The monadic variant of 'popMin'.
 popMinT ::  (Monus w, Monad m) =>
             HeapT w m a ->
             m ([a], Maybe (w, HeapT w m a))
 popMinT = fmap (second comb . partition) . toListT .# runHeapT
 {-# INLINE popMinT #-}
 
+-- | /O(log n)/. 'popMin' returns a list of those elements in the 'Heap' with a
+-- weight equal to 'mempty', paired with the rest of the heap and the minimum
+-- weight in the rest of the heap.
 popMin :: Monus w => Heap w a -> ([a], Maybe (w, Heap w a))
 popMin = runIdentity #. popMinT
 {-# INLINE popMin #-}
 
+-- | The monadic version of 'flatten'.
 flattenT :: (Monad m, Monus w) => HeapT w m a -> ListT m (w, [a])
 flattenT = ListT #. fmap (uncurry (:-) . bimap (mempty,) go) . popMinT
   where
     go = maybe empty (\(w, xs) -> ListT (fmap (uncurry (:-) . bimap (w,) go) (popMinT xs)))
 {-# INLINE flattenT #-}
 
+-- | /O(n log n)/. Return all the elements of the heap, in order of their
+-- weights, grouped by equal weights, paired with the /differences/ in weights.
+--
+-- The weights returned are the /differences/, not the absolute weights.
+--
+-- >>> flatten (fromList [('a', 5), ('b', 3), ('c', 6)])
+-- [(3, "b"), (2, "a"), (1, "c")]
 flatten :: Monus w => Heap w a -> [(w, [a])]
 flatten = runIdentity #. toListT . flattenT
 {-# INLINE flatten #-}
 
+-- | The monadic variant of 'search'.
 searchT ::  (Monad m, Monus w) =>
             HeapT w m a -> m [(a, w)]
 searchT xs = popMinT xs >>= go mempty where
@@ -311,10 +327,13 @@ searchT xs = popMinT xs >>= go mempty where
     go !w1 (x, Just (w2, xs))  = fmap  (map (,w1) x ++) (popMinT xs >>= go (w1 <> w2))
 {-# INLINE searchT #-}
 
+-- | /O(n log n)/. Return all of the elements in the heap, in order, paired
+-- with their weights.
 search :: Monus w => Heap w a -> [(a, w)]
 search = runIdentity #. searchT
 {-# INLINE search #-}
 
+-- | The monadic variant of 'best'.
 bestT :: (Monad m, Monus w) => HeapT w m a -> m (Maybe (w, a))
 bestT = runMaybeT . go mempty
   where
@@ -326,6 +345,9 @@ bestT = runMaybeT . go mempty
           (w', zs) <- MaybeT (pure ys)
           go (a <> w') zs
 {-# INLINE bestT #-}
+
+-- | /O(log n)/. Return the lowest-weight element in the heap, paired with its
+-- weight.
 best :: Monus w => Heap w a -> Maybe (w, a)
 best = runIdentity #. bestT
 {-# INLINE best #-}
