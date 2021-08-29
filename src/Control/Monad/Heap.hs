@@ -153,6 +153,8 @@ newtype HeapT w m a = HeapT { runHeapT :: ListT m (Node w a (HeapT w m a)) }
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (HeapT w m) a
 
+deriving instance (forall x. Data x => Data (m x), Typeable m, Data a, Data w) => Data (HeapT w m a)
+
 -- | Build a heap from a list of values paired with their weights.
 fromList :: Applicative m => [(a,w)] -> HeapT w m a
 fromList = HeapT #. foldr f (ListT (pure Nil))

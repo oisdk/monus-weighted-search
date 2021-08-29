@@ -99,6 +99,8 @@ newtype ListT m a
   deriving (Typeable, Generic)
   deriving (Semigroup, Monoid) via Alt (ListT m) a
 
+deriving instance (forall x. Data x => Data (m x), Typeable m, Data a) => Data (ListT m a)
+
 deriving newtype instance (forall x. NFData x => NFData (m x), NFData a) => NFData (ListT m a)
 
 -- | Unfold, monadically, a list from a seed.
