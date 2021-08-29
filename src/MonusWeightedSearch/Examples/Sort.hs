@@ -1,4 +1,4 @@
-module MonusWeightedSearch.Sort where
+module MonusWeightedSearch.Examples.Sort where
 
 import Data.Monus
 import Control.Monad.Heap

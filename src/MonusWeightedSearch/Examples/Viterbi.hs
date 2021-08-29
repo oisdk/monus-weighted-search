@@ -1,4 +1,4 @@
-module MonusWeightedSearch.Viterbi where
+module MonusWeightedSearch.Examples.Viterbi where
 
 import Control.Monad.Heap
 import Data.Monus.Prob

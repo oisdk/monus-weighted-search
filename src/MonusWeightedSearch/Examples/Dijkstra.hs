@@ -1,4 +1,4 @@
-module MonusWeightedSearch.Dijkstra where
+module MonusWeightedSearch.Examples.Dijkstra where
 
 import Control.Monad.State.Strict
 import Control.Applicative

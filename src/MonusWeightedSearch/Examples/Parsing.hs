@@ -1,4 +1,4 @@
-module MonusWeightedSearch.Parsing where
+module MonusWeightedSearch.Examples.Parsing where
 
 import Control.Applicative
 import Control.Monad.Heap

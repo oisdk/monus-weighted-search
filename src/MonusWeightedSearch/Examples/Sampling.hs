@@ -1,4 +1,4 @@
-module MonusWeightedSearch.Sampling where
+module MonusWeightedSearch.Examples.Sampling where
 
 import Control.Monad.Heap
 import Data.Monus.Prob

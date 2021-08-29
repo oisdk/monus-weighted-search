@@ -1,4 +1,4 @@
-module MonusWeightedSearch.SubsetSum where
+module MonusWeightedSearch.Examples.SubsetSum where
 
 import Control.Monad.Heap
 import Data.Monus.Dist
