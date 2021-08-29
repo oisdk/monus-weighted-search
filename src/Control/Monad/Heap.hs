@@ -198,7 +198,7 @@ runHeapIdent = runIdentity #. (toListT .# runHeapT)
 {-# INLINE runHeapIdent #-}
 
 toHeapIdent :: [Node w a (Heap w a)] -> Heap w a
-toHeapIdent = HeapT #. foldr (\x xs -> ListT (Identity (x :- xs))) (ListT (Identity Nil))
+toHeapIdent = HeapT #. foldr (((ListT . Identity) . ) #. (:-)) (ListT (Identity Nil))
 {-# INLINE toHeapIdent #-}
 
 -- | The constructor for the non-transformer 'Heap' type.
