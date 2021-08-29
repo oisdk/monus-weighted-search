@@ -1,4 +1,4 @@
-cabal-version:       3.4
+cabal-version:       >= 1.10
 
 name:                monus-weighted-search
 version:             0.1.0.0
@@ -75,7 +75,6 @@ library
                -Wno-name-shadowing
                -Wno-unused-matches
                -O2
-  x-docspec-property-variables: n
 
 test-suite monus-weighted-search-tests
   type: exitcode-stdio-1.0
