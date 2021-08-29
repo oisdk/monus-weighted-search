@@ -1,3 +1,13 @@
+-- |
+-- Module      : MonusWeightedSearch.Internal.AdjList
+-- Copyright   : (c) Donnacha Oisín Kidney 2021
+-- Maintainer  : mail@doisinkidney.com
+-- Stability   : experimental
+-- Portability : non-portable
+--
+-- This module provides an implementation of weighted graphs as arrays of words.
+-- It's useful for generating random graphs, and performance testing.
+
 module MonusWeightedSearch.Internal.AdjList
   ( AdjList(..)
   , randAdjList
@@ -16,6 +26,7 @@ import MonusWeightedSearch.Internal.TestHelpers
 import System.Random
 import Data.Bool
 
+-- | A graph with vertices labelled by words, and edges weighted by words.
 newtype AdjList
   = AdjList
   { edges :: UArray (Word,Word) Word
@@ -29,6 +40,7 @@ edgeDensity :: Word
 -- ^The default edge density of randomly-generated graphs.
 edgeDensity = 50
 
+-- | Generate a random graph.
 randAdjList :: Word -- ^ Edge Density (as a percentage)
             -> Word -- ^ Size
             -> IO AdjList
@@ -54,11 +66,12 @@ instance Arbitrary AdjList where
       cut ar = AdjList (listArray ((0,0),(s,s)) (map (edges ar !) (range ((0,0),(s,s)))))
         where s = alSize ar - 2
 
-
+-- | Return the number of vertices in the graph.
 alSize :: AdjList -> Word
 alSize = succ . snd . snd . (bounds .# edges)
 {-# INLINE alSize #-}
 
+-- | Convert an adjacency list to a standard graph.
 toGraph :: AdjList -> Graph Word
 toGraph (AdjList xs) i
   | i <= snd (snd (bounds xs)) =
@@ -67,7 +80,10 @@ toGraph (AdjList xs) i
   | otherwise = []
 {-# INLINE toGraph #-}
 
-fromGraph :: Word -> Graph Word -> AdjList
+-- | Convert a graph to an adjacency list.
+fromGraph :: Word -- ^ The number of vertices in the graph.
+  -> Graph Word -- ^ The graph.
+  -> AdjList
 fromGraph n g =
   AdjList (array ((0,0),(n-1,n-1)) [ ((i,j),toEnum (fromEnum d)) | i <- [0..n-1], (j,d) <- g i ])
 {-# INLINE fromGraph #-}
