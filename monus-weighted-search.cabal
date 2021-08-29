@@ -55,9 +55,9 @@ library
                      , MonusWeightedSearch.Internal.AdjList
   build-depends:       base >=4.13 && <5
                      , containers >=0.1.0.0
-                     , QuickCheck >=2.14 && <2.15
-                     , deepseq >= 1.4
-                     , transformers >= 0.5
+                     , QuickCheck >=2.10 && <2.15
+                     , deepseq >= 1.1
+                     , transformers >= 0.4.2
                      , mtl >= 2.2
                      , random >= 1.0
                      , array >= 0.5
