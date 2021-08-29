@@ -18,9 +18,9 @@
 --   DOI:<https://doi.org/10.1145/3473577>
 --
 -- This monad transformer can be used to implement search algorithms like
--- Dijkstra's algorithm (see "MonusWeightedSearch.Dijkstra"), or the Viterbi
--- algorithm ("MonusWeightedSearch.Viterbi"), or probabilistic parsing
--- ("MonusWeightedSearch.Parsing").
+-- Dijkstra's algorithm (see "MonusWeightedSearch.Examples.Dijkstra"), or the
+-- Viterbi algorithm ("MonusWeightedSearch.Examples.Viterbi"), or probabilistic
+-- parsing ("MonusWeightedSearch.Examples.Parsing").
 --
 -- The type supports nondeterminism (using the 'Alternative' and 'MonadPlus'
 -- interfaces), where each branch in a computation can be weighted by some
