@@ -1,3 +1,6 @@
+[![Hackage](https://img.shields.io/hackage/v/monus-weighted-search.svg)](https://hackage.haskell.org/package/monus-weighted-search)
+[![Compile, Test, and Build Docs](https://github.com/oisdk/monus-weighted-search/actions/workflows/haskell-compile-and-test.yaml/badge.svg)](https://github.com/oisdk/monus-weighted-search/actions/workflows/haskell-compile-and-test.yaml)
+
 # monus-weighted-search
 
 This is a Haskell package containing the heap monad and some of the examples in the paper 
