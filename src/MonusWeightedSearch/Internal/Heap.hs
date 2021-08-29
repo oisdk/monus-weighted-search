@@ -74,7 +74,7 @@ singleton :: a -> b -> Heap a b
 singleton x y = Node x y []
 {-# INLINE singleton #-}
 
--- | An implementation of Dijkstra's algorithm on 'Graphs'.
+-- | An implementation of Dijkstra's algorithm on 'Graph's.
 dijkstra :: Ord a => Graph a -> Graph a
 dijkstra g s = go Set.empty (Node mempty s [])
   where
