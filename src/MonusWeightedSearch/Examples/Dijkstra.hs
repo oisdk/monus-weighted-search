@@ -32,14 +32,28 @@ module MonusWeightedSearch.Examples.Dijkstra where
 import Control.Monad.State.Strict
 import Control.Applicative
 import Control.Monad.Writer
+import Data.Foldable
 
 import Data.Monus.Dist
 import Data.Set (Set)
 import qualified Data.Set as Set
 
-import Data.List.NonEmpty
+import Data.List.NonEmpty (NonEmpty(..))
 
 import Control.Monad.Heap
+
+-- | The example graph from
+-- <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm the Wikipedia article on Dijkstra's algorithm>.
+--
+-- <<https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif>>
+graph :: Graph Int
+graph 1 = [(2,7),(3,9),(6,14)]
+graph 2 = [(3,10),(4,15)]
+graph 3 = [(4,11), (6,2)]
+graph 4 = [(5,6)]
+graph 5 = []
+graph 6 = [(5,9)]
+graph _ = []
 
 -- | @'unique' x@ checks that @x@ has not yet been seen in this branch of the
 -- computation.
@@ -51,24 +65,30 @@ unique x = do
   pure x
 {-# INLINE unique #-}
 
-dijkstra :: Ord a => Graph a -> a -> [(a, Dist)]
-dijkstra g x =
-  evalState (searchT (star (choices (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
-{-# INLINE dijkstra #-}
+-- | This is the Kleene star on the semiring of 'MonadPlus'. It is analagous to
+-- the 'many' function on 'Alternative's.
+star :: MonadPlus m => (a -> m a) -> a -> m a
+star f x = pure x <|> (f x >>= star f)
+{-# INLINE star #-}
 
-shortestPaths :: Ord a => Graph a -> a -> [(NonEmpty a, Dist)]
-shortestPaths g x =
-  evalState (searchT (pathed (choices (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
-{-# INLINE shortestPaths #-}
-
-choices :: Alternative f => (a -> f b) -> [a] -> f b
-choices f = foldr ((<|>) . f) empty
-{-# INLINE choices #-}
-
+-- | This is a version of 'star' which keeps track of the inputs it was given.
 pathed :: MonadPlus m => (a -> m a) -> a -> m (NonEmpty a)
 pathed f = star (\ ~(x :| xs) -> fmap (:|x:xs) (f x)) . (:| [])
 {-# INLINE pathed #-}
 
-star :: MonadPlus m => (a -> m a) -> a -> m a
-star f x = pure x <|> (f x >>= star f)
-{-# INLINE star #-}
+-- | Dijkstra's algorithm. This function returns the length of the shortest path
+-- from a given vertex to every vertex in the graph.
+--
+-- >>> dijkstra graph 1
+-- [(1,0),(2,7),(3,9),(6,11),(5,20),(4,20)]
+dijkstra :: Ord a => Graph a -> a -> [(a, Dist)]
+dijkstra g x =
+  evalState (searchT (star (asum . map (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
+{-# INLINE dijkstra #-}
+
+shortestPaths :: Ord a => Graph a -> a -> [(NonEmpty a, Dist)]
+shortestPaths g x =
+  evalState (searchT (pathed (asum . map (\(x,w) -> tell w >> unique x) . g) =<< unique x)) Set.empty
+{-# INLINE shortestPaths #-}
+
+
