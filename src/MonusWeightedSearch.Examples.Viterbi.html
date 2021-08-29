@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">MonusWeightedSearch.Examples.Viterbi</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Control.Monad.Heap.html"><span class="hs-identifier">Control.Monad.Heap</span></a></span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Data.Monus.Prob.html"><span class="hs-identifier">Data.Monus.Prob</span></a></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Foldable</span></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Writer</span></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Maybe</span></span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">type</span><span> </span><span id="Viterbi"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Viterbi"><span class="hs-identifier hs-var">Viterbi</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Control.Monad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">data</span><span> </span><span id="Obs"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Obs"><span class="hs-identifier hs-var">Obs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Normal"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Normal"><span class="hs-identifier hs-var">Normal</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="Cold"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Cold"><span class="hs-identifier hs-var">Cold</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="Dizzy"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Dizzy"><span class="hs-identifier hs-var">Dizzy</span></a></span></span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679084666"><span id="local-6989586621679084668"><span id="local-6989586621679084670"><span class="annot"><span class="annottext">Int -&gt; Obs -&gt; ShowS
+[Obs] -&gt; ShowS
+Obs -&gt; String
+(Int -&gt; Obs -&gt; ShowS)
+-&gt; (Obs -&gt; String) -&gt; ([Obs] -&gt; ShowS) -&gt; Show Obs
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [Obs] -&gt; ShowS
+$cshowList :: [Obs] -&gt; ShowS
+show :: Obs -&gt; String
+$cshow :: Obs -&gt; String
+showsPrec :: Int -&gt; Obs -&gt; ShowS
+$cshowsPrec :: Int -&gt; Obs -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679084661"><span id="local-6989586621679084663"><span class="annot"><span class="annottext">Obs -&gt; Obs -&gt; Bool
+(Obs -&gt; Obs -&gt; Bool) -&gt; (Obs -&gt; Obs -&gt; Bool) -&gt; Eq Obs
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+/= :: Obs -&gt; Obs -&gt; Bool
+$c/= :: Obs -&gt; Obs -&gt; Bool
+== :: Obs -&gt; Obs -&gt; Bool
+$c== :: Obs -&gt; Obs -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">data</span><span> </span><span id="States"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#States"><span class="hs-identifier hs-var">States</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Healthy"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Healthy"><span class="hs-identifier hs-var">Healthy</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="Fever"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Fever"><span class="hs-identifier hs-var">Fever</span></a></span></span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679084652"><span id="local-6989586621679084654"><span id="local-6989586621679084656"><span class="annot"><span class="annottext">Int -&gt; States -&gt; ShowS
+[States] -&gt; ShowS
+States -&gt; String
+(Int -&gt; States -&gt; ShowS)
+-&gt; (States -&gt; String) -&gt; ([States] -&gt; ShowS) -&gt; Show States
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [States] -&gt; ShowS
+$cshowList :: [States] -&gt; ShowS
+show :: States -&gt; String
+$cshow :: States -&gt; String
+showsPrec :: Int -&gt; States -&gt; ShowS
+$cshowsPrec :: Int -&gt; States -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679084648"><span id="local-6989586621679084650"><span class="annot"><span class="annottext">States -&gt; States -&gt; Bool
+(States -&gt; States -&gt; Bool)
+-&gt; (States -&gt; States -&gt; Bool) -&gt; Eq States
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+/= :: States -&gt; States -&gt; Bool
+$c/= :: States -&gt; States -&gt; Bool
+== :: States -&gt; States -&gt; Bool
+$c== :: States -&gt; States -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#start"><span class="hs-identifier hs-type">start</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Viterbi"><span class="hs-identifier hs-type">Viterbi</span></a></span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#States"><span class="hs-identifier hs-type">States</span></a></span><span>
+</span><span id="line-15"></span><span id="start"><span class="annot"><span class="annottext">start :: Viterbi States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#start"><span class="hs-identifier hs-var hs-var">start</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Viterbi States] -&gt; Viterbi States
+forall (t :: * -&gt; *) (f :: * -&gt; *) a.
+(Foldable t, Alternative f) =&gt;
+t (f a) -&gt; f a
+</span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">(States, Prob) -&gt; Viterbi States
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Healthy"><span class="hs-identifier hs-var">Healthy</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.6</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(States, Prob) -&gt; Viterbi States
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Fever"><span class="hs-identifier hs-var">Fever</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.4</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#trans"><span class="hs-identifier hs-type">trans</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#States"><span class="hs-identifier hs-type">States</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Viterbi"><span class="hs-identifier hs-type">Viterbi</span></a></span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#States"><span class="hs-identifier hs-type">States</span></a></span><span>
+</span><span id="line-18"></span><span id="trans"><span class="annot"><span class="annottext">trans :: States -&gt; Viterbi States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#trans"><span class="hs-identifier hs-var hs-var">trans</span></a></span></span><span> </span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Healthy"><span class="hs-identifier hs-var">Healthy</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Viterbi States] -&gt; Viterbi States
+forall (t :: * -&gt; *) (f :: * -&gt; *) a.
+(Foldable t, Alternative f) =&gt;
+t (f a) -&gt; f a
+</span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">(States, Prob) -&gt; Viterbi States
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Healthy"><span class="hs-identifier hs-var">Healthy</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.7</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(States, Prob) -&gt; Viterbi States
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Fever"><span class="hs-identifier hs-var">Fever</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.3</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-19"></span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#trans"><span class="hs-identifier hs-var">trans</span></a></span><span> </span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Fever"><span class="hs-identifier hs-var">Fever</span></a></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Viterbi States] -&gt; Viterbi States
+forall (t :: * -&gt; *) (f :: * -&gt; *) a.
+(Foldable t, Alternative f) =&gt;
+t (f a) -&gt; f a
+</span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">(States, Prob) -&gt; Viterbi States
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Healthy"><span class="hs-identifier hs-var">Healthy</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.4</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(States, Prob) -&gt; Viterbi States
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Fever"><span class="hs-identifier hs-var">Fever</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.6</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#emit"><span class="hs-identifier hs-type">emit</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#States"><span class="hs-identifier hs-type">States</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Viterbi"><span class="hs-identifier hs-type">Viterbi</span></a></span><span> </span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#Obs"><span class="hs-identifier hs-type">Obs</span></a></span><span>
+</span><span id="line-22"></span><span id="emit"><span class="annot"><span class="annottext">emit :: States -&gt; Viterbi Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#emit"><span class="hs-identifier hs-var hs-var">emit</span></a></span></span><span> </span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Healthy"><span class="hs-identifier hs-var">Healthy</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Viterbi Obs] -&gt; Viterbi Obs
+forall (t :: * -&gt; *) (f :: * -&gt; *) a.
+(Foldable t, Alternative f) =&gt;
+t (f a) -&gt; f a
+</span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">(Obs, Prob) -&gt; Viterbi Obs
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Normal"><span class="hs-identifier hs-var">Normal</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.5</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(Obs, Prob) -&gt; Viterbi Obs
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Cold"><span class="hs-identifier hs-var">Cold</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.4</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(Obs, Prob) -&gt; Viterbi Obs
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Dizzy"><span class="hs-identifier hs-var">Dizzy</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.1</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-23"></span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#emit"><span class="hs-identifier hs-var">emit</span></a></span><span> </span><span class="annot"><span class="annottext">States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Fever"><span class="hs-identifier hs-var">Fever</span></a></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Viterbi Obs] -&gt; Viterbi Obs
+forall (t :: * -&gt; *) (f :: * -&gt; *) a.
+(Foldable t, Alternative f) =&gt;
+t (f a) -&gt; f a
+</span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">(Obs, Prob) -&gt; Viterbi Obs
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Normal"><span class="hs-identifier hs-var">Normal</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.1</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(Obs, Prob) -&gt; Viterbi Obs
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Cold"><span class="hs-identifier hs-var">Cold</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.3</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(Obs, Prob) -&gt; Viterbi Obs
+forall w (m :: * -&gt; *) a. MonadWriter w m =&gt; (a, w) -&gt; m a
+</span><span class="hs-identifier hs-var">writer</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Dizzy"><span class="hs-identifier hs-var">Dizzy</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Prob
+</span><span class="hs-number">0.6</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span id="local-6989586621679084771"><span id="local-6989586621679084772"><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#iterateM"><span class="hs-identifier hs-type">iterateM</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Monad</span></span><span> </span><span class="annot"><a href="#local-6989586621679084772"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679084771"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679084772"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679084771"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679084772"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679084771"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679084772"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679084771"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span></span></span><span>
+</span><span id="line-26"></span><span id="iterateM"><span class="annot"><span class="annottext">iterateM :: forall (m :: * -&gt; *) a.
+Monad m =&gt;
+Int -&gt; (a -&gt; m a) -&gt; m a -&gt; m [a]
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#iterateM"><span class="hs-identifier hs-var hs-var">iterateM</span></a></span></span><span> </span><span id="local-6989586621679084630"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679084630"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span id="local-6989586621679084629"><span class="annot"><span class="annottext">a -&gt; m a
+</span><a href="#local-6989586621679084629"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; ([a] -&gt; [a]) -&gt; m a -&gt; m [a]
+</span><a href="#local-6989586621679084628"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679084630"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">[a] -&gt; [a]
+forall a. a -&gt; a
+</span><span class="hs-identifier hs-var">id</span></span><span>
+</span><span id="line-27"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-28"></span><span>    </span><span id="local-6989586621679084628"><span class="annot"><span class="annottext">go :: Int -&gt; ([a] -&gt; [a]) -&gt; m a -&gt; m [a]
+</span><a href="#local-6989586621679084628"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span id="local-6989586621679084626"><span class="annot"><span class="annottext">[a] -&gt; [a]
+</span><a href="#local-6989586621679084626"><span class="hs-identifier hs-var">k</span></a></span></span><span> </span><span id="local-6989586621679084625"><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679084625"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[a] -&gt; m [a]
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[a] -&gt; [a]
+</span><a href="#local-6989586621679084626"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span class="hs-special">)</span><span>
+</span><span id="line-29"></span><span>    </span><span class="annot"><a href="#local-6989586621679084628"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span id="local-6989586621679084624"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679084624"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span id="local-6989586621679084623"><span class="annot"><span class="annottext">[a] -&gt; [a]
+</span><a href="#local-6989586621679084623"><span class="hs-identifier hs-var">k</span></a></span></span><span> </span><span id="local-6989586621679084622"><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679084622"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679084622"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">m a -&gt; (a -&gt; m [a]) -&gt; m [a]
+forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679084621"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679084621"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; ([a] -&gt; [a]) -&gt; m a -&gt; m [a]
+</span><a href="#local-6989586621679084628"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679084624"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-glyph hs-var">-</span></span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[a] -&gt; [a]
+</span><a href="#local-6989586621679084623"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">([a] -&gt; [a]) -&gt; ([a] -&gt; [a]) -&gt; [a] -&gt; [a]
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679084621"><span class="hs-identifier hs-var">x</span></a></span><span class="annot"><span class="annottext">a -&gt; [a] -&gt; [a]
+forall a. a -&gt; [a] -&gt; [a]
+</span><span class="hs-glyph hs-var">:</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; m a
+</span><a href="#local-6989586621679084629"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679084621"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#likely"><span class="hs-identifier hs-type">likely</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="MonusWeightedSearch.Examples.Viterbi.html#States"><span class="hs-identifier hs-type">States</span></a></span><span class="hs-special">]</span><span class="hs-special">)</span><span>
+</span><span id="line-32"></span><span id="likely"><span class="annot"><span class="annottext">likely :: (Prob, [States])
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#likely"><span class="hs-identifier hs-var hs-var">likely</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe (Prob, [States]) -&gt; (Prob, [States])
+forall a. HasCallStack =&gt; Maybe a -&gt; a
+</span><span class="hs-identifier hs-var">fromJust</span></span><span> </span><span class="annot"><span class="annottext">(Maybe (Prob, [States]) -&gt; (Prob, [States]))
+-&gt; Maybe (Prob, [States]) -&gt; (Prob, [States])
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Heap Prob [States] -&gt; Maybe (Prob, [States])
+forall w a. Monus w =&gt; Heap w a -&gt; Maybe (w, a)
+</span><a href="Control.Monad.Heap.html#best"><span class="hs-identifier hs-var">best</span></a></span><span> </span><span class="annot"><span class="annottext">(Heap Prob [States] -&gt; Maybe (Prob, [States]))
+-&gt; Heap Prob [States] -&gt; Maybe (Prob, [States])
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-33"></span><span>  </span><span id="local-6989586621679084616"><span class="annot"><span class="annottext">[States]
+</span><a href="#local-6989586621679084616"><span class="hs-identifier hs-var">hidden</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int
+-&gt; (States -&gt; Viterbi States)
+-&gt; Viterbi States
+-&gt; Heap Prob [States]
+forall (m :: * -&gt; *) a.
+Monad m =&gt;
+Int -&gt; (a -&gt; m a) -&gt; m a -&gt; m [a]
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#iterateM"><span class="hs-identifier hs-var">iterateM</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">3</span></span><span> </span><span class="annot"><span class="annottext">States -&gt; Viterbi States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#trans"><span class="hs-identifier hs-var">trans</span></a></span><span> </span><span class="annot"><span class="annottext">Viterbi States
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#start"><span class="hs-identifier hs-var">start</span></a></span><span>
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679084615"><span class="annot"><span class="annottext">[Obs]
+</span><a href="#local-6989586621679084615"><span class="hs-identifier hs-var">obs</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(States -&gt; Viterbi Obs) -&gt; [States] -&gt; HeapT Prob Identity [Obs]
+forall (t :: * -&gt; *) (f :: * -&gt; *) a b.
+(Traversable t, Applicative f) =&gt;
+(a -&gt; f b) -&gt; t a -&gt; f (t b)
+</span><span class="hs-identifier hs-var">traverse</span></span><span> </span><span class="annot"><span class="annottext">States -&gt; Viterbi Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#emit"><span class="hs-identifier hs-var">emit</span></a></span><span> </span><span class="annot"><span class="annottext">[States]
+</span><a href="#local-6989586621679084616"><span class="hs-identifier hs-var">hidden</span></a></span><span>
+</span><span id="line-35"></span><span>  </span><span class="annot"><span class="annottext">Bool -&gt; HeapT Prob Identity ()
+forall (f :: * -&gt; *). Alternative f =&gt; Bool -&gt; f ()
+</span><span class="hs-identifier hs-var">guard</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">[</span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Normal"><span class="hs-identifier hs-var">Normal</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Cold"><span class="hs-identifier hs-var">Cold</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Obs
+</span><a href="MonusWeightedSearch.Examples.Viterbi.html#Dizzy"><span class="hs-identifier hs-var">Dizzy</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[Obs] -&gt; [Obs] -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">[Obs]
+</span><a href="#local-6989586621679084615"><span class="hs-identifier hs-var">obs</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-36"></span><span>  </span><span class="hs-identifier">return</span><span> </span><span class="annot"><span class="annottext">[States]
+</span><a href="#local-6989586621679084616"><span class="hs-identifier hs-var">hidden</span></a></span><span>
+</span><span id="line-37"></span></pre></body></html>
