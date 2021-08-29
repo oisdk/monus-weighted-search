@@ -258,7 +258,8 @@ instance Monad m => Monad (HeapT w m) where
   {-# INLINE (>>) #-}
 
 instance Monad m => Alternative (HeapT w m) where
-  HeapT xs <|> HeapT ys = HeapT (xs <|> ys)
+  (<|>) = under (<|>) runHeapT
+  {-# INLINE (<|>) #-}
   empty = HeapT empty
   {-# INLINE empty #-}
 
@@ -364,15 +365,10 @@ heapMmap :: forall m1 m2 a1 a2 w1 w2. Functor m1 =>
             (m1 (ListCons (Node w1 a1 (HeapT w2 m2 a2)) (ListT m2 (Node w2 a2 (HeapT w2 m2 a2)))) ->
              m2 (ListCons (Node w2 a2 (HeapT w2 m2 a2)) (ListT m2 (Node w2 a2 (HeapT w2 m2 a2)))))
          -> HeapT w1 m1 a1 -> HeapT w2 m2 a2
-heapMmap h = goH
+heapMmap h = HeapT #. (goL .# runHeapT)
   where
-    goH :: HeapT w1 m1 a1 -> HeapT w2 m2 a2
-    goH = HeapT #. (goL .# runHeapT)
-    {-# INLINE goH #-}
-
     goL :: ListT m1 (Node w1 a1 (HeapT w1 m1 a1)) -> ListT m2 (Node w2 a2 (HeapT w2 m2 a2))
-    goL = ListT #. h . (fmap (bimap (fmap goH) goL) .# runListT)
-    {-# INLINE goL #-}
+    goL = ListT #. h . (fmap (bimap (fmap (HeapT #. (goL .# runHeapT))) goL) .# runListT)
 {-# INLINE heapMmap #-}
 
 instance (Monad m, Monus w) => MonadWriter w (HeapT w m) where

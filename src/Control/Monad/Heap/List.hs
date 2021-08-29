@@ -105,7 +105,11 @@ deriving newtype instance (forall x. NFData x => NFData (m x), NFData a) => NFDa
 unfoldrM :: Functor m => (b -> m (Maybe (a, b))) -> b -> ListT m a
 unfoldrM f = go
   where
-    go = ListT #. fmap (maybe Nil (uncurry (:-) . second go)) . f
+    go = ListT #. fmap h . f
+
+    h Nothing = Nil
+    h (Just (x, xs)) = x :- go xs
+    {-# INLINE h #-}
 {-# INLINE unfoldrM #-}
 
 instance (forall x. Show x => Show (m x), Show a) => Show (ListT m a) where
