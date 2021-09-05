@@ -1,6 +1,9 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE DeriveFoldable #-}
+{-# LANGUAGE DeriveTraversable #-}
 
 module Main where
 
@@ -12,6 +15,7 @@ import Control.Monad.Writer
 import Data.List (sort)
 import Data.Bifoldable
 import Data.Foldable
+import Control.Applicative
 
 import Control.Monad.Heap
 import Control.Monad.Heap.List
@@ -47,6 +51,16 @@ prop_bifoldlListCons =
 prop_fromList :: [(Word,Dist)] -> Property
 prop_fromList xs = (fromList xs :: Heap Dist Word) === asum (map writer xs)
 
+data Pair a = a :*: a deriving (Eq, Ord, Show, Functor, Foldable, Traversable)
+
+instance Arbitrary1 Pair where
+  liftArbitrary arb = liftA2 (:*:) arb arb
+  liftShrink shr (x :*: y) = map (uncurry (:*:)) (liftShrink2 shr shr (x , y))
+
+prop_traverseHeap :: Property
+prop_traverseHeap = mapSize (min 5) $
+  forAll (arbitrary :: Gen (HeapT Dist Pair Word))
+    (\xs -> foldr (:) [] xs === appEndo (fst (traverse (\x -> (Endo (x:), ())) xs)) [])
 
 return []
 
