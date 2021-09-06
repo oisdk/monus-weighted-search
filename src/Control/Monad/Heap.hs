@@ -404,7 +404,7 @@ instance MonadState s m => MonadState s (HeapT w m) where
 instance MonadError e m => MonadError e (HeapT w m) where
   throwError = lift . throwError
   {-# INLINE throwError #-}
-  catchError xs h = heapMmap (`catchError` (runListT . runHeapT . h)) xs
+  catchError xs h = heapMmap (`catchError` ((runListT . runHeapT) #. h)) xs
   {-# INLINE catchError #-}
 
 instance MonadReader r m => MonadReader r (HeapT w m) where
