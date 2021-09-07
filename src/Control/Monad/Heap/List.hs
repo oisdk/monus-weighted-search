@@ -25,7 +25,7 @@ module Control.Monad.Heap.List
   ) where
 
 import Data.Bifunctor ( Bifunctor(first, bimap) )
-import Data.Bifoldable ( Bifoldable(..) )
+import Data.Bifoldable ( Bifoldable(..) , bifoldl', bifoldr')
 import Data.Bitraversable ( Bitraversable(..) )
 import Control.Monad ( MonadPlus )
 import Control.Applicative
@@ -52,6 +52,7 @@ import Control.DeepSeq ( NFData(..) )
 import GHC.Generics ( Generic, Generic1 )
 import Data.Data ( Data, Typeable )
 import Data.Coerce ( coerce )
+import Data.Foldable ( Foldable(foldr', foldl') )
 
 infixr 5 :-
 -- | The list constructor.
@@ -177,14 +178,29 @@ instance Monad m => Monad (ListT m) where
   (>>) = (*>)
   
 instance Foldable m => Foldable (ListT m) where
-  foldr f = flip go
+  foldr f = go
     where
-      go = flip (foldr (flip (bifoldr f go))) .# runListT
+      go = (. runListT) #. foldr (flip (bifoldr f (flip go)))
   {-# INLINE foldr #-}
+  
   foldMap f = go
     where
       go = foldMap (bifoldMap f go) .# runListT
   {-# INLINE foldMap #-}
+  foldl f = go
+    where
+      go = (. runListT) #. foldl (bifoldl f go)
+  {-# INLINE foldl #-}
+  
+  foldl' f = go
+    where
+      go = (. runListT) #. foldl' (bifoldl' f go)
+  {-# INLINE foldl' #-}
+  
+  foldr' f = go
+    where
+      go = (. runListT) #. foldr' (flip (bifoldr' f (flip go)))
+  {-# INLINE foldr' #-}
 
 instance Traversable m => Traversable (ListT m) where
   traverse f = fmap ListT . (traverse h .# runListT)

@@ -63,7 +63,7 @@ module Control.Monad.Heap
 -- >>> default (Dist,Integer,Double)
 
 import Data.Bifunctor ( Bifunctor(..) )
-import Data.Bifoldable ( Bifoldable(..) )
+import Data.Bifoldable ( Bifoldable(..), bifoldl', bifoldr' )
 import Data.Bitraversable ( Bitraversable(..) )
 import Control.Monad.Heap.List
     ( catMaybesT, toListT, ListCons(..), ListT(..) )
@@ -78,7 +78,6 @@ import Control.Monad.Except ( MonadError(..) )
 import Control.Monad.Reader ( MonadReader(..) )
 import Control.Monad.Cont ( MonadCont(..) )
 import Data.Functor.Identity ( Identity(..) )
-import Control.Monad.Trans.Maybe ( MaybeT(MaybeT, runMaybeT) )
 import Test.QuickCheck
     ( arbitrary1,
       frequency,
@@ -91,6 +90,7 @@ import MonusWeightedSearch.Internal.TestHelpers ( sumsTo )
 import Data.Data ( Data, Typeable )
 import GHC.Generics ( Generic, Generic1 )
 import Control.DeepSeq ( NFData(..) )
+import Data.Foldable (Foldable(foldl', foldr'))
 
 infixr 5 :<
 -- | A 'Heap' is a list of 'Node's of 'Heap's.
@@ -173,14 +173,30 @@ fromList = HeapT #. foldr f (ListT (pure Nil))
 {-# INLINE fromList #-}
 
 instance Foldable m => Foldable (HeapT w m) where
-  foldr f = flip go
+  foldr f = go
     where
-      go = flip (foldr (flip (bifoldr f go))) .# runHeapT
+      go = (. runHeapT) #. foldr (flip (bifoldr f (flip go)))
   {-# INLINE foldr #-}
+  
   foldMap f = go
     where
       go = foldMap (bifoldMap f go) .# runHeapT
   {-# INLINE foldMap #-}
+
+  foldl f = go
+    where
+      go = (. runHeapT) #. foldl (bifoldl f go)
+  {-# INLINE foldl #-}
+  
+  foldl' f = go
+    where
+      go = (. runHeapT) #. foldl' (bifoldl' f go)
+  {-# INLINE foldl' #-}
+  
+  foldr' f = go
+    where
+      go = (. runHeapT) #. foldr' (flip (bifoldr' f (flip go)))
+  {-# INLINE foldr' #-}
 
 instance Traversable m => Traversable (HeapT w m) where
   traverse :: forall f a b. Applicative f => (a -> f b) -> HeapT w m a -> f (HeapT w m b)
@@ -352,15 +368,12 @@ search = runIdentity #. searchT
 
 -- | The monadic variant of 'best'.
 bestT :: (Monad m, Monus w) => HeapT w m a -> m (Maybe (w, a))
-bestT = runMaybeT #. go mempty
+bestT = go mempty
   where
-    go a xs = do
-      (y,ys) <- lift (popMinT xs)
-      case y of
-        z:_ -> pure (a, z)
-        [] -> do
-          (w', zs) <- MaybeT (pure ys)
-          go (a <> w') zs
+    go !a xs = popMinT xs >>= \case
+      (y:_,_) -> pure (Just (a, y))
+      ([],Nothing) -> pure Nothing
+      ([],Just (w,zs)) -> go (a <> w) zs
 {-# INLINE bestT #-}
 
 -- | /O(log n)/. Return the lowest-weight element in the heap, paired with its
