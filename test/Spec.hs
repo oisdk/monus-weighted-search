@@ -39,10 +39,13 @@ prop_monadSort xs = sort xs === M.monusSort xs
 prop_probOrdMonoid :: Prob -> Prob -> Property
 prop_probOrdMonoid x y = (x <= x <> y) .&&. (y <= x <> y)
 
-prop_probMonus :: Prob -> Prob -> Property
-prop_probMonus x y
+monusLaw :: (Show a, Monus a) => a -> a -> Property
+monusLaw x y
   | x <= y    = x <> (x |-| y) === y
   | otherwise = y <> (y |-| x) === x
+
+prop_probMonus :: Prob -> Prob -> Property
+prop_probMonus = monusLaw
 
 prop_bifoldlListCons :: Property
 prop_bifoldlListCons =

@@ -11,6 +11,9 @@
 
 module Data.Monus (Monus(..)) where
 
+-- $
+-- >>> import Data.Monoid (Any(..))
+
 import Data.Monoid (Sum(..), Any(..))
 
 infixl 6 |-|
@@ -43,13 +46,8 @@ instance (Num a, Ord a) => Monus (Sum a) where
 -- |
 --
 -- >>> let bools = [Any False, Any True]
--- >>> and [ x <> (y |-| x) == y | x <- bools, y <- bools, x <= y]
+-- >>> and [ x <> (y |-| x) == y | x <- bools, y <- bools, x <= y ]
 -- True
 instance Monus Any where
   (|-|) = (<>)
   {-# INLINE (|-|) #-}
-
--- F F : F <= F ==> F || F || F == F
--- F T : F <= T ==> F || T || F == T
--- T T : T <= T ==> T || T || T == T
--- T F : T <= F ==> T || F || T == F
