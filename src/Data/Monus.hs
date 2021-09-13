@@ -40,6 +40,11 @@ instance (Num a, Ord a) => Monus (Sum a) where
     | otherwise = Sum (x - y)
   {-# INLINE (|-|) #-}
 
+-- |
+--
+-- >>> let bools = [Any False, Any True]
+-- >>> and [ x <> (y |-| x) == y | x <- bools, y <- bools, x <= y]
+-- True
 instance Monus Any where
   (|-|) = (<>)
   {-# INLINE (|-|) #-}
