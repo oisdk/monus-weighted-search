@@ -11,11 +11,11 @@
 
 module Data.Monus (Monus(..)) where
 
--- $setup
--- >>> import Data.Monoid (Any(..))
-
 import Data.Monoid (Sum(..), Any(..))
 import Data.Semigroup (Max(..))
+
+-- $setup
+-- >>> import Data.Monoid (Any(..))
 
 infixl 6 |-|
 -- | A class for (constructive) totally-ordered commutative monoids. These

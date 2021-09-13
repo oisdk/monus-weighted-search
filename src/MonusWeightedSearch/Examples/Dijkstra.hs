@@ -29,10 +29,6 @@
 
 module MonusWeightedSearch.Examples.Dijkstra where
 
--- $setup
--- >>> import Prelude hiding (head)
--- >>> import Data.List.NonEmpty (head)
-
 import Prelude hiding (head)
 import Control.Monad.State.Strict
 import Control.Applicative
@@ -47,6 +43,9 @@ import Data.List.NonEmpty (NonEmpty(..))
 
 import Control.Monad.Heap
 
+-- $setup
+-- >>> import Prelude hiding (head)
+-- >>> import Data.List.NonEmpty (head)
 
 -- | The example graph from
 -- <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm the Wikipedia article on Dijkstra's algorithm>.

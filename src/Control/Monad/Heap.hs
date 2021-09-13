@@ -58,10 +58,6 @@ module Control.Monad.Heap
   )
   where
 
--- $setup
--- >>> import Data.Monus.Dist
--- >>> default (Dist,Integer,Double)
-
 import Data.Bifunctor ( Bifunctor(..) )
 import Data.Bifoldable ( Bifoldable(..), bifoldl', bifoldr' )
 import Data.Bitraversable ( Bitraversable(..) )
@@ -91,6 +87,10 @@ import Data.Data ( Data, Typeable )
 import GHC.Generics ( Generic, Generic1 )
 import Control.DeepSeq ( NFData(..) )
 import Data.Foldable (Foldable(foldl', foldr'))
+
+-- $setup
+-- >>> import Data.Monus.Dist
+-- >>> default (Dist,Integer,Double)
 
 infixr 5 :<
 -- | A 'Heap' is a list of 'Node's of 'Heap's.

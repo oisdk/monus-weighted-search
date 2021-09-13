@@ -13,12 +13,12 @@
 
 module MonusWeightedSearch.Examples.Sort where
 
+import Data.Monus
+import Control.Monad.Heap
+
 -- $setup
 -- >>> import Data.Monus.Dist
 -- >>> default (Dist)
-
-import Data.Monus
-import Control.Monad.Heap
 
 -- | /O(n log n)/. Heapsort.
 --
