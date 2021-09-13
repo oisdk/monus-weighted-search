@@ -15,13 +15,21 @@ module MonusWeightedSearch.Examples.Sampling where
 import Control.Monad.Heap
 import Data.Monus.Prob
 import Data.Ratio
-import System.Random
+import System.Random (randomRIO)
+import Data.List (genericLength)
+
+-- | @'withChance' p@ returns 'True' @p@ percent of the time.
+withChance :: Integral a => Ratio a -> IO Bool
+withChance f = fmap (toInteger (numerator f) >=) (randomRIO (1, toInteger (denominator f)))
 
 -- | Sample a single value from the heap.
 sample :: Heap Prob a -> IO a
-sample = go 1 . search where
-  go r ((x,Prob px):xs) = do
+sample hp = foldr f (error "impossible") (search hp) 1 where
+  f (x,Prob px) k r = do
     let f = r * px
-    c <- randomRIO (1, toInteger (denominator f))
-    if fromInteger c <= numerator f  then pure x else go (r / (1 - f)) xs
-  go r [] = error "impossible"
+    c <- withChance f
+    if c then pure x else k (r / (1 - f)) 
+
+uniform :: [a] -> Heap Prob a
+uniform xs = fromList (map (,p) xs)
+  where p = Prob (1 % genericLength xs)
