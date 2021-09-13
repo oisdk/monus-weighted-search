@@ -28,8 +28,4 @@ sample hp = foldr f (error "impossible") (search hp) 1 where
   f (x,Prob px) k r = do
     let f = r * px
     c <- withChance f
-    if c then pure x else k (r / (1 - f)) 
-
-uniform :: [a] -> Heap Prob a
-uniform xs = fromList (map (,p) xs)
-  where p = Prob (1 % genericLength xs)
+    if c then pure x else k (r / (1 - f))
