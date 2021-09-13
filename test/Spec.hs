@@ -4,6 +4,9 @@
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveFoldable #-}
 {-# LANGUAGE DeriveTraversable #-}
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE GeneralisedNewtypeDeriving #-}
+{-# LANGUAGE DerivingStrategies #-}
 
 module Main where
 
@@ -16,6 +19,9 @@ import Data.List (sort)
 import Data.Bifoldable
 import Data.Foldable
 import Control.Applicative
+import Data.Word
+import Data.Semigroup (Max(..))
+import Numeric.Natural
 
 import Control.Monad.Heap
 import Control.Monad.Heap.List
@@ -29,6 +35,12 @@ import qualified MonusWeightedSearch.Examples.Sort as M
 import Data.Monus
 import Data.Monus.Prob
 import Data.Monus.Dist
+
+instance Arbitrary Natural where
+  arbitrary = arbitrarySizedNatural
+  shrink = map fromInteger . filter (0<=) . shrink . toInteger
+
+deriving newtype instance Arbitrary a => Arbitrary (Max a)
 
 prop_monadDijkstra :: AdjList -> Property
 prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
@@ -46,6 +58,9 @@ monusLaw x y
 
 prop_probMonus :: Prob -> Prob -> Property
 prop_probMonus = monusLaw
+
+prop_ordMonus :: Max Word8 -> Max Word8 -> Property
+prop_ordMonus = monusLaw
 
 prop_bifoldlListCons :: Property
 prop_bifoldlListCons =

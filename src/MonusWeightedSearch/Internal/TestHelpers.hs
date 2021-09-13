@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
-
 -- |
 -- Module      : MonusWeightedSearch.Internal.TestHelpers
 -- Copyright   : (c) Donnacha Oisín Kidney 2021
@@ -12,7 +10,6 @@
 module MonusWeightedSearch.Internal.TestHelpers where
 
 import Test.QuickCheck
-import Numeric.Natural
 import System.Random
 
 -- $setup
@@ -29,10 +26,6 @@ sumsTo n = go [] n >>= shuffle
       | otherwise = do
           m <- choose (1, n)
           go (m : ks) (n-m)
-
-instance Arbitrary Natural where
-  arbitrary = arbitrarySizedNatural
-  shrink = map fromInteger . filter (0<=) . shrink . toInteger
 
 -- | @'percentageChance' n@ is 'True' @n@% of the time, and 'False' the rest
 -- of the time.
