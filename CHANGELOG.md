@@ -15,6 +15,8 @@
    * Added `instance Monus Any`
    
    * Added `instance (Bounded a, Ord a) => Monus (Max a)`
+   
+   * Added `Read` instances for `HeapT` and `ListT`
 
 ### Performance improvements
 
