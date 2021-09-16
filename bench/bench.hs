@@ -25,7 +25,7 @@ dijkstraBench n = env (randAdjList 10 n :: IO AdjList)
       ]
 
 sortBench :: Int -> Benchmark
-sortBench n = env (replicateM n (fmap toEnum (randomRIO (0,100000)))) $
+sortBench n = env (replicateM n (randomIO :: IO Word)) $
   \xs -> bgroup (show n)
       [ bench "monad" $ nf M.monusSort xs
       , bench "heap" $ nf H.monusSort xs

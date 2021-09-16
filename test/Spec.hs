@@ -47,7 +47,7 @@ deriving newtype instance Arbitrary a => Arbitrary (Max a)
 prop_monadDijkstra :: AdjList -> Property
 prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
 
-prop_monadSort :: [Dist] -> Property
+prop_monadSort :: [Word] -> Property
 prop_monadSort xs = sort xs === M.monusSort xs
 
 prop_probOrdMonoid :: Prob -> Prob -> Property

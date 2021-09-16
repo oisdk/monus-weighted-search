@@ -87,7 +87,7 @@ dijkstra g s = go Set.empty (Node mempty s [])
             f (y, w') = Node (w <> w') y []
 {-# INLINE dijkstra #-}
 
--- | Sort a list of 'Dist'.
-monusSort :: [Dist] -> [Dist]
-monusSort = map fst . unfoldr minView . foldMap (`singleton` ())
+-- | Heapsort.
+monusSort :: (Ord a, Bounded a) => [a] -> [a]
+monusSort = map snd . unfoldr minView . foldMap (\x -> singleton (Max x) x)
 {-# INLINE monusSort #-}
