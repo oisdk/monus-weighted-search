@@ -17,8 +17,7 @@ import Data.Semigroup (Max(..))
 import Control.Monad.Heap
 
 -- $setup
--- >>> import Data.Monus.Dist
--- >>> default (Dist)
+-- >>> default (Word)
 
 -- | /O(n log n)/. Heapsort.
 --
