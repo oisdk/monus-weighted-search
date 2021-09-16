@@ -14,6 +14,8 @@ import Test.QuickCheck hiding (tabulate)
 import Test.Tasty.QuickCheck hiding (tabulate)
 import Test.Tasty
 
+import Data.Functor.Identity
+import Text.Read
 import Control.Monad.Writer
 import Data.List (sort)
 import Data.Bifoldable
@@ -50,6 +52,9 @@ prop_monadSort xs = sort xs === M.monusSort xs
 
 prop_probOrdMonoid :: Prob -> Prob -> Property
 prop_probOrdMonoid x y = (x <= x <> y) .&&. (y <= x <> y)
+
+prop_readListT :: ListT Identity Word -> Property
+prop_readListT xs = readEither (show xs) === Right xs
 
 monusLaw :: (Show a, Monus a) => a -> a -> Property
 monusLaw x y

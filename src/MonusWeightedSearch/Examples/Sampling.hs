@@ -16,7 +16,6 @@ import Control.Monad.Heap
 import Data.Monus.Prob
 import Data.Ratio
 import System.Random (randomRIO)
-import Data.List (genericLength)
 
 -- | @'withChance' p@ returns 'True' @p@ percent of the time.
 withChance :: Integral a => Ratio a -> IO Bool

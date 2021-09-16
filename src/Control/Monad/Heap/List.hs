@@ -53,6 +53,7 @@ import GHC.Generics ( Generic, Generic1 )
 import Data.Data ( Data, Typeable )
 import Data.Coerce ( coerce )
 import Data.Foldable ( Foldable(foldr', foldl') )
+import Text.Read (readPrec, parens, prec, Lexeme(Ident), lexP, step)
 
 infixr 5 :-
 -- | The list constructor.
@@ -127,6 +128,13 @@ unfoldrM f = go
 
 instance (forall x. Show x => Show (m x), Show a) => Show (ListT m a) where
   showsPrec n (ListT xs) = showParen (n > 10) (showString "ListT " . showsPrec 11 xs)
+  
+instance (forall x. Read x => Read (m x), Read a) => Read (ListT m a) where
+  readPrec = parens $
+      prec 10 $ do
+        Ident "ListT" <- lexP
+        m <- step readPrec
+        return (ListT m)
   
 deriving instance (forall x. Eq x => Eq (m x), Eq a) => Eq (ListT m a)
 deriving instance (forall x. Ord x => Ord (m x), Eq (ListT m a), Ord a) => Ord (ListT m a)
