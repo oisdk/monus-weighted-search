@@ -87,6 +87,7 @@ import Data.Data ( Data, Typeable )
 import GHC.Generics ( Generic, Generic1 )
 import Control.DeepSeq ( NFData(..) )
 import Data.Foldable (Foldable(foldl', foldr'))
+import Text.Read (readPrec, parens, prec, Lexeme(Ident), lexP, step)
 
 -- $setup
 -- >>> import Data.Monus.Dist
@@ -243,6 +244,13 @@ pattern Heap { runHeap } <- (runHeapIdent -> runHeap)
 
 instance (forall x. Show x => Show (m x), Show a, Show w) => Show (HeapT w m a) where
   showsPrec n (HeapT xs) = showParen (n > 10) (showString "HeapT " . showsPrec 11 xs)
+  
+instance (forall x. Read x => Read (m x), Read w, Read a) => Read (HeapT w m a) where
+  readPrec = parens $
+      prec 10 $ do
+        Ident "HeapT" <- lexP
+        m <- step readPrec
+        return (HeapT m)
   
 deriving instance (forall x. Eq x => Eq (m x), Eq a, Eq w) => Eq (HeapT w m a)
 -- Some special incantations are needed to make this work:
