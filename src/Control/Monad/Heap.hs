@@ -63,7 +63,7 @@ import Data.Bifoldable ( Bifoldable(..), bifoldl', bifoldr' )
 import Data.Bitraversable ( Bitraversable(..) )
 import Control.Monad.Heap.List
     ( catMaybesT, toListT, ListCons(..), ListT(..) )
-import Control.Monad ( MonadPlus, ap )
+import Control.Monad ( MonadPlus )
 import Control.Applicative
     ( Applicative(liftA2), Alternative(empty, (<|>)) )
 import Control.Monad.Trans ( MonadTrans(..) )
@@ -274,11 +274,15 @@ instance Functor m => Functor (HeapT w m) where
 instance Monad m => Applicative (HeapT w m) where
   pure = HeapT #. pure . Leaf
   {-# INLINE pure #-}
-  (<*>) = ap
+  (<*>) = liftA2 id
   {-# INLINE (<*>) #-}
   (*>) = (>>)  -- We have to do this because the default definition
                -- is (x *> y) = (id <$ x) <*> y. (which is horrifically slow)
   {-# INLINE (*>) #-}
+  liftA2 f xs ys = do
+    x <- xs
+    fmap (f x) ys
+  {-# INLINE liftA2 #-}
 
 instance Monad m => Monad (HeapT w m) where
   HeapT m >>= f = HeapT (m >>= g)
