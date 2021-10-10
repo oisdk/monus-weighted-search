@@ -2,6 +2,15 @@
 
 ## 0.2.0.0
 
+### Semantics
+
+   * The `flatten` function on `HeapT` no longer orders its output.
+
+### Laws
+
+   * Changed second law on `Monus` to be more permissive (now 
+     `x <= y ==> x <> (y |-| x) == y`)
+
 ### Instances
 
    * Removed orphan instance `instance Arbitrary Natural` from exposed code, put
@@ -17,6 +26,8 @@
    * Added `instance (Bounded a, Ord a) => Monus (Max a)`
    
    * Added `Read` instances for `HeapT` and `ListT`
+
+   * Added `IsList` instance to `HeapT`
 
 ### Performance improvements
 
