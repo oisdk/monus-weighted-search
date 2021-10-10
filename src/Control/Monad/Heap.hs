@@ -315,7 +315,7 @@ instance MonadTrans (HeapT w) where
            (w, HeapT w m a) ->
            (w, HeapT w m a)
 (x, xv) <||> (y, yv)
-  | x <= y    = (x, HeapT (ListT (pure ((x |-| y :< yv) :- runHeapT xv))))
+  | x <= y    = (x, HeapT (ListT (pure ((y |-| x :< yv) :- runHeapT xv))))
   | otherwise = (y, HeapT (ListT (pure ((x |-| y :< xv) :- runHeapT yv))))
 {-# INLINE (<||>) #-}
 
