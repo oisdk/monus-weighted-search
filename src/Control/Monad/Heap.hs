@@ -364,7 +364,7 @@ flattenT = runWriterT #. go
 -- weights, paired with their weights.
 --
 -- >>> flatten (fromList [('a',5), ('b', 3), ('c',6)])
--- [('a',5),('b', 3),('c',6)]
+-- [('a',5),('b',3),('c',6)]
 flatten :: Monus w => Heap w a -> [(a, w)]
 flatten = runIdentity #. toListT . flattenT
 {-# INLINE flatten #-}
