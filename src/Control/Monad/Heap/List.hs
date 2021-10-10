@@ -54,6 +54,10 @@ import Data.Data ( Data, Typeable )
 import Data.Coerce ( coerce )
 import Data.Foldable ( Foldable(foldr', foldl') )
 import Text.Read (readPrec, parens, prec, Lexeme(Ident), lexP, step)
+import GHC.Exts (IsList)
+import qualified GHC.Exts as IsList
+import Data.List (unfoldr)
+import Data.Functor.Identity (Identity(..))
 
 infixr 5 :-
 -- | The list constructor.
@@ -153,7 +157,15 @@ instance Arbitrary1 m => Arbitrary1 (ListT m) where
     where
       f Nil       = []
       f (x :- xs) = Nil : map (uncurry (:-)) (liftShrink2 shr (liftShrink shr) (x,xs))
-  
+
+instance (m ~ Identity) => IsList (ListT m a) where
+  type Item (ListT m a) = a
+  fromList = foldr (\x xs -> ListT (Identity (x :- xs))) (ListT (Identity Nil))
+  toList = unfoldr f
+    where
+      f (ListT (Identity Nil)) = Nothing
+      f (ListT (Identity (x :- xs))) = Just (x, xs)
+
 instance Functor m => Functor (ListT m) where
   fmap f = ListT #. (fmap (bimap f (fmap f)) .# runListT)
   {-# INLINE fmap #-}

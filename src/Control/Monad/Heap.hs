@@ -88,6 +88,8 @@ import GHC.Generics ( Generic, Generic1 )
 import Control.DeepSeq ( NFData(..) )
 import Data.Foldable (Foldable(foldl', foldr'))
 import Text.Read (readPrec, parens, prec, Lexeme(Ident), lexP, step)
+import GHC.Exts (IsList)
+import qualified GHC.Exts as IsList
 
 -- $setup
 -- >>> import Data.Monus.Dist
@@ -241,6 +243,11 @@ pattern Heap { runHeap } <- (runHeapIdent -> runHeap)
   where
     Heap = toHeapIdent
 {-# COMPLETE Heap #-}
+
+instance (Monus w, Identity ~ m) => IsList (HeapT w m a) where
+  type Item (HeapT w m a) = (a, w)
+  toList = search
+  fromList = fromList
 
 instance (forall x. Show x => Show (m x), Show a, Show w) => Show (HeapT w m a) where
   showsPrec n (HeapT xs) = showParen (n > 10) (showString "HeapT " . showsPrec 11 xs)
