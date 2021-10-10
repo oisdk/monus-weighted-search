@@ -28,6 +28,7 @@
 -- operator, see the "Data.Monus" module for more details.
 --------------------------------------------------------------------------------
 
+
 module Control.Monad.Heap
   ( -- * Heap Type
     HeapT(..)
@@ -62,13 +63,13 @@ import Data.Bifunctor ( Bifunctor(..) )
 import Data.Bifoldable ( Bifoldable(..), bifoldl', bifoldr' )
 import Data.Bitraversable ( Bitraversable(..) )
 import Control.Monad.Heap.List
-    ( catMaybesT, toListT, ListCons(..), ListT(..) )
-import Control.Monad ( MonadPlus )
+    ( toListT, ListCons(..), ListT(..) )
+import Control.Monad ( MonadPlus , (<=<))
 import Control.Applicative
     ( Applicative(liftA2), Alternative(empty, (<|>)) )
 import Control.Monad.Trans ( MonadTrans(..) )
 import Data.Monus ( Monus(..) )
-import Control.Monad.Writer ( MonadWriter(..), Alt(Alt) )
+import Control.Monad.Writer ( MonadWriter(..), WriterT(..) )
 import Control.Monad.State ( MonadState(..) )
 import Control.Monad.Except ( MonadError(..) )
 import Control.Monad.Reader ( MonadReader(..) )
@@ -88,6 +89,8 @@ import GHC.Generics ( Generic, Generic1 )
 import Control.DeepSeq ( NFData(..) )
 import Data.Foldable (Foldable(foldl', foldr'))
 import Text.Read (readPrec, parens, prec, Lexeme(Ident), lexP, step)
+import Data.Monoid (Alt(Alt))
+
 import GHC.Exts (IsList)
 import qualified GHC.Exts as IsList
 
@@ -244,11 +247,6 @@ pattern Heap { runHeap } <- (runHeapIdent -> runHeap)
     Heap = toHeapIdent
 {-# COMPLETE Heap #-}
 
-instance (Monus w, Identity ~ m) => IsList (HeapT w m a) where
-  type Item (HeapT w m a) = (a, w)
-  toList = search
-  fromList = fromList
-
 instance (forall x. Show x => Show (m x), Show a, Show w) => Show (HeapT w m a) where
   showsPrec n (HeapT xs) = showParen (n > 10) (showString "HeapT " . showsPrec 11 xs)
   
@@ -317,8 +315,8 @@ instance MonadTrans (HeapT w) where
            (w, HeapT w m a) ->
            (w, HeapT w m a)
 (x, xv) <||> (y, yv)
-  | x <= y    = (x, HeapT (ListT (pure ((x |-| y :< yv) :- runHeapT xv))))
-  | otherwise = (y, HeapT (ListT (pure ((x |-| y :< xv) :- runHeapT yv))))
+  | x <= y    = (x, HeapT (ListT (pure ((x .-. y :< yv) :- runHeapT xv))))
+  | otherwise = (y, HeapT (ListT (pure ((x .-. y :< xv) :- runHeapT yv))))
 {-# INLINE (<||>) #-}
 
 comb ::  (Monus w, Monad m) =>
@@ -354,20 +352,20 @@ popMin = runIdentity #. popMinT
 {-# INLINE popMin #-}
 
 -- | The monadic version of 'flatten'.
-flattenT :: (Monad m, Monus w) => HeapT w m a -> ListT m (w, [a])
-flattenT = ListT #. fmap (uncurry (:-) . bimap (mempty,) go) . popMinT
+flattenT :: (Monad m, Monoid w) => HeapT w m a -> ListT m (a, w)
+flattenT = runWriterT #. go
   where
-    go = maybe empty (\(w, xs) -> ListT (fmap (uncurry (:-) . bimap (w,) go) (popMinT xs)))
+    go = (h <=< lift) .# runHeapT
+    h (Leaf x) = return x
+    h (w :< xs) = writer (xs, w) >>= go
 {-# INLINE flattenT #-}
 
--- | /O(n log n)/. Return all the elements of the heap, in order of their
--- weights, grouped by equal weights, paired with the /differences/ in weights.
---
--- The weights returned are the /differences/, not the absolute weights.
+-- | /O(n)/. Return all the elements of the heap, /not/ in order of their
+-- weights, paired with their weights.
 --
 -- >>> flatten (fromList [('a',5), ('b', 3), ('c',6)])
--- [(0,""),(3,"b"),(2,"a"),(1,"c")]
-flatten :: Monus w => Heap w a -> [(w, [a])]
+-- [('a',5), ('b', 3), ('c',6)]
+flatten :: Monus w => Heap w a -> [(a, w)]
 flatten = runIdentity #. toListT . flattenT
 {-# INLINE flatten #-}
 
@@ -384,6 +382,13 @@ searchT xs = popMinT xs >>= go mempty where
 search :: Monus w => Heap w a -> [(a, w)]
 search = runIdentity #. searchT
 {-# INLINE search #-}
+
+instance (Monus w, m ~ Identity) => IsList (HeapT w m a) where
+  type Item (HeapT w m a) = (a, w)
+  fromList = fromList
+  {-# INLINE fromList #-}
+  toList = flatten
+  {-# INLINE toList #-}
 
 -- | The monadic variant of 'best'.
 bestT :: (Monad m, Monus w) => HeapT w m a -> m (Maybe (w, a))
@@ -411,7 +416,7 @@ heapMmap h = HeapT #. (goL .# runHeapT)
     goL = ListT #. h . (fmap (bimap (fmap (HeapT #. (goL .# runHeapT))) goL) .# runListT)
 {-# INLINE heapMmap #-}
 
-instance (Monad m, Monus w) => MonadWriter w (HeapT w m) where
+instance (Monad m, Monoid w) => MonadWriter w (HeapT w m) where
   writer (x, !w) = HeapT (pure (w :< pure x))
   {-# INLINE writer #-}
   tell !w = HeapT (pure (w :< pure ()))
@@ -422,7 +427,7 @@ instance (Monad m, Monus w) => MonadWriter w (HeapT w m) where
       h !w1 (Leaf x) = Leaf (x, w1)
       h !w1 (w2 :< xs) = w2 :< go (w1 <> w2) xs
   {-# INLINE listen #-}
-  pass = HeapT #. catMaybesT (fmap (uncurry (:<)) . comb . uncurry (\w -> map (\(x,f) -> (f w, pure x)))) . flattenT
+  pass = HeapT #. fmap (\(x, w) -> w :< return x) . (runWriterT #. pass) . (WriterT #. flattenT)
   {-# INLINE pass #-}
 
 instance MonadState s m => MonadState s (HeapT w m) where
