@@ -38,6 +38,8 @@ import Data.Monus
 import Data.Monus.Prob
 import Data.Monus.Dist
 
+import qualified GHC.Exts as IsList
+
 instance Arbitrary Natural where
   arbitrary = arbitrarySizedNatural
   shrink = map fromInteger . filter (0<=) . shrink . toInteger
@@ -61,8 +63,8 @@ prop_readHeapT xs = readEither (show xs) === Right xs
 
 monusLaw :: (Show a, Monus a) => a -> a -> Property
 monusLaw x y
-  | x <= y    = x <> (x |-| y) === y
-  | otherwise = y <> (y |-| x) === x
+  | x <= y    = x <> (y |-| x) === y
+  | otherwise = y <> (x |-| y) === x
 
 prop_probMonus :: Prob -> Prob -> Property
 prop_probMonus = monusLaw
@@ -87,6 +89,9 @@ prop_traverseHeap :: Property
 prop_traverseHeap = mapSize (min 5) $
   forAll (arbitrary :: Gen (HeapT Dist Pair Word))
     (\xs -> foldr (:) [] xs === appEndo (fst (traverse (\x -> (Endo (x:), ())) xs)) [])
+
+prop_toFromListHeap :: [(Word, Dist)] -> Property
+prop_toFromListHeap xs = IsList.toList (IsList.fromList xs :: Heap Dist Word) === xs
 
 return []
 
