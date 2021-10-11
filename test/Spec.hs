@@ -68,6 +68,9 @@ prop_readListT xs = readEither (show xs) === Right xs
 prop_readHeapT :: HeapT Dist Identity Word -> Property
 prop_readHeapT xs = readEither (show xs) === Right xs
 
+prop_readMax :: Max Word -> Property
+prop_readMax xs = readEither (show xs) === Right xs
+
 monusLaw :: (Show a, Monus a) => a -> a -> Property
 monusLaw x y
   | x <= y    =
@@ -82,8 +85,11 @@ monusLaw x y
 prop_probMonus :: Prob -> Prob -> Property
 prop_probMonus = monusLaw
 
-prop_ordMonus :: Max Word8 -> Max Word8 -> Property
-prop_ordMonus = monusLaw
+prop_maxMonus :: Max Word8 -> Max Word8 -> Property
+prop_maxMonus = monusLaw
+
+prop_maxOrdMonus :: Max Word8 -> Max Word8 -> Property
+prop_maxOrdMonus = ordMonusLaw
 
 prop_bifoldlListCons :: Property
 prop_bifoldlListCons =
