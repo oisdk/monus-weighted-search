@@ -11,6 +11,7 @@ module MonusWeightedSearch.Internal.Heap (Heap(..),minView, singleton, dijkstra,
 
 import Data.Monus
 import Data.Monus.Dist
+import Data.Monus.Max
 
 import qualified Data.Set as Set
 
@@ -88,6 +89,6 @@ dijkstra g s = go Set.empty (Node mempty s [])
 {-# INLINE dijkstra #-}
 
 -- | Heapsort.
-monusSort :: (Ord a, Bounded a) => [a] -> [a]
-monusSort = map snd . unfoldr minView . foldMap (\x -> singleton (Max x) x)
+monusSort :: Ord a => [a] -> [a]
+monusSort = map snd . unfoldr minView . foldMap (\x -> singleton (In x) x)
 {-# INLINE monusSort #-}
