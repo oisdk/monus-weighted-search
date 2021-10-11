@@ -13,7 +13,7 @@
 
 module MonusWeightedSearch.Examples.Sort where
 
-import Data.Semigroup (Max(..))
+import Data.Monus.Max
 import Control.Monad.Heap
 
 -- $setup
@@ -23,6 +23,6 @@ import Control.Monad.Heap
 --
 -- >>> monusSort [5,1,2,3,1,6,3,2,5,7]
 -- [1,1,2,2,3,3,5,5,6,7]
-monusSort :: (Ord a, Bounded a) => [a] -> [a]
-monusSort = map fst . search . fromList . map (\x -> (x, Max x)) 
+monusSort :: Ord a => [a] -> [a]
+monusSort = map fst . search . fromList . map (\x -> (x, In x)) 
 {-# INLINE monusSort #-}
