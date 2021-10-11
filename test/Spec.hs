@@ -22,7 +22,7 @@ import Data.Bifoldable
 import Data.Foldable
 import Control.Applicative
 import Data.Word
-import Data.Semigroup (Max(..))
+import Data.Monus.Max
 import Numeric.Natural
 
 import Control.Monad.Heap
@@ -52,8 +52,17 @@ prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (t
 prop_monadSort :: [Word] -> Property
 prop_monadSort xs = sort xs === M.monusSort xs
 
+ordMonusLaw :: (Monus a, Show a) => a -> a -> Property
+ordMonusLaw x y =
+  counterexample
+    (show x ++ " !<= " ++ show x ++ " <> " ++ show y)
+    (x <= x <> y) .&&.
+  counterexample
+    (show y ++ " !<= " ++ show y ++ " <> " ++ show x)
+    (y <= y <> x)
+
 prop_probOrdMonoid :: Prob -> Prob -> Property
-prop_probOrdMonoid x y = (x <= x <> y) .&&. (y <= x <> y)
+prop_probOrdMonoid = ordMonusLaw
 
 prop_readListT :: ListT Identity Word -> Property
 prop_readListT xs = readEither (show xs) === Right xs
