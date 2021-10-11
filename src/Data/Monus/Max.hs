@@ -68,15 +68,13 @@ instance Arbitrary1 Max where
   liftShrink shr (In x) = Bot : fmap In (shr x)
 
 instance Ord a => Ord (Max a) where
-  Bot  <= _ = True
-  In _ <= Bot = False
+  Bot  <= _    = True
+  In _ <= Bot  = False
   In x <= In y = x <= y
 
   (>=) = flip (<=)
 
-  _ < Bot = False
-  Bot < In _ = True
-  In x < In y = x < y
+  x < y = not (x >= y)
 
   (>) = flip (<)
 
@@ -84,9 +82,9 @@ instance Ord a => Ord (Max a) where
 
   min = liftA2 min
 
-  compare Bot Bot = EQ
-  compare Bot (In _) = LT
-  compare (In _) Bot = GT
+  compare Bot    Bot    = EQ
+  compare Bot    (In _) = LT
+  compare (In _) Bot    = GT
   compare (In x) (In y) = compare x y
 
 instance Applicative Max where
