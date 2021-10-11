@@ -28,7 +28,7 @@ import Data.Functor (($>))
 
 -- | A type which adds a lower bound to some ordered type.
 data Max a = Bot | In a
-  deriving stock (Eq, Data, Generic, Typeable, Functor, Foldable, Traversable)
+  deriving stock (Eq, Data, Generic, Typeable, Functor, Foldable, Traversable, Show, Read)
 
 instance Arbitrary a => Arbitrary (Max a) where
   arbitrary = arbitrary1

@@ -44,8 +44,6 @@ instance Arbitrary Natural where
   arbitrary = arbitrarySizedNatural
   shrink = map fromInteger . filter (0<=) . shrink . toInteger
 
-deriving newtype instance Arbitrary a => Arbitrary (Max a)
-
 prop_monadDijkstra :: AdjList -> Property
 prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (toGraph gm) 1)
 
