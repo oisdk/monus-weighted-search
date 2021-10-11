@@ -70,8 +70,14 @@ prop_readHeapT xs = readEither (show xs) === Right xs
 
 monusLaw :: (Show a, Monus a) => a -> a -> Property
 monusLaw x y
-  | x <= y    = x <> (y |-| x) === y
-  | otherwise = y <> (x |-| y) === x
+  | x <= y    =
+    counterexample
+      (show x ++ " <> (" ++ show y ++ " |-| " ++ show x ++ ") /= " ++ show y)
+      (x <> (y |-| x) === y)
+  | otherwise =
+    counterexample
+      (show y ++ " <> (" ++ show x ++ " |-| " ++ show y ++ ") /= " ++ show x)
+      (y <> (x |-| y) === x)
 
 prop_probMonus :: Prob -> Prob -> Property
 prop_probMonus = monusLaw
