@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679078692"><span id="local-6989586621679078693"><span id="local-6989586621679078694"></span></span></span><span class="hs-comment">--------------------------------------------------------------------------------</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679078686"><span id="local-6989586621679078687"><span id="local-6989586621679078688"></span></span></span><span class="hs-comment">--------------------------------------------------------------------------------</span><span>
 </span><span id="line-2"></span><span class="hs-comment">-- |</span><span>
 </span><span id="line-3"></span><span class="hs-comment">-- Module      : Data.Monus.Max</span><span>
 </span><span id="line-4"></span><span class="hs-comment">-- Copyright   : (c) Donnacha Ois&#237;n Kidney 2021</span><span>
@@ -27,8 +27,8 @@
 </span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-operator">($&gt;)</span></span><span class="hs-special">)</span><span>
 </span><span id="line-28"></span><span>
 </span><span id="line-29"></span><span class="hs-comment">-- | A type which adds a lower bound to some ordered type.</span><span>
-</span><span id="line-30"></span><span id="local-6989586621679078688"><span id="local-6989586621679078689"></span></span><span class="hs-keyword">data</span><span> </span><span id="Max"><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-var">Max</span></a></span></span><span> </span><span id="local-6989586621679078961"><span class="annot"><a href="#local-6989586621679078961"><span class="hs-identifier hs-type">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Bot"><span class="annot"><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="In"><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679078961"><span class="hs-identifier hs-type">a</span></a></span><span>
-</span><span id="line-31"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679078681"><span id="local-6989586621679078684"><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Bool
+</span><span id="line-30"></span><span id="local-6989586621679078682"><span id="local-6989586621679078683"></span></span><span class="hs-keyword">data</span><span> </span><span id="Max"><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-var">Max</span></a></span></span><span> </span><span id="local-6989586621679078955"><span class="annot"><a href="#local-6989586621679078955"><span class="hs-identifier hs-type">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Bot"><span class="annot"><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="In"><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679078955"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-31"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679078675"><span id="local-6989586621679078678"><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Bool
 (Max a -&gt; Max a -&gt; Bool) -&gt; (Max a -&gt; Max a -&gt; Bool) -&gt; Eq (Max a)
 forall a. Eq a =&gt; Max a -&gt; Max a -&gt; Bool
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -36,7 +36,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: forall a. Eq a =&gt; Max a -&gt; Max a -&gt; Bool
 == :: Max a -&gt; Max a -&gt; Bool
 $c== :: forall a. Eq a =&gt; Max a -&gt; Max a -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078643"><span id="local-6989586621679078645"><span id="local-6989586621679078647"><span id="local-6989586621679078649"><span id="local-6989586621679078651"><span id="local-6989586621679078653"><span id="local-6989586621679078655"><span id="local-6989586621679078657"><span id="local-6989586621679078659"><span id="local-6989586621679078665"><span id="local-6989586621679078667"><span id="local-6989586621679078669"><span id="local-6989586621679078672"><span id="local-6989586621679078675"><span class="annot"><span class="annottext">Typeable (Max a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078637"><span id="local-6989586621679078639"><span id="local-6989586621679078641"><span id="local-6989586621679078643"><span id="local-6989586621679078645"><span id="local-6989586621679078647"><span id="local-6989586621679078649"><span id="local-6989586621679078651"><span id="local-6989586621679078653"><span id="local-6989586621679078659"><span id="local-6989586621679078661"><span id="local-6989586621679078663"><span id="local-6989586621679078666"><span id="local-6989586621679078669"><span class="annot"><span class="annottext">Typeable (Max a)
 Typeable (Max a)
 -&gt; (forall (c :: * -&gt; *).
     (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
@@ -239,7 +239,7 @@ forall a x. Rep (Max a) x -&gt; Max a
 forall a x. Max a -&gt; Rep (Max a) x
 $cto :: forall a x. Rep (Max a) x -&gt; Max a
 $cfrom :: forall a x. Max a -&gt; Rep (Max a) x
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Typeable</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078634"><span id="local-6989586621679078636"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; Max a -&gt; Max b)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Typeable</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078628"><span id="local-6989586621679078630"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; Max a -&gt; Max b)
 -&gt; (forall a b. a -&gt; Max b -&gt; Max a) -&gt; Functor Max
 forall a b. a -&gt; Max b -&gt; Max a
 forall a b. (a -&gt; b) -&gt; Max a -&gt; Max b
@@ -250,7 +250,7 @@ forall (f :: * -&gt; *).
 $c&lt;$ :: forall a b. a -&gt; Max b -&gt; Max a
 fmap :: forall a b. (a -&gt; b) -&gt; Max a -&gt; Max b
 $cfmap :: forall a b. (a -&gt; b) -&gt; Max a -&gt; Max b
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078596"><span id="local-6989586621679078598"><span id="local-6989586621679078600"><span id="local-6989586621679078602"><span id="local-6989586621679078604"><span id="local-6989586621679078606"><span id="local-6989586621679078608"><span id="local-6989586621679078610"><span id="local-6989586621679078612"><span id="local-6989586621679078614"><span id="local-6989586621679078616"><span id="local-6989586621679078618"><span id="local-6989586621679078620"><span id="local-6989586621679078622"><span id="local-6989586621679078624"><span id="local-6989586621679078628"><span id="local-6989586621679078630"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; Max m -&gt; m)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078590"><span id="local-6989586621679078592"><span id="local-6989586621679078594"><span id="local-6989586621679078596"><span id="local-6989586621679078598"><span id="local-6989586621679078600"><span id="local-6989586621679078602"><span id="local-6989586621679078604"><span id="local-6989586621679078606"><span id="local-6989586621679078608"><span id="local-6989586621679078610"><span id="local-6989586621679078612"><span id="local-6989586621679078614"><span id="local-6989586621679078616"><span id="local-6989586621679078618"><span id="local-6989586621679078622"><span id="local-6989586621679078624"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; Max m -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Max a -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Max a -&gt; m)
 -&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; Max a -&gt; b)
@@ -332,7 +332,7 @@ foldMap :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Max a -&gt; m
 $cfoldMap :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Max a -&gt; m
 fold :: forall m. Monoid m =&gt; Max m -&gt; m
 $cfold :: forall m. Monoid m =&gt; Max m -&gt; m
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078579"><span id="local-6989586621679078581"><span id="local-6989586621679078583"><span id="local-6989586621679078589"><span class="annot"><span class="annottext">Functor Max
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078573"><span id="local-6989586621679078575"><span id="local-6989586621679078577"><span id="local-6989586621679078583"><span class="annot"><span class="annottext">Functor Max
 Foldable Max
 Functor Max
 -&gt; Foldable Max
@@ -385,40 +385,40 @@ Applicative f =&gt;
 (a -&gt; f b) -&gt; Max a -&gt; f (Max b)
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Traversable</span></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-32"></span><span>
-</span><span id="line-33"></span><span id="local-6989586621679078889"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679078889"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078889"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-34"></span><span>  </span><span id="local-6989586621679078568"><span class="annot"><span class="annottext">arbitrary :: Gen (Max a)
+</span><span id="line-33"></span><span id="local-6989586621679078883"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679078883"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078883"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679078562"><span class="annot"><span class="annottext">arbitrary :: Gen (Max a)
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen (Max a)
 forall (f :: * -&gt; *) a. (Arbitrary1 f, Arbitrary a) =&gt; Gen (f a)
 </span><span class="hs-identifier hs-var">arbitrary1</span></span><span>
-</span><span id="line-35"></span><span>  </span><span id="local-6989586621679078563"><span class="annot"><span class="annottext">shrink :: Max a -&gt; [Max a]
+</span><span id="line-35"></span><span>  </span><span id="local-6989586621679078557"><span class="annot"><span class="annottext">shrink :: Max a -&gt; [Max a]
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">shrink</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a -&gt; [Max a]
 forall (f :: * -&gt; *) a. (Arbitrary1 f, Arbitrary a) =&gt; f a -&gt; [f a]
 </span><span class="hs-identifier hs-var">shrink1</span></span></span><span>
 </span><span id="line-36"></span><span>
-</span><span id="line-37"></span><span id="local-6989586621679078880"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="annot"><a href="#local-6989586621679078880"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078880"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-38"></span><span>  </span><span id="local-6989586621679078555"><span class="annot"><span class="annottext">rnf :: Max a -&gt; ()
+</span><span id="line-37"></span><span id="local-6989586621679078874"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="annot"><a href="#local-6989586621679078874"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078874"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-38"></span><span>  </span><span id="local-6989586621679078549"><span class="annot"><span class="annottext">rnf :: Max a -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">rnf</span></span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-39"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">rnf</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078553"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078553"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; ()
+</span><span id="line-39"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">rnf</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078547"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078547"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; ()
 forall a. NFData a =&gt; a -&gt; ()
 </span><span class="hs-identifier hs-var">rnf</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078553"><span class="hs-identifier hs-var">x</span></a></span></span><span>
+</span><a href="#local-6989586621679078547"><span class="hs-identifier hs-var">x</span></a></span></span><span>
 </span><span id="line-40"></span><span>
 </span><span id="line-41"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Eq1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-42"></span><span>  </span><span id="local-6989586621679078549"><span class="annot"><span class="annottext">liftEq :: forall a b. (a -&gt; b -&gt; Bool) -&gt; Max a -&gt; Max b -&gt; Bool
+</span><span id="line-42"></span><span>  </span><span id="local-6989586621679078543"><span class="annot"><span class="annottext">liftEq :: forall a b. (a -&gt; b -&gt; Bool) -&gt; Max a -&gt; Max b -&gt; Bool
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftEq</span></span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="annot"><span class="annottext">Max b
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-43"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftEq</span></span><span> </span><span id="local-6989586621679078547"><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
-</span><a href="#local-6989586621679078547"><span class="hs-identifier hs-var">eq</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078546"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078546"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078545"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679078545"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
-</span><a href="#local-6989586621679078547"><span class="hs-identifier hs-var">eq</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078546"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679078545"><span class="hs-identifier hs-var">y</span></a></span><span>
+</span><span id="line-43"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftEq</span></span><span> </span><span id="local-6989586621679078541"><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
+</span><a href="#local-6989586621679078541"><span class="hs-identifier hs-var">eq</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078540"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078540"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078539"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679078539"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
+</span><a href="#local-6989586621679078541"><span class="hs-identifier hs-var">eq</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078540"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679078539"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-44"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftEq</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Max b
@@ -426,56 +426,56 @@ forall a. NFData a =&gt; a -&gt; ()
 </span><span class="hs-identifier hs-var">False</span></span><span>
 </span><span id="line-45"></span><span>
 </span><span id="line-46"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-47"></span><span>  </span><span id="local-6989586621679078539"><span class="annot"><span class="annottext">liftCompare :: forall a b. (a -&gt; b -&gt; Ordering) -&gt; Max a -&gt; Max b -&gt; Ordering
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftCompare</span></span></span><span> </span><span id="local-6989586621679078537"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
-</span><a href="#local-6989586621679078537"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><span id="line-47"></span><span>  </span><span id="local-6989586621679078533"><span class="annot"><span class="annottext">liftCompare :: forall a b. (a -&gt; b -&gt; Ordering) -&gt; Max a -&gt; Max b -&gt; Ordering
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftCompare</span></span></span><span> </span><span id="local-6989586621679078531"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
+</span><a href="#local-6989586621679078531"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="annot"><span class="annottext">Max b
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">EQ</span></span><span>
-</span><span id="line-48"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftCompare</span></span><span> </span><span id="local-6989586621679078536"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
-</span><a href="#local-6989586621679078536"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><span id="line-48"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftCompare</span></span><span> </span><span id="local-6989586621679078530"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
+</span><a href="#local-6989586621679078530"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">b
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">LT</span></span><span>
-</span><span id="line-49"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftCompare</span></span><span> </span><span id="local-6989586621679078535"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
-</span><a href="#local-6989586621679078535"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><span id="line-49"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftCompare</span></span><span> </span><span id="local-6989586621679078529"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
+</span><a href="#local-6989586621679078529"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Max b
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">GT</span></span><span>
-</span><span id="line-50"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftCompare</span></span><span> </span><span id="local-6989586621679078534"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
-</span><a href="#local-6989586621679078534"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078533"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078533"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078532"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679078532"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
-</span><a href="#local-6989586621679078534"><span class="hs-identifier hs-var">cmp</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078533"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679078532"><span class="hs-identifier hs-var">y</span></a></span><span>
+</span><span id="line-50"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftCompare</span></span><span> </span><span id="local-6989586621679078528"><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
+</span><a href="#local-6989586621679078528"><span class="hs-identifier hs-var">cmp</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078527"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078527"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078526"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679078526"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Ordering
+</span><a href="#local-6989586621679078528"><span class="hs-identifier hs-var">cmp</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078527"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679078526"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-51"></span><span>
-</span><span id="line-52"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078529"><span class="annot"><span class="hs-identifier hs-type">Show1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-53"></span><span>  </span><span id="local-6989586621679078527"><span class="annot"><span class="annottext">liftShowsPrec :: forall a.
+</span><span id="line-52"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078523"><span class="annot"><span class="hs-identifier hs-type">Show1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-53"></span><span>  </span><span id="local-6989586621679078521"><span class="annot"><span class="annottext">liftShowsPrec :: forall a.
 (Int -&gt; a -&gt; ShowS) -&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; Max a -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShowsPrec</span></span></span><span> </span><span id="local-6989586621679078525"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679078525"><span class="hs-identifier hs-var">sp</span></a></span></span><span> </span><span id="local-6989586621679078524"><span class="annot"><span class="annottext">[a] -&gt; ShowS
-</span><a href="#local-6989586621679078524"><span class="hs-identifier hs-var">sl</span></a></span></span><span> </span><span id="local-6989586621679078523"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679078523"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShowsPrec</span></span></span><span> </span><span id="local-6989586621679078519"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679078519"><span class="hs-identifier hs-var">sp</span></a></span></span><span> </span><span id="local-6989586621679078518"><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679078518"><span class="hs-identifier hs-var">sl</span></a></span></span><span> </span><span id="local-6989586621679078517"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679078517"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Bot&quot;</span></span><span>
-</span><span id="line-54"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftShowsPrec</span></span><span> </span><span id="local-6989586621679078521"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679078521"><span class="hs-identifier hs-var">sp</span></a></span></span><span> </span><span class="annot"><span class="annottext">[a] -&gt; ShowS
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679078520"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679078520"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078519"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078519"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; a -&gt; ShowS) -&gt; String -&gt; Int -&gt; a -&gt; ShowS
+</span><span id="line-54"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftShowsPrec</span></span><span> </span><span id="local-6989586621679078515"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679078515"><span class="hs-identifier hs-var">sp</span></a></span></span><span> </span><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679078514"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679078514"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078513"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078513"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; a -&gt; ShowS) -&gt; String -&gt; Int -&gt; a -&gt; ShowS
 forall a. (Int -&gt; a -&gt; ShowS) -&gt; String -&gt; Int -&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">showsUnaryWith</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679078521"><span class="hs-identifier hs-var">sp</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679078515"><span class="hs-identifier hs-var">sp</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;In&quot;</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679078520"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078519"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679078514"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078513"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-55"></span><span>
-</span><span id="line-56"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078516"><span class="annot"><span class="hs-identifier hs-type">Read1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-57"></span><span>  </span><span id="local-6989586621679078507"><span class="annot"><span class="annottext">liftReadPrec :: forall a. ReadPrec a -&gt; ReadPrec [a] -&gt; ReadPrec (Max a)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftReadPrec</span></span></span><span> </span><span id="local-6989586621679078505"><span class="annot"><span class="annottext">ReadPrec a
-</span><a href="#local-6989586621679078505"><span class="hs-identifier hs-var">rp</span></a></span></span><span> </span><span class="annot"><span class="annottext">ReadPrec [a]
+</span><span id="line-56"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078510"><span class="annot"><span class="hs-identifier hs-type">Read1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-57"></span><span>  </span><span id="local-6989586621679078501"><span class="annot"><span class="annottext">liftReadPrec :: forall a. ReadPrec a -&gt; ReadPrec [a] -&gt; ReadPrec (Max a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftReadPrec</span></span></span><span> </span><span id="local-6989586621679078499"><span class="annot"><span class="annottext">ReadPrec a
+</span><a href="#local-6989586621679078499"><span class="hs-identifier hs-var">rp</span></a></span></span><span> </span><span class="annot"><span class="annottext">ReadPrec [a]
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-58"></span><span>      </span><span class="annot"><span class="annottext">ReadPrec (Max a) -&gt; ReadPrec (Max a)
 forall a. ReadPrec a -&gt; ReadPrec a
@@ -495,18 +495,18 @@ forall a. ReadPrec a -&gt; ReadPrec a
 </span><span class="hs-identifier hs-var">readData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ReadPrec a -&gt; String -&gt; (a -&gt; Max a) -&gt; ReadPrec (Max a)
 forall a t. ReadPrec a -&gt; String -&gt; (a -&gt; t) -&gt; ReadPrec t
 </span><span class="hs-identifier hs-var">readUnaryWith</span></span><span> </span><span class="annot"><span class="annottext">ReadPrec a
-</span><a href="#local-6989586621679078505"><span class="hs-identifier hs-var">rp</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679078499"><span class="hs-identifier hs-var">rp</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;In&quot;</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; Max a
 forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-61"></span><span>
-</span><span id="line-62"></span><span>  </span><span id="local-6989586621679078498"><span class="annot"><span class="annottext">liftReadListPrec :: forall a. ReadPrec a -&gt; ReadPrec [a] -&gt; ReadPrec [Max a]
+</span><span id="line-62"></span><span>  </span><span id="local-6989586621679078492"><span class="annot"><span class="annottext">liftReadListPrec :: forall a. ReadPrec a -&gt; ReadPrec [a] -&gt; ReadPrec [Max a]
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftReadListPrec</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ReadPrec a -&gt; ReadPrec [a] -&gt; ReadPrec [Max a]
 forall (f :: * -&gt; *) a.
 Read1 f =&gt;
 ReadPrec a -&gt; ReadPrec [a] -&gt; ReadPrec [f a]
 </span><span class="hs-identifier hs-var">liftReadListPrecDefault</span></span><span>
-</span><span id="line-63"></span><span>  </span><span id="local-6989586621679078494"><span class="annot"><span class="annottext">liftReadList :: forall a. (Int -&gt; ReadS a) -&gt; ReadS [a] -&gt; ReadS [Max a]
+</span><span id="line-63"></span><span>  </span><span id="local-6989586621679078488"><span class="annot"><span class="annottext">liftReadList :: forall a. (Int -&gt; ReadS a) -&gt; ReadS [a] -&gt; ReadS [Max a]
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftReadList</span></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; ReadS a) -&gt; ReadS [a] -&gt; ReadS [Max a]
 forall (f :: * -&gt; *) a.
 Read1 f =&gt;
@@ -514,9 +514,9 @@ Read1 f =&gt;
 </span><span class="hs-identifier hs-var">liftReadListDefault</span></span><span>
 </span><span id="line-64"></span><span>
 </span><span id="line-65"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary1</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-66"></span><span>  </span><span id="local-6989586621679078484"><span class="annot"><span class="annottext">liftArbitrary :: forall a. Gen a -&gt; Gen (Max a)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftArbitrary</span></span></span><span> </span><span id="local-6989586621679078482"><span class="annot"><span class="annottext">Gen a
-</span><a href="#local-6989586621679078482"><span class="hs-identifier hs-var">arb</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Maybe a -&gt; Max a) -&gt; Gen (Maybe a) -&gt; Gen (Max a)
+</span><span id="line-66"></span><span>  </span><span id="local-6989586621679078478"><span class="annot"><span class="annottext">liftArbitrary :: forall a. Gen a -&gt; Gen (Max a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftArbitrary</span></span></span><span> </span><span id="local-6989586621679078476"><span class="annot"><span class="annottext">Gen a
+</span><a href="#local-6989586621679078476"><span class="hs-identifier hs-var">arb</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Maybe a -&gt; Max a) -&gt; Gen (Maybe a) -&gt; Gen (Max a)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Max a -&gt; (a -&gt; Max a) -&gt; Maybe a -&gt; Max a
 forall b a. b -&gt; (a -&gt; b) -&gt; Maybe a -&gt; b
@@ -527,14 +527,14 @@ forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Gen a -&gt; Gen (Maybe a)
 forall (f :: * -&gt; *) a. Arbitrary1 f =&gt; Gen a -&gt; Gen (f a)
 </span><span class="hs-identifier hs-var">liftArbitrary</span></span><span> </span><span class="annot"><span class="annottext">Gen a
-</span><a href="#local-6989586621679078482"><span class="hs-identifier hs-var">arb</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-67"></span><span>  </span><span id="local-6989586621679078478"><span class="annot"><span class="annottext">liftShrink :: forall a. (a -&gt; [a]) -&gt; Max a -&gt; [Max a]
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShrink</span></span></span><span> </span><span id="local-6989586621679078476"><span class="annot"><span class="annottext">a -&gt; [a]
-</span><a href="#local-6989586621679078476"><span class="hs-identifier hs-var">shr</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078476"><span class="hs-identifier hs-var">arb</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-67"></span><span>  </span><span id="local-6989586621679078472"><span class="annot"><span class="annottext">liftShrink :: forall a. (a -&gt; [a]) -&gt; Max a -&gt; [Max a]
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShrink</span></span></span><span> </span><span id="local-6989586621679078470"><span class="annot"><span class="annottext">a -&gt; [a]
+</span><a href="#local-6989586621679078470"><span class="hs-identifier hs-var">shr</span></a></span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
-</span><span id="line-68"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftShrink</span></span><span> </span><span id="local-6989586621679078475"><span class="annot"><span class="annottext">a -&gt; [a]
-</span><a href="#local-6989586621679078475"><span class="hs-identifier hs-var">shr</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078474"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078474"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
+</span><span id="line-68"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftShrink</span></span><span> </span><span id="local-6989586621679078469"><span class="annot"><span class="annottext">a -&gt; [a]
+</span><a href="#local-6989586621679078469"><span class="hs-identifier hs-var">shr</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078468"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078468"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
 forall a. Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="annot"><span class="annottext">Max a -&gt; [Max a] -&gt; [Max a]
 forall a. a -&gt; [a] -&gt; [a]
@@ -543,64 +543,57 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; Max a
 forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; [a]
-</span><a href="#local-6989586621679078475"><span class="hs-identifier hs-var">shr</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078474"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679078469"><span class="hs-identifier hs-var">shr</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078468"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-69"></span><span>
-</span><span id="line-70"></span><span id="local-6989586621679078828"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078828"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078828"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-70"></span><span id="local-6989586621679078822"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078822"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078822"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-71"></span><span>  </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span id="local-6989586621679078458"><span class="annot"><span class="annottext">&lt;= :: Max a -&gt; Max a -&gt; Bool
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span id="local-6989586621679078452"><span class="annot"><span class="annottext">&lt;= :: Max a -&gt; Max a -&gt; Bool
 </span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;=</span></span></span><span> </span><span class="annot"><span class="annottext">Max a
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier">_</span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
 </span><span id="line-72"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-73"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078456"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078456"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078455"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078455"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078456"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Bool
+</span><span id="line-73"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078450"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078450"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078449"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078449"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078450"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078455"><span class="hs-identifier hs-var">y</span></a></span><span>
+</span><a href="#local-6989586621679078449"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-74"></span><span>
-</span><span id="line-75"></span><span>  </span><span id="local-6989586621679078453"><span class="annot"><span class="annottext">&gt;= :: Max a -&gt; Max a -&gt; Bool
+</span><span id="line-75"></span><span>  </span><span id="local-6989586621679078447"><span class="annot"><span class="annottext">&gt;= :: Max a -&gt; Max a -&gt; Bool
 </span><span class="hs-operator hs-var hs-var hs-var hs-var">(&gt;=)</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Max a -&gt; Max a -&gt; Bool) -&gt; Max a -&gt; Max a -&gt; Bool
 forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c
 </span><span class="hs-identifier hs-var">flip</span></span><span> </span><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">(&lt;=)</span></span><span>
 </span><span id="line-76"></span><span>
-</span><span id="line-77"></span><span>  </span><span class="annot"><span class="annottext">Max a
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679078450"><span class="annot"><span class="annottext">&lt; :: Max a -&gt; Max a -&gt; Bool
-</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;</span></span></span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-78"></span><span>  </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-79"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078448"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078448"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078447"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078447"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078448"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Bool
+</span><span id="line-77"></span><span>  </span><span id="local-6989586621679078444"><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078444"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679078443"><span class="annot"><span class="annottext">&lt; :: Max a -&gt; Max a -&gt; Bool
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;</span></span></span><span> </span><span id="local-6989586621679078441"><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078441"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool
+</span><span class="hs-identifier hs-var">not</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078444"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
-</span><span class="hs-operator hs-var">&lt;</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078447"><span class="hs-identifier hs-var">y</span></a></span><span>
-</span><span id="line-80"></span><span>
-</span><span id="line-81"></span><span>  </span><span id="local-6989586621679078445"><span class="annot"><span class="annottext">&gt; :: Max a -&gt; Max a -&gt; Bool
+</span><span class="hs-operator hs-var">&gt;=</span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078441"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-78"></span><span>
+</span><span id="line-79"></span><span>  </span><span id="local-6989586621679078438"><span class="annot"><span class="annottext">&gt; :: Max a -&gt; Max a -&gt; Bool
 </span><span class="hs-operator hs-var hs-var hs-var hs-var">(&gt;)</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Max a -&gt; Max a -&gt; Bool) -&gt; Max a -&gt; Max a -&gt; Bool
 forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c
 </span><span class="hs-identifier hs-var">flip</span></span><span> </span><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">(&lt;)</span></span><span>
-</span><span id="line-82"></span><span>
-</span><span id="line-83"></span><span>  </span><span id="local-6989586621679078442"><span class="annot"><span class="annottext">max :: Max a -&gt; Max a -&gt; Max a
+</span><span id="line-80"></span><span>
+</span><span id="line-81"></span><span>  </span><span id="local-6989586621679078435"><span class="annot"><span class="annottext">max :: Max a -&gt; Max a -&gt; Max a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">max</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Max a
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">(&lt;&gt;)</span></span><span>
-</span><span id="line-84"></span><span>
-</span><span id="line-85"></span><span>  </span><span id="local-6989586621679078438"><span class="annot"><span class="annottext">min :: Max a -&gt; Max a -&gt; Max a
+</span><span id="line-82"></span><span>
+</span><span id="line-83"></span><span>  </span><span id="local-6989586621679078431"><span class="annot"><span class="annottext">min :: Max a -&gt; Max a -&gt; Max a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">min</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(a -&gt; a -&gt; a) -&gt; Max a -&gt; Max a -&gt; Max a
 forall (f :: * -&gt; *) a b c.
 Applicative f =&gt;
@@ -608,129 +601,129 @@ Applicative f =&gt;
 </span><span class="hs-identifier hs-var">liftA2</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; a
 forall a. Ord a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">min</span></span><span>
-</span><span id="line-86"></span><span>
-</span><span id="line-87"></span><span>  </span><span id="local-6989586621679078434"><span class="annot"><span class="annottext">compare :: Max a -&gt; Max a -&gt; Ordering
+</span><span id="line-84"></span><span>
+</span><span id="line-85"></span><span>  </span><span id="local-6989586621679078427"><span class="annot"><span class="annottext">compare :: Max a -&gt; Max a -&gt; Ordering
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">compare</span></span></span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>    </span><span class="annot"><span class="annottext">Max a
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">EQ</span></span><span>
-</span><span id="line-88"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><span id="line-86"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">LT</span></span><span>
-</span><span id="line-89"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><span id="line-87"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">GT</span></span><span>
-</span><span id="line-90"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078432"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078432"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078431"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078431"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Ordering
+</span><span id="line-88"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078425"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078425"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078424"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078424"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Ordering
 forall a. Ord a =&gt; a -&gt; a -&gt; Ordering
 </span><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078432"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078431"><span class="hs-identifier hs-var">y</span></a></span></span><span>
-</span><span id="line-91"></span><span>
-</span><span id="line-92"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078422"><span id="local-6989586621679078424"><span class="annot"><span class="hs-identifier hs-type">Applicative</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-93"></span><span>  </span><span id="local-6989586621679078420"><span class="annot"><span class="annottext">pure :: forall a. a -&gt; Max a
+</span><a href="#local-6989586621679078425"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078424"><span class="hs-identifier hs-var">y</span></a></span></span><span>
+</span><span id="line-89"></span><span>
+</span><span id="line-90"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078415"><span id="local-6989586621679078417"><span class="annot"><span class="hs-identifier hs-type">Applicative</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-91"></span><span>  </span><span id="local-6989586621679078413"><span class="annot"><span class="annottext">pure :: forall a. a -&gt; Max a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">pure</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Max a
 forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span>
-</span><span id="line-94"></span><span>
-</span><span id="line-95"></span><span>  </span><span id="local-6989586621679078419"><span class="annot"><span class="annottext">liftA2 :: forall a b c. (a -&gt; b -&gt; c) -&gt; Max a -&gt; Max b -&gt; Max c
-</span><a href="#local-6989586621679078419"><span class="hs-identifier hs-var hs-var hs-var hs-var">liftA2</span></a></span></span><span> </span><span id="local-6989586621679078418"><span class="annot"><span class="annottext">a -&gt; b -&gt; c
-</span><a href="#local-6989586621679078418"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078417"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078417"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078416"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679078416"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">c -&gt; Max c
+</span><span id="line-92"></span><span>
+</span><span id="line-93"></span><span>  </span><span id="local-6989586621679078412"><span class="annot"><span class="annottext">liftA2 :: forall a b c. (a -&gt; b -&gt; c) -&gt; Max a -&gt; Max b -&gt; Max c
+</span><a href="#local-6989586621679078412"><span class="hs-identifier hs-var hs-var hs-var hs-var">liftA2</span></a></span></span><span> </span><span id="local-6989586621679078411"><span class="annot"><span class="annottext">a -&gt; b -&gt; c
+</span><a href="#local-6989586621679078411"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078410"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078410"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078409"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679078409"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">c -&gt; Max c
 forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; b -&gt; c
-</span><a href="#local-6989586621679078418"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078417"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679078416"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-96"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftA2</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; c
+</span><a href="#local-6989586621679078411"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078410"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679078409"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-94"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">liftA2</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; c
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Max b
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max c
 forall a. Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>
-</span><span id="line-97"></span><span>
-</span><span id="line-98"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078415"><span class="annot"><span class="annottext">a -&gt; b
-</span><a href="#local-6989586621679078415"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679078414"><span class="annot"><span class="annottext">&lt;*&gt; :: forall a b. Max (a -&gt; b) -&gt; Max a -&gt; Max b
-</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;*&gt;</span></span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078413"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078413"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b -&gt; Max b
+</span><span id="line-95"></span><span>
+</span><span id="line-96"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078408"><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679078408"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679078407"><span class="annot"><span class="annottext">&lt;*&gt; :: forall a b. Max (a -&gt; b) -&gt; Max a -&gt; Max b
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;*&gt;</span></span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078406"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078406"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b -&gt; Max b
 forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; b
-</span><a href="#local-6989586621679078415"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078413"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-99"></span><span>  </span><span class="annot"><span class="annottext">Max (a -&gt; b)
+</span><a href="#local-6989586621679078408"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078406"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-97"></span><span>  </span><span class="annot"><span class="annottext">Max (a -&gt; b)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max b
 forall a. Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>
-</span><span id="line-100"></span><span>
-</span><span id="line-101"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078406"><span id="local-6989586621679078408"><span class="annot"><span class="hs-identifier hs-type">Monad</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-102"></span><span>  </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span id="local-6989586621679078404"><span class="annot"><span class="annottext">&gt;&gt;= :: forall a b. Max a -&gt; (a -&gt; Max b) -&gt; Max b
+</span><span id="line-98"></span><span>
+</span><span id="line-99"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078399"><span id="local-6989586621679078401"><span class="annot"><span class="hs-identifier hs-type">Monad</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-100"></span><span>  </span><span class="annot"><span class="annottext">Max a
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span id="local-6989586621679078397"><span class="annot"><span class="annottext">&gt;&gt;= :: forall a b. Max a -&gt; (a -&gt; Max b) -&gt; Max b
 </span><span class="hs-operator hs-var hs-var hs-var hs-var">&gt;&gt;=</span></span></span><span> </span><span class="annot"><span class="annottext">a -&gt; Max b
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max b
 forall a. Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>
-</span><span id="line-103"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078403"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078403"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span id="local-6989586621679078402"><span class="annot"><span class="annottext">a -&gt; Max b
-</span><a href="#local-6989586621679078402"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Max b
-</span><a href="#local-6989586621679078402"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078403"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-104"></span><span>
-</span><span id="line-105"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078394"><span id="local-6989586621679078396"><span class="annot"><span class="hs-identifier hs-type">Alternative</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-106"></span><span>  </span><span id="local-6989586621679078392"><span class="annot"><span class="annottext">empty :: forall a. Max a
+</span><span id="line-101"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078396"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078396"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span id="local-6989586621679078395"><span class="annot"><span class="annottext">a -&gt; Max b
+</span><a href="#local-6989586621679078395"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Max b
+</span><a href="#local-6989586621679078395"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078396"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-102"></span><span>
+</span><span id="line-103"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078387"><span id="local-6989586621679078389"><span class="annot"><span class="hs-identifier hs-type">Alternative</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-104"></span><span>  </span><span id="local-6989586621679078385"><span class="annot"><span class="annottext">empty :: forall a. Max a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">empty</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
 forall a. Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>
-</span><span id="line-107"></span><span>
-</span><span id="line-108"></span><span>  </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span id="local-6989586621679078390"><span class="annot"><span class="annottext">&lt;|&gt; :: forall a. Max a -&gt; Max a -&gt; Max a
-</span><a href="#local-6989586621679078390"><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;|&gt;</span></a></span></span><span> </span><span id="local-6989586621679078389"><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078389"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078389"><span class="hs-identifier hs-var">y</span></a></span><span>
-</span><span id="line-109"></span><span>  </span><span id="local-6989586621679078388"><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078388"><span class="hs-identifier hs-var">x</span></a></span></span><span>   </span><span class="annot"><span class="hs-operator hs-var">&lt;|&gt;</span></span><span> </span><span class="annot"><span class="annottext">Max a
+</span><span id="line-105"></span><span>
+</span><span id="line-106"></span><span>  </span><span class="annot"><span class="annottext">Max a
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span id="local-6989586621679078383"><span class="annot"><span class="annottext">&lt;|&gt; :: forall a. Max a -&gt; Max a -&gt; Max a
+</span><a href="#local-6989586621679078383"><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;|&gt;</span></a></span></span><span> </span><span id="local-6989586621679078382"><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078382"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078382"><span class="hs-identifier hs-var">y</span></a></span><span>
+</span><span id="line-107"></span><span>  </span><span id="local-6989586621679078381"><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078381"><span class="hs-identifier hs-var">x</span></a></span></span><span>   </span><span class="annot"><span class="hs-operator hs-var">&lt;|&gt;</span></span><span> </span><span class="annot"><span class="annottext">Max a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078388"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679078381"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-108"></span><span>
+</span><span id="line-109"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078373"><span id="local-6989586621679078375"><span class="annot"><span class="hs-identifier hs-type">MonadPlus</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span>
 </span><span id="line-110"></span><span>
-</span><span id="line-111"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078380"><span id="local-6989586621679078382"><span class="annot"><span class="hs-identifier hs-type">MonadPlus</span></span><span> </span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span></span></span><span>
-</span><span id="line-112"></span><span>
-</span><span id="line-113"></span><span id="local-6989586621679078824"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078374"><span id="local-6989586621679078376"><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078824"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078824"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-114"></span><span>  </span><span class="annot"><span class="annottext">Max a
-</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span id="local-6989586621679078371"><span class="annot"><span class="annottext">&lt;&gt; :: Max a -&gt; Max a -&gt; Max a
-</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span id="local-6989586621679078370"><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078370"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078370"><span class="hs-identifier hs-var">y</span></a></span><span>
-</span><span id="line-115"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078369"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078369"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span id="local-6989586621679078368"><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078368"><span class="hs-identifier hs-var">ys</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Max a
+</span><span id="line-111"></span><span id="local-6989586621679078818"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078367"><span id="local-6989586621679078369"><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078818"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078818"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-112"></span><span>  </span><span class="annot"><span class="annottext">Max a
+</span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>  </span><span id="local-6989586621679078364"><span class="annot"><span class="annottext">&lt;&gt; :: Max a -&gt; Max a -&gt; Max a
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span id="local-6989586621679078363"><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078363"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078363"><span class="hs-identifier hs-var">y</span></a></span><span>
+</span><span id="line-113"></span><span>  </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078362"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078362"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span id="local-6989586621679078361"><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078361"><span class="hs-identifier hs-var">ys</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Max a
 forall a. a -&gt; Max a
 </span><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-var">In</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Max a
-</span><a href="#local-6989586621679078368"><span class="hs-identifier hs-var">ys</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-116"></span><span>                    </span><span class="annot"><span class="annottext">Max a
+</span><a href="#local-6989586621679078361"><span class="hs-identifier hs-var">ys</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-114"></span><span>                    </span><span class="annot"><span class="annottext">Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078369"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-117"></span><span>                    </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078367"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078367"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; a
+</span><a href="#local-6989586621679078362"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-115"></span><span>                    </span><span class="annot"><a href="Data.Monus.Max.html#In"><span class="hs-identifier hs-type">In</span></a></span><span> </span><span id="local-6989586621679078360"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078360"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; a
 forall a. Ord a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">max</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078369"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679078367"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span></span><span>
-</span><span id="line-118"></span><span>
-</span><span id="line-119"></span><span id="local-6989586621679078788"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078360"><span id="local-6989586621679078362"><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078788"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078788"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-120"></span><span>  </span><span id="local-6989586621679078358"><span class="annot"><span class="annottext">mempty :: Max a
+</span><a href="#local-6989586621679078362"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679078360"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span></span><span>
+</span><span id="line-116"></span><span>
+</span><span id="line-117"></span><span id="local-6989586621679078782"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679078353"><span id="local-6989586621679078355"><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078782"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078782"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-118"></span><span>  </span><span id="local-6989586621679078351"><span class="annot"><span class="annottext">mempty :: Max a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">mempty</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a
 forall a. Max a
 </span><a href="Data.Monus.Max.html#Bot"><span class="hs-identifier hs-var">Bot</span></a></span><span>
-</span><span id="line-121"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">mempty</span></span><span> </span><span class="hs-pragma">#-}</span></span><span>
-</span><span id="line-122"></span><span>
-</span><span id="line-123"></span><span id="local-6989586621679078784"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078784"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078784"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-124"></span><span>  </span><span id="local-6989586621679078348"><span class="annot"><span class="annottext">|-| :: Max a -&gt; Max a -&gt; Max a
+</span><span id="line-119"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">mempty</span></span><span> </span><span class="hs-pragma">#-}</span></span><span>
+</span><span id="line-120"></span><span>
+</span><span id="line-121"></span><span id="local-6989586621679078778"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679078778"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Data.Monus.Max.html#Max"><span class="hs-identifier hs-type">Max</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679078778"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-122"></span><span>  </span><span id="local-6989586621679078341"><span class="annot"><span class="annottext">|-| :: Max a -&gt; Max a -&gt; Max a
 </span><a href="Data.Monus.html#%7C-%7C"><span class="hs-operator hs-var hs-var hs-var hs-var">(|-|)</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Max a -&gt; Max a -&gt; Max a
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">(&lt;&gt;)</span></span><span>
-</span><span id="line-125"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">|-|</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span></span><span>
-</span><span id="line-126"></span></pre></body></html>
+</span><span id="line-123"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">|-|</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span></span><span>
+</span><span id="line-124"></span></pre></body></html>
