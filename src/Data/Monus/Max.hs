@@ -25,6 +25,7 @@ import Data.Data ( Data, Typeable )
 import GHC.Generics ( Generic )
 import GHC.Read (expectP)
 import Data.Functor (($>))
+import Control.Monad.Fix
 
 -- | A type which adds a lower bound to some ordered type.
 data Max a = Bot | In a
@@ -107,6 +108,13 @@ instance Alternative Max where
   x   <|> _ = x
 
 instance MonadPlus Max
+
+instance MonadFix Max where
+  mfix f = r
+    where
+      r = f (unIn r)
+      unIn (In x) = x
+      unIn Bot = errorWithoutStackTrace "mfix Max: Bot"
 
 instance Ord a => Semigroup (Max a) where
   Bot  <> y = y
