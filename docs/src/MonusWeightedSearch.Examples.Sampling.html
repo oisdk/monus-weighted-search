@@ -18,17 +18,17 @@
 </span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">System.Random</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">randomRIO</span></span><span class="hs-special">)</span><span>
 </span><span id="line-19"></span><span>
 </span><span id="line-20"></span><span class="hs-comment">-- | @'withChance' p@ returns 'True' @p@ percent of the time.</span><span>
-</span><span id="line-21"></span><span id="local-6989586621679084784"><span class="annot"><a href="MonusWeightedSearch.Examples.Sampling.html#withChance"><span class="hs-identifier hs-type">withChance</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Integral</span></span><span> </span><span class="annot"><a href="#local-6989586621679084784"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ratio</span></span><span> </span><span class="annot"><a href="#local-6989586621679084784"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span></span><span>
+</span><span id="line-21"></span><span id="local-6989586621679085078"><span class="annot"><a href="MonusWeightedSearch.Examples.Sampling.html#withChance"><span class="hs-identifier hs-type">withChance</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Integral</span></span><span> </span><span class="annot"><a href="#local-6989586621679085078"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ratio</span></span><span> </span><span class="annot"><a href="#local-6989586621679085078"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span></span><span>
 </span><span id="line-22"></span><span id="withChance"><span class="annot"><span class="annottext">withChance :: forall a. Integral a =&gt; Ratio a -&gt; IO Bool
-</span><a href="MonusWeightedSearch.Examples.Sampling.html#withChance"><span class="hs-identifier hs-var hs-var">withChance</span></a></span></span><span> </span><span id="local-6989586621679084737"><span class="annot"><span class="annottext">Ratio a
-</span><a href="#local-6989586621679084737"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Integer -&gt; Bool) -&gt; IO Integer -&gt; IO Bool
+</span><a href="MonusWeightedSearch.Examples.Sampling.html#withChance"><span class="hs-identifier hs-var hs-var">withChance</span></a></span></span><span> </span><span id="local-6989586621679085031"><span class="annot"><span class="annottext">Ratio a
+</span><a href="#local-6989586621679085031"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Integer -&gt; Bool) -&gt; IO Integer -&gt; IO Bool
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; Integer
 forall a. Integral a =&gt; a -&gt; Integer
 </span><span class="hs-identifier hs-var">toInteger</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Ratio a -&gt; a
 forall a. Ratio a -&gt; a
 </span><span class="hs-identifier hs-var">numerator</span></span><span> </span><span class="annot"><span class="annottext">Ratio a
-</span><a href="#local-6989586621679084737"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
+</span><a href="#local-6989586621679085031"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;=</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Integer, Integer) -&gt; IO Integer
 forall a (m :: * -&gt; *). (Random a, MonadIO m) =&gt; (a, a) -&gt; m a
@@ -38,13 +38,13 @@ forall a. Integral a =&gt; a -&gt; Integer
 </span><span class="hs-identifier hs-var">toInteger</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Ratio a -&gt; a
 forall a. Ratio a -&gt; a
 </span><span class="hs-identifier hs-var">denominator</span></span><span> </span><span class="annot"><span class="annottext">Ratio a
-</span><a href="#local-6989586621679084737"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679085031"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-23"></span><span>
 </span><span id="line-24"></span><span class="hs-comment">-- | Sample a single value from the heap.</span><span>
-</span><span id="line-25"></span><span id="local-6989586621679084771"><span class="annot"><a href="MonusWeightedSearch.Examples.Sampling.html#sample"><span class="hs-identifier hs-type">sample</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Control.Monad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679084771"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="#local-6989586621679084771"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-25"></span><span id="local-6989586621679085065"><span class="annot"><a href="MonusWeightedSearch.Examples.Sampling.html#sample"><span class="hs-identifier hs-type">sample</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Control.Monad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679085065"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="#local-6989586621679085065"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-26"></span><span id="sample"><span class="annot"><span class="annottext">sample :: forall a. Heap Prob a -&gt; IO a
-</span><a href="MonusWeightedSearch.Examples.Sampling.html#sample"><span class="hs-identifier hs-var hs-var">sample</span></a></span></span><span> </span><span id="local-6989586621679084723"><span class="annot"><span class="annottext">Heap Prob a
-</span><a href="#local-6989586621679084723"><span class="hs-identifier hs-var">hp</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((a, Prob) -&gt; (Ratio Natural -&gt; IO a) -&gt; Ratio Natural -&gt; IO a)
+</span><a href="MonusWeightedSearch.Examples.Sampling.html#sample"><span class="hs-identifier hs-var hs-var">sample</span></a></span></span><span> </span><span id="local-6989586621679085017"><span class="annot"><span class="annottext">Heap Prob a
+</span><a href="#local-6989586621679085017"><span class="hs-identifier hs-var">hp</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((a, Prob) -&gt; (Ratio Natural -&gt; IO a) -&gt; Ratio Natural -&gt; IO a)
 -&gt; (Ratio Natural -&gt; IO a) -&gt; [(a, Prob)] -&gt; Ratio Natural -&gt; IO a
 forall (t :: * -&gt; *) a b.
 Foldable t =&gt;
@@ -52,42 +52,42 @@ Foldable t =&gt;
 </span><span class="hs-identifier hs-var">foldr</span></span><span> </span><span class="annot"><span class="annottext">(a, Prob) -&gt; (Ratio Natural -&gt; IO a) -&gt; Ratio Natural -&gt; IO a
 forall {b}.
 (b, Prob) -&gt; (Ratio Natural -&gt; IO b) -&gt; Ratio Natural -&gt; IO b
-</span><a href="#local-6989586621679084721"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; Ratio Natural -&gt; IO a
+</span><a href="#local-6989586621679085015"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; Ratio Natural -&gt; IO a
 forall a. HasCallStack =&gt; [Char] -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">[Char]
 </span><span class="hs-string">&quot;impossible&quot;</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Heap Prob a -&gt; [(a, Prob)]
 forall w a. Monus w =&gt; Heap w a -&gt; [(a, w)]
 </span><a href="Control.Monad.Heap.html#search"><span class="hs-identifier hs-var">search</span></a></span><span> </span><span class="annot"><span class="annottext">Heap Prob a
-</span><a href="#local-6989586621679084723"><span class="hs-identifier hs-var">hp</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Ratio Natural
+</span><a href="#local-6989586621679085017"><span class="hs-identifier hs-var">hp</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Ratio Natural
 </span><span class="hs-number">1</span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-27"></span><span>  </span><span id="local-6989586621679084721"><span class="annot"><span class="annottext">f :: (b, Prob) -&gt; (Ratio Natural -&gt; IO b) -&gt; Ratio Natural -&gt; IO b
-</span><a href="#local-6989586621679084721"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679084707"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679084707"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span> </span><span id="local-6989586621679084705"><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084705"><span class="hs-identifier hs-var">px</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679084704"><span class="annot"><span class="annottext">Ratio Natural -&gt; IO b
-</span><a href="#local-6989586621679084704"><span class="hs-identifier hs-var">k</span></a></span></span><span> </span><span id="local-6989586621679084703"><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084703"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-28"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679084702"><span class="annot"><span class="annottext">f :: Ratio Natural
-</span><a href="#local-6989586621679084702"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084703"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Ratio Natural -&gt; Ratio Natural
+</span><span id="line-27"></span><span>  </span><span id="local-6989586621679085015"><span class="annot"><span class="annottext">f :: (b, Prob) -&gt; (Ratio Natural -&gt; IO b) -&gt; Ratio Natural -&gt; IO b
+</span><a href="#local-6989586621679085015"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679085001"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679085001"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span> </span><span id="local-6989586621679084999"><span class="annot"><span class="annottext">Ratio Natural
+</span><a href="#local-6989586621679084999"><span class="hs-identifier hs-var">px</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679084998"><span class="annot"><span class="annottext">Ratio Natural -&gt; IO b
+</span><a href="#local-6989586621679084998"><span class="hs-identifier hs-var">k</span></a></span></span><span> </span><span id="local-6989586621679084997"><span class="annot"><span class="annottext">Ratio Natural
+</span><a href="#local-6989586621679084997"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-28"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679084996"><span class="annot"><span class="annottext">f :: Ratio Natural
+</span><a href="#local-6989586621679084996"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ratio Natural
+</span><a href="#local-6989586621679084997"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Ratio Natural -&gt; Ratio Natural
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084705"><span class="hs-identifier hs-var">px</span></a></span><span>
-</span><span id="line-29"></span><span>    </span><span id="local-6989586621679084700"><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679084700"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; IO Bool
+</span><a href="#local-6989586621679084999"><span class="hs-identifier hs-var">px</span></a></span><span>
+</span><span id="line-29"></span><span>    </span><span id="local-6989586621679084994"><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679084994"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; IO Bool
 forall a. Integral a =&gt; Ratio a -&gt; IO Bool
 </span><a href="MonusWeightedSearch.Examples.Sampling.html#withChance"><span class="hs-identifier hs-var">withChance</span></a></span><span> </span><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084702"><span class="hs-identifier hs-var">f</span></a></span><span>
+</span><a href="#local-6989586621679084996"><span class="hs-identifier hs-var">f</span></a></span><span>
 </span><span id="line-30"></span><span>    </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679084700"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">b -&gt; IO b
+</span><a href="#local-6989586621679084994"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">b -&gt; IO b
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679084707"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; IO b
-</span><a href="#local-6989586621679084704"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084703"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Ratio Natural -&gt; Ratio Natural
+</span><a href="#local-6989586621679085001"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; IO b
+</span><a href="#local-6989586621679084998"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Ratio Natural
+</span><a href="#local-6989586621679084997"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Ratio Natural -&gt; Ratio Natural
 forall a. Fractional a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">/</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Ratio Natural
 </span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Ratio Natural -&gt; Ratio Natural
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Ratio Natural
-</span><a href="#local-6989586621679084702"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679084996"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-31"></span></pre></body></html>
