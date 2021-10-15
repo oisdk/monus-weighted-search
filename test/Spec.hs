@@ -30,7 +30,7 @@ import Data.Functor.Identity ( Identity )
 import Text.Read ( readEither )
 import Control.Monad.Writer
     ( Endo(Endo, appEndo), MonadWriter(writer) )
-import Data.List (sort)
+import Data.List (sort, unfoldr)
 import Data.Bifoldable ( Bifoldable(bifoldl, bifoldr) )
 import Data.Foldable ( asum )
 import Control.Applicative ( Applicative(liftA2) )
@@ -39,7 +39,7 @@ import Data.Monus.Max ( Max )
 import Numeric.Natural ( Natural )
 import Text.Printf
 
-import Control.Monad.Heap ( fromList, Heap, HeapT )
+import Control.Monad.Heap ( fromList, Heap, HeapT, search, popMinOne)
 import Control.Monad.Heap.List ( ListCons((:-)), ListT )
 
 import MonusWeightedSearch.Internal.AdjList ( toGraph, AdjList )
@@ -105,6 +105,9 @@ prop_bifoldlListCons =
 
 prop_fromList :: [(Word,Dist)] -> Property
 prop_fromList xs = (fromList xs :: Heap Dist Word) === asum (map writer xs)
+
+prop_popMinOne :: Heap Dist Word -> Property
+prop_popMinOne xs = search xs === unfoldr popMinOne xs
 
 data Pair a = a :*: a deriving (Eq, Ord, Show, Functor, Foldable, Traversable)
 

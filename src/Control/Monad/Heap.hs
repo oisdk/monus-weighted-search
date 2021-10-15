@@ -41,9 +41,13 @@ module Control.Monad.Heap
     -- * Constructing Heaps
   , fromList
 
-    -- * Popping the smallest element
+    -- * Popping the smallest elements
   , popMin
   , popMinT
+  
+    -- * Popping the smallest element
+  , popMinOne
+  , popMinOneT
 
     -- * Turning into a cons-list
   , flatten
@@ -350,6 +354,30 @@ popMinT = fmap (second comb . partition) . toListT .# runHeapT
 popMin :: Monus w => Heap w a -> ([a], Maybe (w, Heap w a))
 popMin = runIdentity #. popMinT
 {-# INLINE popMin #-}
+
+-- | The monadic variant of 'popMinOne'.
+popMinOneT :: forall w m a. (Monus w, Monad m) => HeapT w m a -> m (Maybe ((a, w), HeapT w m a))
+popMinOneT = go mempty [] .# runHeapT
+  where
+    go' :: w -> Maybe (w, HeapT w m a) -> m (Maybe ((a, w), HeapT w m a))
+    go' a Nothing = pure Nothing
+    go' a (Just (w, HeapT xs)) = go (a <> w) [] xs
+    
+    go :: w -> [(w, HeapT w m a)] -> ListT m (Node w a (HeapT w m a)) -> m (Maybe ((a, w), HeapT w m a))
+    go w a (ListT xs) = xs >>= \case
+      Nil -> go' w (comb (reverse a))
+      Leaf x :- xs -> pure (Just ((x, w), tell w >> HeapT (foldl (\ys (yw,y) -> ListT (pure ((yw :< y) :- ys))) xs a)))
+      (u :< x) :- xs -> go w ((u,x) : a) xs
+{-# INLINE popMinOneT #-}
+    
+-- | /O(log n)/. 'popMinOne' returns the smallest weighted element in the
+-- heap, along with its weight, along with the rest of the heap.
+--
+-- This function is a more traditional version of 'popMin', but it has much
+-- worse performance in general.
+popMinOne :: Monus w => Heap w a -> Maybe ((a, w), Heap w a)
+popMinOne = runIdentity #. popMinOneT
+{-# INLINE popMinOne #-}
 
 -- | The monadic version of 'flatten'.
 flattenT :: (Monad m, Monoid w) => HeapT w m a -> ListT m (a, w)
