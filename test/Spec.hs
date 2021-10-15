@@ -10,35 +10,50 @@
 
 module Main where
 
-import Test.QuickCheck hiding (tabulate)
-import Test.Tasty.QuickCheck hiding (tabulate)
-import Test.Tasty
+import Test.QuickCheck
+    ( allProperties,
+      forAll,
+      mapSize,
+      (.&&.),
+      counterexample,
+      (===),
+      arbitrarySizedNatural,
+      Arbitrary2(liftShrink2),
+      Arbitrary1(..),
+      Property,
+      Arbitrary(..),
+      Gen )
+import Test.Tasty.QuickCheck ( testProperties )
+import Test.Tasty ( defaultMain )
 
-import Data.Functor.Identity
-import Text.Read
+import Data.Functor.Identity ( Identity )
+import Text.Read ( readEither )
 import Control.Monad.Writer
+    ( Endo(Endo, appEndo), MonadWriter(writer) )
 import Data.List (sort)
-import Data.Bifoldable
-import Data.Foldable
-import Control.Applicative
-import Data.Word
-import Data.Monus.Max
-import Numeric.Natural
+import Data.Bifoldable ( Bifoldable(bifoldl, bifoldr) )
+import Data.Foldable ( asum )
+import Control.Applicative ( Applicative(liftA2) )
+import Data.Word ( Word8 )
+import Data.Monus.Max ( Max )
+import Numeric.Natural ( Natural )
+import Text.Printf
 
-import Control.Monad.Heap
-import Control.Monad.Heap.List
+import Control.Monad.Heap ( fromList, Heap, HeapT )
+import Control.Monad.Heap.List ( ListCons((:-)), ListT )
 
-import MonusWeightedSearch.Internal.AdjList
+import MonusWeightedSearch.Internal.AdjList ( toGraph, AdjList )
 
 import qualified MonusWeightedSearch.Internal.Heap as H
 import qualified MonusWeightedSearch.Examples.Dijkstra as M
 import qualified MonusWeightedSearch.Examples.Sort as M
 
-import Data.Monus
-import Data.Monus.Prob
-import Data.Monus.Dist
+import Data.Monus ( Monus(..) )
+import Data.Monus.Prob ( Prob )
+import Data.Monus.Dist ( Dist )
 
 import qualified GHC.Exts as IsList
+import Data.Function (on)
 
 instance Arbitrary Natural where
   arbitrary = arbitrarySizedNatural
@@ -50,17 +65,30 @@ prop_monadDijkstra gm = sort (H.dijkstra (toGraph gm) 1) === sort (M.dijkstra (t
 prop_monadSort :: [Word] -> Property
 prop_monadSort xs = sort xs === M.monusSort xs
 
-ordMonusLaw :: (Monus a, Show a) => a -> a -> Property
-ordMonusLaw x y =
-  counterexample
-    (show x ++ " !<= " ++ show x ++ " <> " ++ show y)
-    (x <= x <> y) .&&.
-  counterexample
-    (show y ++ " !<= " ++ show y ++ " <> " ++ show x)
-    (y <= y <> x)
+monusPositiveLaw :: (Monus a, Show a) => a -> a -> Property
+monusPositiveLaw x y =
+  counterexample ((disp `on` show) x y) (x <= x <> y) .&&.
+  counterexample ((disp `on` show) y x) (y <= y <> x)
+    where disp lhs rhs = printf "%s !<= %s <> %s" lhs lhs rhs
+     
+monusInvLaw :: (Show a, Monus a) => a -> a -> Property
+monusInvLaw x y
+  | x <= y    = counterexample ((disp `on` show) x y) (x <> (y |-| x) === y)
+  | otherwise = counterexample ((disp `on` show) y x) (y <> (x |-| y) === x)
+ where
+   disp lhs rhs = printf "%s <> (%s |-| %s) /= %s" lhs rhs lhs rhs
 
-prop_probOrdMonoid :: Prob -> Prob -> Property
-prop_probOrdMonoid = ordMonusLaw
+monusLaws :: (Show a, Monus a) => a -> a -> Property
+monusLaws x y = monusPositiveLaw x y .&&. monusInvLaw x y
+
+prop_probMonoid :: Prob -> Prob -> Property
+prop_probMonoid = monusLaws
+
+prop_probMonus :: Prob -> Prob -> Property
+prop_probMonus = monusLaws
+
+prop_maxMonus :: Max Word8 -> Max Word8 -> Property
+prop_maxMonus = monusLaws
 
 prop_readListT :: ListT Identity Word -> Property
 prop_readListT xs = readEither (show xs) === Right xs
@@ -70,26 +98,6 @@ prop_readHeapT xs = readEither (show xs) === Right xs
 
 prop_readMax :: Max Word -> Property
 prop_readMax xs = readEither (show xs) === Right xs
-
-monusLaw :: (Show a, Monus a) => a -> a -> Property
-monusLaw x y
-  | x <= y    =
-    counterexample
-      (show x ++ " <> (" ++ show y ++ " |-| " ++ show x ++ ") /= " ++ show y)
-      (x <> (y |-| x) === y)
-  | otherwise =
-    counterexample
-      (show y ++ " <> (" ++ show x ++ " |-| " ++ show y ++ ") /= " ++ show x)
-      (y <> (x |-| y) === x)
-
-prop_probMonus :: Prob -> Prob -> Property
-prop_probMonus = monusLaw
-
-prop_maxMonus :: Max Word8 -> Max Word8 -> Property
-prop_maxMonus = monusLaw
-
-prop_maxOrdMonus :: Max Word8 -> Max Word8 -> Property
-prop_maxOrdMonus = ordMonusLaw
 
 prop_bifoldlListCons :: Property
 prop_bifoldlListCons =
