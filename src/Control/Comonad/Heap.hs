@@ -8,7 +8,6 @@ import Data.Bitraversable
 import Data.Monus.Dist
 import Data.Monus.Max
 import qualified Data.Set as Set
-
 import Control.Comonad.Cofree.Class
 import Control.Comonad
 import Data.Monus
@@ -16,15 +15,23 @@ import Data.List.NonEmpty (NonEmpty(..), nonEmpty, unfoldr, toList)
 import MonusWeightedSearch.Internal.TestHelpers
 import Test.QuickCheck
 import Control.Applicative
+import Data.Typeable (Typeable)
+import Data.Data (Data)
+import GHC.Generics (Generic, Generic1)
+import Control.DeepSeq (NFData(..))
 
 data Heap w a
   = Root !w a [Heap w a]
-  deriving (Eq, Ord, Show, Read, Functor, Foldable, Traversable)
+  deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
+
+instance (NFData w, NFData a) => NFData (Heap w a) where
+  rnf (Root w x xs) = rnf w `seq` rnf x `seq` rnf xs
 
 instance Bifunctor Heap where
   bimap f g (Root w x xs) = Root (f w) (g x) (map (bimap f g) xs)
 
 instance Bifoldable Heap where
+  bifold (Root w x xs) = w <> x <> foldMap bifold xs
   bifoldMap f g (Root w x xs) = f w <> g x <> foldMap (bifoldMap f g) xs
   bifoldr f g b (Root w x xs) = f w (g x (foldr (flip (bifoldr f g)) b xs))
   bifoldl f g b (Root w x xs) = foldl (bifoldl f g) (g (f b w) x) xs
@@ -66,6 +73,13 @@ popMin (Root w x xs) = ((w, x), fmap mergeHeaps (nonEmpty xs))
 
 singleton :: w -> a -> Heap w a
 singleton w x = Root w x []
+
+-- instance Monus w => Applicative (Heap w) where
+--   pure x = Root mempty x []
+--   (<*>) = ap
+
+-- instance Monus w => Monad (Heap w) where
+--   Root w x xs >>= k = w <>< mergeHeaps (k x :| map (>>= k) xs)
 
 instance Comonad (Heap w) where
   extract (Root _ x _) = x

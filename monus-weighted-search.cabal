@@ -44,6 +44,7 @@ library
                      , Control.Monad.Heap.List
                      , Control.Monad.Heap
                      , Control.Comonad.Heap
+                     , Control.Comonad.Heap.Pointed
 
                      , MonusWeightedSearch.Examples.Dijkstra
                      , MonusWeightedSearch.Examples.Sampling
