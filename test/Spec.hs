@@ -44,7 +44,7 @@ import Control.Monad.Heap.List ( ListCons((:-)), ListT )
 
 import MonusWeightedSearch.Internal.AdjList ( toGraph, AdjList )
 
-import qualified MonusWeightedSearch.Internal.Heap as H
+import qualified Control.Comonad.Heap.Pointed as H
 import qualified MonusWeightedSearch.Examples.Dijkstra as M
 import qualified MonusWeightedSearch.Examples.Sort as M
 

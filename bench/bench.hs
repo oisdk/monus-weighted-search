@@ -10,7 +10,7 @@ import Data.Monus.Dist
 
 import qualified MonusWeightedSearch.Examples.Dijkstra as M
 import qualified MonusWeightedSearch.Examples.Sort as M
-import qualified MonusWeightedSearch.Internal.Heap as H
+import qualified Control.Comonad.Heap.Pointed as H
 
 onG :: (Graph Word -> Graph Word) -> AdjList -> AdjList
 onG f al = fromGraph (alSize al) (f (toGraph al))

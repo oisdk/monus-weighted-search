@@ -1,8 +1,20 @@
 -- | 
 
-module Control.Comonad.Heap.Pointed where
+module Control.Comonad.Heap.Pointed
+  (Heap(..)
+  ,Root
+  ,pattern Root
+  ,popMin
+  ,singleton
+  ,(<+>)
+  ,dijkstra
+  ,monusSort
+  ,fromList)
+  where
 
 import qualified Control.Comonad.Heap as NonEmpty
+import Control.Comonad.Heap (pattern Root)
+
 import qualified Data.Set as Set
 
 import Data.Data ( Data, Typeable )
@@ -23,20 +35,18 @@ import Data.Monus
 import Data.Monus.Dist
 import Data.Monus.Max
 
+type Root = NonEmpty.Heap
+
 data Heap w a
   = Leaf
-  | Node {-# UNPACK #-} !(NonEmpty.Heap w a)
+  | Node {-# UNPACK #-} !(Root w a)
   deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
 
-heap :: b -> (NonEmpty.Heap w a -> b) -> Heap w a -> b
+heap :: b -> (Root w a -> b) -> Heap w a -> b
 heap b k = \case
   Leaf -> b
   Node xs -> k xs
 {-# INLINE heap #-}
-
-node :: Heap w a -> Maybe (NonEmpty.Heap w a)
-node = heap Nothing Just
-{-# INLINE node #-}
 
 instance (NFData w, NFData a) => NFData (Heap w a) where
   rnf = heap () rnf
@@ -54,7 +64,7 @@ instance Bifoldable Heap where
 
 instance Bitraversable Heap where
   bitraverse f g Leaf = pure Leaf
-  bitraverse f g (Node (NonEmpty.Root w x xs)) = liftA3 (\w' x' xs' -> Node (NonEmpty.Root w' x' xs')) (f w) (g x) (traverse (bitraverse f g) xs)
+  bitraverse f g (Node (Root w x xs)) = liftA3 (\w' x' xs' -> Node (Root w' x' xs')) (f w) (g x) (traverse (bitraverse f g) xs)
 
 instance Arbitrary2 Heap where
   liftArbitrary2 ls rs = sized (\n -> frequency [(1, pure Leaf), (n, fmap Node (liftArbitrary2 ls rs))])
@@ -79,14 +89,15 @@ popMin = heap Nothing (Just . fmap (maybe Leaf Node) . NonEmpty.popMin)
 
 (<><) :: Semigroup w => w -> Heap w a -> Heap w a
 w <>< Leaf = Leaf
-w <>< Node (NonEmpty.Root w' x xs) = Node (NonEmpty.Root (w <> w') x xs)
+w <>< Node (Root w' x xs) = Node (Root (w <> w') x xs)
 
 singleton :: w -> a -> Heap w a
-singleton w x = Node (NonEmpty.Root w x [])
+singleton w x = Node (Root w x [])
 
 fromList :: Monus w => [(w, a)] -> Heap w a
 fromList = maybe Leaf (Node . NonEmpty.mergeHeaps . fmap (uncurry NonEmpty.singleton)) . nonEmpty
 
+-- | An implementation of Dijkstra's algorithm on 'Graph's.
 dijkstra :: Ord a => Graph a -> Graph a
 dijkstra g s = go Set.empty (singleton mempty s)
   where
@@ -94,9 +105,9 @@ dijkstra g s = go Set.empty (singleton mempty s)
       Nothing -> []
       Just ((w,x),xs)
         | Set.member x s -> go s xs
-        | otherwise -> (x,w) : go (Set.insert x s) (xs <+> fromList (map f (g x)))
+        | otherwise -> (x,w) : go (Set.insert x s) (xs <+> (w <>< fromList (map f (g x))))
           where
-            f (y, w') = (w <> w', y)
+            f (y, w') = (w', y)
 
 -- | Heapsort.
 monusSort :: Ord a => [a] -> [a]

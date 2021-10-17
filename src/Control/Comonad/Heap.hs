@@ -69,7 +69,7 @@ mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
 (<><) w (Root ws x xs) = Root (w <> ws) x xs
 
 popMin :: Monus w => Heap w a -> ((w, a), Maybe (Heap w a))
-popMin (Root w x xs) = ((w, x), fmap mergeHeaps (nonEmpty xs))
+popMin (Root w x xs) = ((w, x), fmap ((w <><) . mergeHeaps) (nonEmpty xs))
 
 singleton :: w -> a -> Heap w a
 singleton w x = Root w x []

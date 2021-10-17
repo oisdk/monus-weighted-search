@@ -55,7 +55,6 @@ library
 
                      , MonusWeightedSearch.Internal.CoerceOperators
                      , MonusWeightedSearch.Internal.TestHelpers
-                     , MonusWeightedSearch.Internal.Heap
                      , MonusWeightedSearch.Internal.AdjList
   build-depends:       base >=4.13 && <5
                      , containers >=0.1.0.0
