@@ -94,7 +94,7 @@ import Control.DeepSeq ( NFData(..) )
 import Data.Foldable (Foldable(foldl', foldr'))
 import Text.Read (readPrec, parens, prec, Lexeme(Ident), lexP, step)
 import Data.Monoid (Alt(Alt))
-
+import Control.Monad.Free.Class
 import GHC.Exts (IsList)
 import qualified GHC.Exts as IsList
 
@@ -181,6 +181,10 @@ fromList = HeapT #. foldr f (ListT (pure Nil))
   where
     f (x,w) xs = ListT (pure ((w :< HeapT (ListT (pure (Leaf x :- ListT (pure Nil))))) :- xs))
 {-# INLINE fromList #-}
+
+instance Monad m => MonadFree ((,) w) (HeapT w m) where
+  wrap (w, xs) = HeapT (pure (w :< xs))
+  {-# INLINE wrap #-}
 
 instance Foldable m => Foldable (HeapT w m) where
   foldr f = go

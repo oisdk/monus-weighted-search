@@ -43,6 +43,7 @@ library
                      , Data.Monus.Max
                      , Control.Monad.Heap.List
                      , Control.Monad.Heap
+                     , Control.Comonad.Heap
 
                      , MonusWeightedSearch.Examples.Dijkstra
                      , MonusWeightedSearch.Examples.Sampling
@@ -63,6 +64,8 @@ library
                      , mtl >= 2.2
                      , random >= 1.0
                      , array >= 0.5
+                     , comonad >= 5
+                     , free >= 5
   default-language:    Haskell2010
   default-extensions:  DeriveFunctor
                      , DeriveFoldable

@@ -41,10 +41,6 @@ instance Monus a => Semigroup (Root a b) where
   sconcat (x1 :| x2 : x3 : xs) = (x1 <> x2) <> sconcat (x3 :| xs)
   {-# INLINABLE sconcat #-}
 
-mergeHeaps :: Monus a => [Root a b] -> Heap a b
-mergeHeaps = fmap sconcat . nonEmpty
-{-# INLINE mergeHeaps #-}
-
 (<><) :: Semigroup a => a -> Root a b -> Root a b
 x <>< Node y yv ys = Node (x <> y) yv ys
 {-# INLINE (<><) #-}
@@ -71,7 +67,7 @@ dijkstra g s = go Set.empty (singleton mempty s)
       Nothing -> []
       Just ((w,x),xs)
         | Set.member x s -> go s xs
-        | otherwise -> (x,w) : go (Set.insert x s) (xs <> mergeHeaps (map f (g x)))
+        | otherwise -> (x,w) : go (Set.insert x s) (xs <> fmap sconcat (nonEmpty (map f (g x))))
           where
             f (y, w') = Node (w <> w') y []
 {-# INLINE dijkstra #-}
