@@ -1,20 +1,30 @@
 -- | 
 
-module Control.Comonad.Heap where
+module Control.Comonad.Heap
+  (Heap(..)
+  ,popMin
+  ,(<+>)
+  ,(<><)
+  ,mergeHeaps
+  ,singleton)
+  where
 
-import Data.Bifunctor
-import Data.Bifoldable
-import Data.Bitraversable
-import Data.Monus.Dist
-import Data.Monus.Max
-import qualified Data.Set as Set
-import Control.Comonad.Cofree.Class
-import Control.Comonad
-import Data.Monus
-import Data.List.NonEmpty (NonEmpty(..), nonEmpty, unfoldr, toList)
-import MonusWeightedSearch.Internal.TestHelpers
+import Data.Bifunctor ( Bifunctor(bimap) )
+import Data.Bifoldable ( Bifoldable(..) )
+import Data.Bitraversable ( Bitraversable(..) )
+import Control.Comonad.Cofree.Class ( ComonadCofree(..) )
+import Control.Comonad ( Comonad(..) )
+import Data.Monus ( Monus(..) )
+import Data.List.NonEmpty (NonEmpty(..), nonEmpty)
+import MonusWeightedSearch.Internal.TestHelpers ( sumsTo )
 import Test.QuickCheck
-import Control.Applicative
+    ( shrink2,
+      arbitrary2,
+      sized,
+      Arbitrary(..),
+      Arbitrary1(..),
+      Arbitrary2(..) )
+import Control.Applicative ( liftA3 )
 import Data.Typeable (Typeable)
 import Data.Data (Data)
 import GHC.Generics (Generic, Generic1)
@@ -26,9 +36,11 @@ data Heap w a
 
 instance (NFData w, NFData a) => NFData (Heap w a) where
   rnf (Root w x xs) = rnf w `seq` rnf x `seq` rnf xs
+  {-# INLINE rnf #-}
 
 instance Bifunctor Heap where
   bimap f g (Root w x xs) = Root (f w) (g x) (map (bimap f g) xs)
+  {-# INLINE bimap #-}
 
 instance Bifoldable Heap where
   bifold (Root w x xs) = w <> x <> foldMap bifold xs
@@ -59,17 +71,21 @@ instance (Arbitrary w, Arbitrary a) => Arbitrary (Heap w a) where
 Root xw x xs <+> Root yw y ys
   | xw <= yw  = Root xw x (Root (yw |-| xw) y ys : xs)
   | otherwise = Root yw y (Root (xw |-| yw) x xs : ys)
+{-# INLINE (<+>) #-}
 
 mergeHeaps :: Monus w => NonEmpty (Heap w a) -> Heap w a
 mergeHeaps (x  :| [])           = x
 mergeHeaps (x1 :| x2 : [])      = x1 <+> x2
 mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
+{-# INLINABLE mergeHeaps #-}
 
 (<><) :: Semigroup w => w -> Heap w a -> Heap w a
 (<><) w (Root ws x xs) = Root (w <> ws) x xs
+{-# INLINE (<><) #-}
 
 popMin :: Monus w => Heap w a -> ((w, a), Maybe (Heap w a))
 popMin (Root w x xs) = ((w, x), fmap ((w <><) . mergeHeaps) (nonEmpty xs))
+{-# INLINE popMin #-}
 
 singleton :: w -> a -> Heap w a
 singleton w x = Root w x []
@@ -92,22 +108,3 @@ instance Comonad (Heap w) where
 instance ComonadCofree [] (Heap w) where
   unwrap (Root w x xs) = xs
   {-# INLINE unwrap #-}
-
-dijkstra :: Ord a => Graph a -> Graph a
-dijkstra g s = go Set.empty (Just (singleton mempty s))
-  where
-    go s Nothing = []
-    go s (Just hp) = case popMin hp of
-      ((w,x),xs)
-        | Set.member x s -> go s xs
-        | otherwise -> (x,w) : go (Set.insert x s) (fmap mergeHeaps (nonEmpty (foldr (:) (map f (g x)) xs)))
-          where
-            f (y, w') = Root (w <> w') y []
-
--- | Heapsort.
-monusSort :: Ord a => [a] -> [a]
-monusSort =
-  maybe
-    []
-    (toList . fmap snd . unfoldr popMin . mergeHeaps . fmap (\x -> singleton (In x) x)) . nonEmpty
-{-# INLINE monusSort #-}
