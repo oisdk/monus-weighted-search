@@ -20,56 +20,56 @@
 </span><span id="line-20"></span><span class="hs-comment">-- prop&gt; n &gt;= 0 ==&gt; forAll (sumsTo n) (\xs -&gt; sum xs === n)</span><span>
 </span><span id="line-21"></span><span class="annot"><a href="MonusWeightedSearch.Internal.TestHelpers.html#sumsTo"><span class="hs-identifier hs-type">sumsTo</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">]</span><span>
 </span><span id="line-22"></span><span id="sumsTo"><span class="annot"><span class="annottext">sumsTo :: Int -&gt; Gen [Int]
-</span><a href="MonusWeightedSearch.Internal.TestHelpers.html#sumsTo"><span class="hs-identifier hs-var hs-var">sumsTo</span></a></span></span><span> </span><span id="local-6989586621679090725"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679090725"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int -&gt; Gen [Int]
+</span><a href="MonusWeightedSearch.Internal.TestHelpers.html#sumsTo"><span class="hs-identifier hs-var hs-var">sumsTo</span></a></span></span><span> </span><span id="local-6989586621679090514"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090514"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int -&gt; Gen [Int]
 forall {t}. (Ord t, Num t, Random t) =&gt; [t] -&gt; t -&gt; Gen [t]
-</span><a href="#local-6989586621679090724"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679090725"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Gen [Int] -&gt; ([Int] -&gt; Gen [Int]) -&gt; Gen [Int]
+</span><a href="#local-6989586621679090513"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090514"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Gen [Int] -&gt; ([Int] -&gt; Gen [Int]) -&gt; Gen [Int]
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Gen [Int]
 forall a. [a] -&gt; Gen [a]
 </span><span class="hs-identifier hs-var">shuffle</span></span><span>
 </span><span id="line-23"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-24"></span><span>    </span><span id="local-6989586621679090724"><span class="annot"><span class="annottext">go :: [t] -&gt; t -&gt; Gen [t]
-</span><a href="#local-6989586621679090724"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span id="local-6989586621679090711"><span class="annot"><span class="annottext">[t]
-</span><a href="#local-6989586621679090711"><span class="hs-identifier hs-var">ks</span></a></span></span><span> </span><span id="local-6989586621679090710"><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090710"><span class="hs-identifier hs-var">n</span></a></span></span><span>
+</span><span id="line-24"></span><span>    </span><span id="local-6989586621679090513"><span class="annot"><span class="annottext">go :: [t] -&gt; t -&gt; Gen [t]
+</span><a href="#local-6989586621679090513"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span id="local-6989586621679090500"><span class="annot"><span class="annottext">[t]
+</span><a href="#local-6989586621679090500"><span class="hs-identifier hs-var">ks</span></a></span></span><span> </span><span id="local-6989586621679090499"><span class="annot"><span class="annottext">t
+</span><a href="#local-6989586621679090499"><span class="hs-identifier hs-var">n</span></a></span></span><span>
 </span><span id="line-25"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090710"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">t -&gt; t -&gt; Bool
+</span><a href="#local-6989586621679090499"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">t -&gt; t -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><span class="annottext">t
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[t] -&gt; Gen [t]
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">[t]
-</span><a href="#local-6989586621679090711"><span class="hs-identifier hs-var">ks</span></a></span><span>
+</span><a href="#local-6989586621679090500"><span class="hs-identifier hs-var">ks</span></a></span><span>
 </span><span id="line-26"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-27"></span><span>          </span><span id="local-6989586621679090708"><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090708"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(t, t) -&gt; Gen t
+</span><span id="line-27"></span><span>          </span><span id="local-6989586621679090497"><span class="annot"><span class="annottext">t
+</span><a href="#local-6989586621679090497"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(t, t) -&gt; Gen t
 forall a. Random a =&gt; (a, a) -&gt; Gen a
 </span><span class="hs-identifier hs-var">choose</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">t
 </span><span class="hs-number">1</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090710"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679090499"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-28"></span><span>          </span><span class="annot"><span class="annottext">[t] -&gt; t -&gt; Gen [t]
-</span><a href="#local-6989586621679090724"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090708"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="annot"><span class="annottext">t -&gt; [t] -&gt; [t]
+</span><a href="#local-6989586621679090513"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">t
+</span><a href="#local-6989586621679090497"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="annot"><span class="annottext">t -&gt; [t] -&gt; [t]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[t]
-</span><a href="#local-6989586621679090711"><span class="hs-identifier hs-var">ks</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090710"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">t -&gt; t -&gt; t
+</span><a href="#local-6989586621679090500"><span class="hs-identifier hs-var">ks</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">t
+</span><a href="#local-6989586621679090499"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">t -&gt; t -&gt; t
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span class="annot"><span class="annottext">t
-</span><a href="#local-6989586621679090708"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679090497"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-29"></span><span>
 </span><span id="line-30"></span><span class="hs-comment">-- | @'percentageChance' n@ is 'True' @n@% of the time, and 'False' the rest</span><span>
 </span><span id="line-31"></span><span class="hs-comment">-- of the time.</span><span>
 </span><span id="line-32"></span><span class="annot"><a href="MonusWeightedSearch.Internal.TestHelpers.html#percentageChance"><span class="hs-identifier hs-type">percentageChance</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
 </span><span id="line-33"></span><span id="percentageChance"><span class="annot"><span class="annottext">percentageChance :: Word -&gt; Gen Bool
-</span><a href="MonusWeightedSearch.Internal.TestHelpers.html#percentageChance"><span class="hs-identifier hs-var hs-var">percentageChance</span></a></span></span><span> </span><span id="local-6989586621679090705"><span class="annot"><span class="annottext">Word
-</span><a href="#local-6989586621679090705"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Word -&gt; Bool) -&gt; Gen Word -&gt; Gen Bool
+</span><a href="MonusWeightedSearch.Internal.TestHelpers.html#percentageChance"><span class="hs-identifier hs-var hs-var">percentageChance</span></a></span></span><span> </span><span id="local-6989586621679090494"><span class="annot"><span class="annottext">Word
+</span><a href="#local-6989586621679090494"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Word -&gt; Bool) -&gt; Gen Word -&gt; Gen Bool
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word
-</span><a href="#local-6989586621679090705"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Word -&gt; Word -&gt; Bool
+</span><a href="#local-6989586621679090494"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Word -&gt; Word -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Word, Word) -&gt; Gen Word
 forall a. Random a =&gt; (a, a) -&gt; Gen a
@@ -81,11 +81,11 @@ forall a. Random a =&gt; (a, a) -&gt; Gen a
 </span><span id="line-36"></span><span class="hs-comment">-- of the time.</span><span>
 </span><span id="line-37"></span><span class="annot"><a href="MonusWeightedSearch.Internal.TestHelpers.html#percentageChanceIO"><span class="hs-identifier hs-type">percentageChanceIO</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
 </span><span id="line-38"></span><span id="percentageChanceIO"><span class="annot"><span class="annottext">percentageChanceIO :: Word -&gt; IO Bool
-</span><a href="MonusWeightedSearch.Internal.TestHelpers.html#percentageChanceIO"><span class="hs-identifier hs-var hs-var">percentageChanceIO</span></a></span></span><span> </span><span id="local-6989586621679090702"><span class="annot"><span class="annottext">Word
-</span><a href="#local-6989586621679090702"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Word -&gt; Bool) -&gt; IO Word -&gt; IO Bool
+</span><a href="MonusWeightedSearch.Internal.TestHelpers.html#percentageChanceIO"><span class="hs-identifier hs-var hs-var">percentageChanceIO</span></a></span></span><span> </span><span id="local-6989586621679090491"><span class="annot"><span class="annottext">Word
+</span><a href="#local-6989586621679090491"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Word -&gt; Bool) -&gt; IO Word -&gt; IO Bool
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word
-</span><a href="#local-6989586621679090702"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Word -&gt; Word -&gt; Bool
+</span><a href="#local-6989586621679090491"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Word -&gt; Word -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Word, Word) -&gt; IO Word
 forall a (m :: * -&gt; *). (Random a, MonadIO m) =&gt; (a, a) -&gt; m a

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679088833"><span id="local-6989586621679088834"></span></span><span class="hs-comment">--------------------------------------------------------------------------------</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679088622"><span id="local-6989586621679088623"></span></span><span class="hs-comment">--------------------------------------------------------------------------------</span><span>
 </span><span id="line-2"></span><span class="hs-comment">-- |</span><span>
 </span><span id="line-3"></span><span class="hs-comment">-- Module      : Data.Monus.Prob</span><span>
 </span><span id="line-4"></span><span class="hs-comment">-- Copyright   : (c) Donnacha Ois&#237;n Kidney 2021</span><span>
@@ -31,16 +31,16 @@
 </span><span id="line-31"></span><span class="hs-comment">--</span><span>
 </span><span id="line-32"></span><span class="hs-comment">-- &gt;&gt;&gt; 0.8 &lt; (0.4 :: Prob)</span><span>
 </span><span id="line-33"></span><span class="hs-comment">-- True</span><span>
-</span><span id="line-34"></span><span id="local-6989586621679088825"><span id="local-6989586621679088826"></span></span><span class="hs-keyword">newtype</span><span> </span><span id="Prob"><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-var">Prob</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Prob"><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-var">Prob</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="runProb"><span class="annot"><span class="annottext">Prob -&gt; Ratio Natural
+</span><span id="line-34"></span><span id="local-6989586621679088614"><span id="local-6989586621679088615"></span></span><span class="hs-keyword">newtype</span><span> </span><span id="Prob"><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-var">Prob</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Prob"><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-var">Prob</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="runProb"><span class="annot"><span class="annottext">Prob -&gt; Ratio Natural
 </span><a href="Data.Monus.Prob.html#runProb"><span class="hs-identifier hs-var hs-var">runProb</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ratio</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span> </span><span class="hs-special">}</span><span>
-</span><span id="line-35"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088816"><span id="local-6989586621679088821"><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Bool
+</span><span id="line-35"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088605"><span id="local-6989586621679088610"><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Bool
 (Prob -&gt; Prob -&gt; Bool) -&gt; (Prob -&gt; Prob -&gt; Bool) -&gt; Eq Prob
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 /= :: Prob -&gt; Prob -&gt; Bool
 $c/= :: Prob -&gt; Prob -&gt; Bool
 == :: Prob -&gt; Prob -&gt; Bool
 $c== :: Prob -&gt; Prob -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088777"><span id="local-6989586621679088779"><span id="local-6989586621679088781"><span id="local-6989586621679088783"><span id="local-6989586621679088785"><span id="local-6989586621679088787"><span id="local-6989586621679088789"><span id="local-6989586621679088791"><span id="local-6989586621679088793"><span id="local-6989586621679088795"><span id="local-6989586621679088797"><span id="local-6989586621679088799"><span id="local-6989586621679088804"><span id="local-6989586621679088810"><span class="annot"><span class="annottext">Typeable Prob
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088566"><span id="local-6989586621679088568"><span id="local-6989586621679088570"><span id="local-6989586621679088572"><span id="local-6989586621679088574"><span id="local-6989586621679088576"><span id="local-6989586621679088578"><span id="local-6989586621679088580"><span id="local-6989586621679088582"><span id="local-6989586621679088584"><span id="local-6989586621679088586"><span id="local-6989586621679088588"><span id="local-6989586621679088593"><span id="local-6989586621679088599"><span class="annot"><span class="annottext">Typeable Prob
 Typeable Prob
 -&gt; (forall (c :: * -&gt; *).
     (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
@@ -202,7 +202,7 @@ forall a.
 $cto :: forall x. Rep Prob x -&gt; Prob
 $cfrom :: forall x. Prob -&gt; Rep Prob x
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Typeable</span></span><span class="hs-special">)</span><span>
-</span><span id="line-36"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088737"><span id="local-6989586621679088742"><span id="local-6989586621679088747"><span id="local-6989586621679088752"><span id="local-6989586621679088757"><span id="local-6989586621679088762"><span id="local-6989586621679088768"><span class="annot"><span class="annottext">Integer -&gt; Prob
+</span><span id="line-36"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088526"><span id="local-6989586621679088531"><span id="local-6989586621679088536"><span id="local-6989586621679088541"><span id="local-6989586621679088546"><span id="local-6989586621679088551"><span id="local-6989586621679088557"><span class="annot"><span class="annottext">Integer -&gt; Prob
 Prob -&gt; Prob
 Prob -&gt; Prob -&gt; Prob
 (Prob -&gt; Prob -&gt; Prob)
@@ -236,7 +236,7 @@ $c* :: Prob -&gt; Prob -&gt; Prob
 $c- :: Prob -&gt; Prob -&gt; Prob
 + :: Prob -&gt; Prob -&gt; Prob
 $c+ :: Prob -&gt; Prob -&gt; Prob
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Num</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088717"><span id="local-6989586621679088722"><span id="local-6989586621679088728"><span class="annot"><span class="annottext">Num Prob
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Num</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088506"><span id="local-6989586621679088511"><span id="local-6989586621679088517"><span class="annot"><span class="annottext">Num Prob
 Num Prob
 -&gt; (Prob -&gt; Prob -&gt; Prob)
 -&gt; (Prob -&gt; Prob)
@@ -254,7 +254,7 @@ recip :: Prob -&gt; Prob
 $crecip :: Prob -&gt; Prob
 / :: Prob -&gt; Prob -&gt; Prob
 $c/ :: Prob -&gt; Prob -&gt; Prob
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Fractional</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088699"><span id="local-6989586621679088704"><span id="local-6989586621679088710"><span class="annot"><span class="annottext">Int -&gt; Prob -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Fractional</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088488"><span id="local-6989586621679088493"><span id="local-6989586621679088499"><span class="annot"><span class="annottext">Int -&gt; Prob -&gt; ShowS
 [Prob] -&gt; ShowS
 Prob -&gt; String
 (Int -&gt; Prob -&gt; ShowS)
@@ -267,7 +267,7 @@ show :: Prob -&gt; String
 $cshow :: Prob -&gt; String
 showsPrec :: Int -&gt; Prob -&gt; ShowS
 $cshowsPrec :: Int -&gt; Prob -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088672"><span id="local-6989586621679088678"><span id="local-6989586621679088684"><span id="local-6989586621679088691"><span class="annot"><span class="annottext">ReadPrec [Prob]
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088461"><span id="local-6989586621679088467"><span id="local-6989586621679088473"><span id="local-6989586621679088480"><span class="annot"><span class="annottext">ReadPrec [Prob]
 ReadPrec Prob
 Int -&gt; ReadS Prob
 ReadS [Prob]
@@ -284,14 +284,14 @@ readList :: ReadS [Prob]
 $creadList :: ReadS [Prob]
 readsPrec :: Int -&gt; ReadS Prob
 $creadsPrec :: Int -&gt; ReadS Prob
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Read</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088658"><span class="annot"><span class="annottext">Num Prob
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Read</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088447"><span class="annot"><span class="annottext">Num Prob
 Ord Prob
 Num Prob -&gt; Ord Prob -&gt; (Prob -&gt; Rational) -&gt; Real Prob
 Prob -&gt; Rational
 forall a. Num a -&gt; Ord a -&gt; (a -&gt; Rational) -&gt; Real a
 toRational :: Prob -&gt; Rational
 $ctoRational :: Prob -&gt; Rational
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Real</span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088607"><span id="local-6989586621679088616"><span id="local-6989586621679088625"><span id="local-6989586621679088634"><span id="local-6989586621679088644"><span class="annot"><span class="annottext">Fractional Prob
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Real</span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088396"><span id="local-6989586621679088405"><span id="local-6989586621679088414"><span id="local-6989586621679088423"><span id="local-6989586621679088433"><span class="annot"><span class="annottext">Fractional Prob
 Real Prob
 Real Prob
 -&gt; Fractional Prob
@@ -322,13 +322,13 @@ truncate :: forall b. Integral b =&gt; Prob -&gt; b
 $ctruncate :: forall b. Integral b =&gt; Prob -&gt; b
 properFraction :: forall b. Integral b =&gt; Prob -&gt; (b, Prob)
 $cproperFraction :: forall b. Integral b =&gt; Prob -&gt; (b, Prob)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">RealFrac</span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088598"><span class="annot"><span class="annottext">Prob -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">RealFrac</span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088387"><span class="annot"><span class="annottext">Prob -&gt; ()
 (Prob -&gt; ()) -&gt; NFData Prob
 forall a. (a -&gt; ()) -&gt; NFData a
 rnf :: Prob -&gt; ()
 $crnf :: Prob -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">via</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ratio</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span>
-</span><span id="line-37"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679088556"><span id="local-6989586621679088561"><span id="local-6989586621679088566"><span id="local-6989586621679088571"><span id="local-6989586621679088576"><span id="local-6989586621679088581"><span id="local-6989586621679088587"><span class="annot"><span class="annottext">Eq Prob
+</span><span id="line-37"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679088345"><span id="local-6989586621679088350"><span id="local-6989586621679088355"><span id="local-6989586621679088360"><span id="local-6989586621679088365"><span id="local-6989586621679088370"><span id="local-6989586621679088376"><span class="annot"><span class="annottext">Eq Prob
 Eq Prob
 -&gt; (Prob -&gt; Prob -&gt; Ordering)
 -&gt; (Prob -&gt; Prob -&gt; Bool)
@@ -366,7 +366,7 @@ $c&lt; :: Prob -&gt; Prob -&gt; Bool
 compare :: Prob -&gt; Prob -&gt; Ordering
 $ccompare :: Prob -&gt; Prob -&gt; Ordering
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Down</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ratio</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span class="hs-special">)</span><span>
-</span><span id="line-38"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088529"><span id="local-6989586621679088536"><span id="local-6989586621679088542"><span class="annot"><span class="annottext">NonEmpty Prob -&gt; Prob
+</span><span id="line-38"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088318"><span id="local-6989586621679088325"><span id="local-6989586621679088331"><span class="annot"><span class="annottext">NonEmpty Prob -&gt; Prob
 Prob -&gt; Prob -&gt; Prob
 (Prob -&gt; Prob -&gt; Prob)
 -&gt; (NonEmpty Prob -&gt; Prob)
@@ -384,7 +384,7 @@ sconcat :: NonEmpty Prob -&gt; Prob
 $csconcat :: NonEmpty Prob -&gt; Prob
 &lt;&gt; :: Prob -&gt; Prob -&gt; Prob
 $c&lt;&gt; :: Prob -&gt; Prob -&gt; Prob
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Semigroup</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088504"><span id="local-6989586621679088509"><span id="local-6989586621679088515"><span class="annot"><span class="annottext">Semigroup Prob
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Semigroup</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679088293"><span id="local-6989586621679088298"><span id="local-6989586621679088304"><span class="annot"><span class="annottext">Semigroup Prob
 Prob
 Semigroup Prob
 -&gt; Prob
@@ -404,34 +404,34 @@ $cmempty :: Prob
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Monoid</span></span></span></span></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">via</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Product</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ratio</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span class="hs-special">)</span><span>
 </span><span id="line-39"></span><span>
 </span><span id="line-40"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-41"></span><span>  </span><span id="local-6989586621679088484"><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088484"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679088483"><span class="annot"><span class="annottext">|-| :: Prob -&gt; Prob -&gt; Prob
-</span><a href="Data.Monus.html#%7C-%7C"><span class="hs-operator hs-var hs-var hs-var hs-var">|-|</span></a></span></span><span> </span><span id="local-6989586621679088481"><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088481"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Ordering
+</span><span id="line-41"></span><span>  </span><span id="local-6989586621679088273"><span class="annot"><span class="annottext">Prob
+</span><a href="#local-6989586621679088273"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679088272"><span class="annot"><span class="annottext">|-| :: Prob -&gt; Prob -&gt; Prob
+</span><a href="Data.Monus.html#%7C-%7C"><span class="hs-operator hs-var hs-var hs-var hs-var">|-|</span></a></span></span><span> </span><span id="local-6989586621679088270"><span class="annot"><span class="annottext">Prob
+</span><a href="#local-6989586621679088270"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Ordering
 forall a. Ord a =&gt; a -&gt; a -&gt; Ordering
 </span><span class="hs-identifier hs-var">compare</span></span><span> </span><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088484"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088481"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679088273"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Prob
+</span><a href="#local-6989586621679088270"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-42"></span><span>    </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">LT</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088481"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Prob
+</span><a href="#local-6989586621679088270"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Prob
 forall a. Fractional a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">/</span></span><span> </span><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088484"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679088273"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-43"></span><span>    </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">EQ</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Prob
 </span><span class="hs-number">1</span></span><span>
 </span><span id="line-44"></span><span>    </span><span class="annot"><span class="annottext">Ordering
 </span><span class="hs-identifier hs-var">GT</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088484"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Prob
+</span><a href="#local-6989586621679088273"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Prob -&gt; Prob -&gt; Prob
 forall a. Fractional a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">/</span></span><span> </span><span class="annot"><span class="annottext">Prob
-</span><a href="#local-6989586621679088481"><span class="hs-identifier hs-var">y</span></a></span><span>
+</span><a href="#local-6989586621679088270"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-45"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">|-|</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-46"></span><span>
-</span><span id="line-47"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679088476"><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-48"></span><span>  </span><span id="local-6989586621679088463"><span class="annot"><span class="annottext">arbitrary :: Gen Prob
-</span><a href="#local-6989586621679088463"><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(NonNegative Integer -&gt; NonNegative Integer -&gt; Prob)
+</span><span id="line-47"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679088265"><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-48"></span><span>  </span><span id="local-6989586621679088252"><span class="annot"><span class="annottext">arbitrary :: Gen Prob
+</span><a href="#local-6989586621679088252"><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(NonNegative Integer -&gt; NonNegative Integer -&gt; Prob)
 -&gt; Gen (NonNegative Integer)
 -&gt; Gen (NonNegative Integer)
 -&gt; Gen Prob
@@ -439,39 +439,39 @@ forall (f :: * -&gt; *) a b c.
 Applicative f =&gt;
 (a -&gt; b -&gt; c) -&gt; f a -&gt; f b -&gt; f c
 </span><span class="hs-identifier hs-var">liftA2</span></span><span> </span><span class="annot"><span class="annottext">NonNegative Integer -&gt; NonNegative Integer -&gt; Prob
-</span><a href="#local-6989586621679088462"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">Gen (NonNegative Integer)
+</span><a href="#local-6989586621679088251"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">Gen (NonNegative Integer)
 forall a. Arbitrary a =&gt; Gen a
 </span><span class="hs-identifier hs-var">arbitrary</span></span><span> </span><span class="annot"><span class="annottext">Gen (NonNegative Integer)
 forall a. Arbitrary a =&gt; Gen a
 </span><span class="hs-identifier hs-var">arbitrary</span></span><span>
 </span><span id="line-49"></span><span>    </span><span class="hs-keyword">where</span><span>
-</span><span id="line-50"></span><span>      </span><span id="local-6989586621679088462"><span class="annot"><span class="annottext">f :: NonNegative Integer -&gt; NonNegative Integer -&gt; Prob
-</span><a href="#local-6989586621679088462"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span class="annot"><span class="annottext">Integer
+</span><span id="line-50"></span><span>      </span><span id="local-6989586621679088251"><span class="annot"><span class="annottext">f :: NonNegative Integer -&gt; NonNegative Integer -&gt; Prob
+</span><a href="#local-6989586621679088251"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Prob
 </span><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-var">Prob</span></a></span><span> </span><span class="annot"><span class="annottext">Ratio Natural
 </span><span class="hs-number">1</span></span><span>
-</span><span id="line-51"></span><span>      </span><span class="annot"><a href="#local-6989586621679088462"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span id="local-6989586621679088449"><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679088449"><span class="hs-identifier hs-var">n</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span id="local-6989586621679088448"><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679088448"><span class="hs-identifier hs-var">d</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Prob
+</span><span id="line-51"></span><span>      </span><span class="annot"><a href="#local-6989586621679088251"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span id="local-6989586621679088238"><span class="annot"><span class="annottext">Integer
+</span><a href="#local-6989586621679088238"><span class="hs-identifier hs-var">n</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NonNegative</span></span><span> </span><span id="local-6989586621679088237"><span class="annot"><span class="annottext">Integer
+</span><a href="#local-6989586621679088237"><span class="hs-identifier hs-var">d</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ratio Natural -&gt; Prob
 </span><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-var">Prob</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer -&gt; Natural
 forall a. Num a =&gt; Integer -&gt; a
 </span><span class="hs-identifier hs-var">fromInteger</span></span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679088449"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Ratio Natural
+</span><a href="#local-6989586621679088238"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Ratio Natural
 forall a. Integral a =&gt; a -&gt; a -&gt; Ratio a
 </span><span class="hs-operator hs-var">%</span></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Natural
 forall a. Num a =&gt; Integer -&gt; a
 </span><span class="hs-identifier hs-var">fromInteger</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679088449"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
+</span><a href="#local-6989586621679088238"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679088448"><span class="hs-identifier hs-var">d</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679088237"><span class="hs-identifier hs-var">d</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-52"></span><span>
 </span><span id="line-53"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bounded</span></span><span> </span><span class="annot"><a href="Data.Monus.Prob.html#Prob"><span class="hs-identifier hs-type">Prob</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-54"></span><span>  </span><span id="local-6989586621679088441"><span class="annot"><span class="annottext">minBound :: Prob
+</span><span id="line-54"></span><span>  </span><span id="local-6989586621679088230"><span class="annot"><span class="annottext">minBound :: Prob
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">minBound</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Prob
 </span><span class="hs-number">0</span></span><span>
-</span><span id="line-55"></span><span>  </span><span id="local-6989586621679088438"><span class="annot"><span class="annottext">maxBound :: Prob
+</span><span id="line-55"></span><span>  </span><span id="local-6989586621679088227"><span class="annot"><span class="annottext">maxBound :: Prob
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">maxBound</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Prob
 </span><span class="hs-number">1</span></span><span>
 </span><span id="line-56"></span></pre></body></html>
