@@ -55,7 +55,7 @@ jobs:
 
 # Compile Local Haskell
     - name: Build project
-      run: cabal v2-build all --enable-tests
+      run: cabal v2-build all --enable-tests --enable-documentation
 
     - name: Run property tests
       run: cabal test
