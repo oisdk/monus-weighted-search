@@ -34,6 +34,7 @@ import Data.List.NonEmpty (nonEmpty)
 import Data.Monus
 import Data.Monus.Dist
 import Data.Monus.Max
+import Data.Tuple (swap)
 
 type Root = NonEmpty.Heap
 
@@ -47,6 +48,14 @@ heap b k = \case
   Leaf -> b
   Node xs -> k xs
 {-# INLINE heap #-}
+
+node :: Maybe (Root w a) -> Heap w a
+node = maybe Leaf Node
+{-# INLINE node #-}
+
+root :: Heap w a -> Maybe (Root w a) 
+root = heap Nothing Just
+{-# INLINE root #-}
 
 instance (NFData w, NFData a) => NFData (Heap w a) where
   rnf = heap () rnf
@@ -83,19 +92,24 @@ instance (Arbitrary w, Arbitrary a) => Arbitrary (Heap w a) where
 Leaf <+> ys = ys
 xs <+> Leaf = xs
 Node xs <+> Node ys = Node (xs NonEmpty.<+> ys)
+{-# INLINE (<+>) #-}
 
 popMin :: Monus w => Heap w a -> Maybe ((w, a), Heap w a)
-popMin = heap Nothing (Just . fmap (maybe Leaf Node) . NonEmpty.popMin)
+popMin = fmap (fmap node . NonEmpty.popMin) . root
+{-# INLINE popMin #-}
 
 (<><) :: Semigroup w => w -> Heap w a -> Heap w a
 w <>< Leaf = Leaf
 w <>< Node (Root w' x xs) = Node (Root (w <> w') x xs)
+{-# INLINE (<><) #-}
 
 singleton :: w -> a -> Heap w a
 singleton w x = Node (Root w x [])
+{-# INLINE singleton #-}
 
 fromList :: Monus w => [(w, a)] -> Heap w a
-fromList = maybe Leaf (Node . NonEmpty.mergeHeaps . fmap (uncurry NonEmpty.singleton)) . nonEmpty
+fromList = node . fmap NonEmpty.mergeHeaps . nonEmpty . map (uncurry NonEmpty.singleton)
+{-# INLINE fromList #-}
 
 -- | An implementation of Dijkstra's algorithm on 'Graph's.
 dijkstra :: Ord a => Graph a -> Graph a
@@ -105,9 +119,9 @@ dijkstra g s = go Set.empty (singleton mempty s)
       Nothing -> []
       Just ((w,x),xs)
         | Set.member x s -> go s xs
-        | otherwise -> (x,w) : go (Set.insert x s) (xs <+> (w <>< fromList (map f (g x))))
-          where
-            f (y, w') = (w', y)
+        | otherwise -> (x,w) : go (Set.insert x s) (xs <+> xs')
+        where
+          xs' = w <>< fromList (map swap (g x))
 
 -- | Heapsort.
 monusSort :: Ord a => [a] -> [a]
