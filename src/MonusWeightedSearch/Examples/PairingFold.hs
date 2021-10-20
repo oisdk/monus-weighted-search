@@ -23,8 +23,11 @@ pairFold1 f (x:xs) = Just (go x xs)
     go x1 (x2:[])    = f x1 x2
     go x1 (x2:x3:xs) = f (f x1 x2) (go x3 xs)
 
--- A function that is identical to the one above, although implemented as a
+-- | A function that is identical to the one above, although implemented as a
 -- fold.
+--
+-- >>> pairFold2 (:*:) (replicate 5 Leaf)
+-- Just ((.*.)*((.*.)*.))
 pairFold2 :: (a -> a -> a) -> [a] -> Maybe a
 pairFold2 c xs = foldr f id xs Nothing
   where
@@ -35,7 +38,11 @@ data Acc3 a
   = Acc3 (Maybe a) (Maybe a)
   deriving Foldable
 
--- This is a slightly different version to the one above.
+-- | This is a slightly different version to the one above: it is
+-- defunctionalised, a little.
+--
+-- >>> pairFold3 (:*:) (replicate 5 Leaf)
+-- Just (.*((.*.)*(.*.)))
 pairFold3 :: (a -> a -> a) -> [a] -> Maybe a
 pairFold3 c xs = foldr ((Just .) . (maybe <*> c)) Nothing (foldr f (Acc3 Nothing Nothing) xs)
   where
