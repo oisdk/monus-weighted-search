@@ -4,14 +4,17 @@ module MonusWeightedSearch.Examples.PairingFold where
 
 -- $setup
 -- >>> :{
--- data Tree a = Leaf a | Tree a :*: Tree a deriving Show
+-- data Tree = Leaf | Tree :*: Tree
+-- instance Show Tree where
+--   show Leaf = "."
+--   show (xs :*: ys) = "(" ++ show xs ++ "*" ++ show ys ++ ")"
 -- :}
 
 -- | The traditional definition of the pairing fold, as given in the original
 -- paper.
 --
--- >>> pairFold1 (:*:) (map Leaf [1..5])
--- Just ((Leaf 1 :*: Leaf 2) :*: ((Leaf 3 :*: Leaf 4) :*: Leaf 5))
+-- >>> pairFold1 (:*:) (replicate 5 Leaf)
+-- Just ((.*.)*((.*.)*.))
 pairFold1 :: (a -> a -> a) -> [a] -> Maybe a
 pairFold1 f []     = Nothing
 pairFold1 f (x:xs) = Just (go x xs)
