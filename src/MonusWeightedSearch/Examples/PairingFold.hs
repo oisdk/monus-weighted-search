@@ -11,7 +11,7 @@ module MonusWeightedSearch.Examples.PairingFold where
 -- paper.
 --
 -- >>> pairFold1 (:*:) (map Leaf [1..5])
--- Just (Leaf 1 :*: ((Leaf 2 :*: Leaf 3) :*: (Leaf 4 :*: Leaf 5)))
+-- Just ((Leaf 1 :*: Leaf 2) :*: ((Leaf 3 :*: Leaf 4) :*: Leaf 5))
 pairFold1 :: (a -> a -> a) -> [a] -> Maybe a
 pairFold1 f []     = Nothing
 pairFold1 f (x:xs) = Just (go x xs)
