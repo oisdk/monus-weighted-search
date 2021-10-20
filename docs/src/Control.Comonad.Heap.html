@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679094349"><span id="local-6989586621679094350"></span></span><span class="hs-comment">-- | </span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679101700"><span id="local-6989586621679101701"></span></span><span class="hs-comment">-- | </span><span>
 </span><span id="line-2"></span><span>
 </span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Control.Comonad.Heap</span><span>
 </span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier">Heap</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
@@ -30,9 +30,9 @@
 </span><span id="line-30"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Generic1</span></span><span class="hs-special">)</span><span>
 </span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.DeepSeq</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">NFData</span></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-32"></span><span>
-</span><span id="line-33"></span><span id="local-6989586621679094331"><span id="local-6989586621679094334"><span id="local-6989586621679094335"><span id="local-6989586621679094336"></span></span></span></span><span class="hs-keyword">data</span><span> </span><span id="Heap"><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-var">Heap</span></a></span></span><span> </span><span id="local-6989586621679094677"><span class="annot"><a href="#local-6989586621679094677"><span class="hs-identifier hs-type">w</span></a></span></span><span> </span><span id="local-6989586621679094676"><span class="annot"><a href="#local-6989586621679094676"><span class="hs-identifier hs-type">a</span></a></span></span><span>
-</span><span id="line-34"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="Root"><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="#local-6989586621679094677"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094676"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094677"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094676"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span>
-</span><span id="line-35"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679094316"><span id="local-6989586621679094318"><span id="local-6989586621679094327"><span class="annot"><span class="annottext">Int -&gt; Heap w a -&gt; ShowS
+</span><span id="line-33"></span><span id="local-6989586621679101682"><span id="local-6989586621679101685"><span id="local-6989586621679101686"><span id="local-6989586621679101687"></span></span></span></span><span class="hs-keyword">data</span><span> </span><span id="Heap"><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-var">Heap</span></a></span></span><span> </span><span id="local-6989586621679102028"><span class="annot"><a href="#local-6989586621679102028"><span class="hs-identifier hs-type">w</span></a></span></span><span> </span><span id="local-6989586621679102027"><span class="annot"><a href="#local-6989586621679102027"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-34"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="Root"><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="#local-6989586621679102028"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679102027"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679102028"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679102027"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-35"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679101667"><span id="local-6989586621679101669"><span id="local-6989586621679101678"><span class="annot"><span class="annottext">Int -&gt; Heap w a -&gt; ShowS
 [Heap w a] -&gt; ShowS
 Heap w a -&gt; String
 (Int -&gt; Heap w a -&gt; ShowS)
@@ -48,7 +48,7 @@ show :: Heap w a -&gt; String
 $cshow :: forall w a. (Show w, Show a) =&gt; Heap w a -&gt; String
 showsPrec :: Int -&gt; Heap w a -&gt; ShowS
 $cshowsPrec :: forall w a. (Show w, Show a) =&gt; Int -&gt; Heap w a -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094295"><span id="local-6989586621679094308"><span id="local-6989586621679094311"><span id="local-6989586621679094313"><span class="annot"><span class="annottext">ReadPrec [Heap w a]
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101646"><span id="local-6989586621679101659"><span id="local-6989586621679101662"><span id="local-6989586621679101664"><span class="annot"><span class="annottext">ReadPrec [Heap w a]
 ReadPrec (Heap w a)
 Int -&gt; ReadS (Heap w a)
 ReadS [Heap w a]
@@ -72,7 +72,7 @@ readList :: ReadS [Heap w a]
 $creadList :: forall w a. (Read w, Read a) =&gt; ReadS [Heap w a]
 readsPrec :: Int -&gt; ReadS (Heap w a)
 $creadsPrec :: forall w a. (Read w, Read a) =&gt; Int -&gt; ReadS (Heap w a)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Read</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094284"><span id="local-6989586621679094291"><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Read</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101635"><span id="local-6989586621679101642"><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Bool
 (Heap w a -&gt; Heap w a -&gt; Bool)
 -&gt; (Heap w a -&gt; Heap w a -&gt; Bool) -&gt; Eq (Heap w a)
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -81,7 +81,7 @@ forall w a. (Eq w, Eq a) =&gt; Heap w a -&gt; Heap w a -&gt; Bool
 $c/= :: forall w a. (Eq w, Eq a) =&gt; Heap w a -&gt; Heap w a -&gt; Bool
 == :: Heap w a -&gt; Heap w a -&gt; Bool
 $c== :: forall w a. (Eq w, Eq a) =&gt; Heap w a -&gt; Heap w a -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094255"><span id="local-6989586621679094257"><span id="local-6989586621679094260"><span id="local-6989586621679094263"><span id="local-6989586621679094266"><span id="local-6989586621679094272"><span id="local-6989586621679094279"><span class="annot"><span class="annottext">Eq (Heap w a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101606"><span id="local-6989586621679101608"><span id="local-6989586621679101611"><span id="local-6989586621679101614"><span id="local-6989586621679101617"><span id="local-6989586621679101623"><span id="local-6989586621679101630"><span class="annot"><span class="annottext">Eq (Heap w a)
 Eq (Heap w a)
 -&gt; (Heap w a -&gt; Heap w a -&gt; Ordering)
 -&gt; (Heap w a -&gt; Heap w a -&gt; Bool)
@@ -122,20 +122,20 @@ $c&lt;= :: forall w a. (Ord w, Ord a) =&gt; Heap w a -&gt; Heap w a -&gt; Bool
 $c&lt; :: forall w a. (Ord w, Ord a) =&gt; Heap w a -&gt; Heap w a -&gt; Bool
 compare :: Heap w a -&gt; Heap w a -&gt; Ordering
 $ccompare :: forall w a. (Ord w, Ord a) =&gt; Heap w a -&gt; Heap w a -&gt; Ordering
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094247"><span id="local-6989586621679094252"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; Heap w a -&gt; Heap w b)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101598"><span id="local-6989586621679101603"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; Heap w a -&gt; Heap w b)
 -&gt; (forall a b. a -&gt; Heap w b -&gt; Heap w a) -&gt; Functor (Heap w)
 forall a b. a -&gt; Heap w b -&gt; Heap w a
 forall a b. (a -&gt; b) -&gt; Heap w a -&gt; Heap w b
 forall w a b. a -&gt; Heap w b -&gt; Heap w a
 forall w a b. (a -&gt; b) -&gt; Heap w a -&gt; Heap w b
-forall (f :: * -&gt; *).
+forall (f :: Type -&gt; Type).
 (forall a b. (a -&gt; b) -&gt; f a -&gt; f b)
 -&gt; (forall a b. a -&gt; f b -&gt; f a) -&gt; Functor f
 &lt;$ :: forall a b. a -&gt; Heap w b -&gt; Heap w a
 $c&lt;$ :: forall w a b. a -&gt; Heap w b -&gt; Heap w a
 fmap :: forall a b. (a -&gt; b) -&gt; Heap w a -&gt; Heap w b
 $cfmap :: forall w a b. (a -&gt; b) -&gt; Heap w a -&gt; Heap w b
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094201"><span id="local-6989586621679094203"><span id="local-6989586621679094205"><span id="local-6989586621679094207"><span id="local-6989586621679094209"><span id="local-6989586621679094211"><span id="local-6989586621679094213"><span id="local-6989586621679094215"><span id="local-6989586621679094217"><span id="local-6989586621679094219"><span id="local-6989586621679094221"><span id="local-6989586621679094223"><span id="local-6989586621679094225"><span id="local-6989586621679094229"><span id="local-6989586621679094231"><span id="local-6989586621679094240"><span id="local-6989586621679094242"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; Heap w m -&gt; m)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101552"><span id="local-6989586621679101554"><span id="local-6989586621679101556"><span id="local-6989586621679101558"><span id="local-6989586621679101560"><span id="local-6989586621679101562"><span id="local-6989586621679101564"><span id="local-6989586621679101566"><span id="local-6989586621679101568"><span id="local-6989586621679101570"><span id="local-6989586621679101572"><span id="local-6989586621679101574"><span id="local-6989586621679101576"><span id="local-6989586621679101580"><span id="local-6989586621679101582"><span id="local-6989586621679101591"><span id="local-6989586621679101593"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; Heap w m -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Heap w a -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Heap w a -&gt; m)
 -&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; Heap w a -&gt; b)
@@ -175,7 +175,7 @@ forall w a. (a -&gt; a -&gt; a) -&gt; Heap w a -&gt; a
 forall w m a. Monoid m =&gt; (a -&gt; m) -&gt; Heap w a -&gt; m
 forall w b a. (b -&gt; a -&gt; b) -&gt; b -&gt; Heap w a -&gt; b
 forall w a b. (a -&gt; b -&gt; b) -&gt; b -&gt; Heap w a -&gt; b
-forall (t :: * -&gt; *).
+forall (t :: Type -&gt; Type).
 (forall m. Monoid m =&gt; t m -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m)
@@ -228,91 +228,101 @@ foldMap :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Heap w a -&gt; m
 $cfoldMap :: forall w m a. Monoid m =&gt; (a -&gt; m) -&gt; Heap w a -&gt; m
 fold :: forall m. Monoid m =&gt; Heap w m -&gt; m
 $cfold :: forall w m. Monoid m =&gt; Heap w m -&gt; m
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094181"><span id="local-6989586621679094183"><span id="local-6989586621679094185"><span id="local-6989586621679094194"><span class="annot"><span class="annottext">Functor (Heap w)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101532"><span id="local-6989586621679101534"><span id="local-6989586621679101536"><span id="local-6989586621679101545"><span class="annot"><span class="annottext">Functor (Heap w)
 Foldable (Heap w)
 Functor (Heap w)
 -&gt; Foldable (Heap w)
--&gt; (forall (f :: * -&gt; *) a b.
+-&gt; (forall (f :: Type -&gt; Type) a b.
     Applicative f =&gt;
     (a -&gt; f b) -&gt; Heap w a -&gt; f (Heap w b))
--&gt; (forall (f :: * -&gt; *) a.
+-&gt; (forall (f :: Type -&gt; Type) a.
     Applicative f =&gt;
     Heap w (f a) -&gt; f (Heap w a))
--&gt; (forall (m :: * -&gt; *) a b.
+-&gt; (forall (m :: Type -&gt; Type) a b.
     Monad m =&gt;
     (a -&gt; m b) -&gt; Heap w a -&gt; m (Heap w b))
--&gt; (forall (m :: * -&gt; *) a.
+-&gt; (forall (m :: Type -&gt; Type) a.
     Monad m =&gt;
     Heap w (m a) -&gt; m (Heap w a))
 -&gt; Traversable (Heap w)
 forall w. Functor (Heap w)
 forall w. Foldable (Heap w)
-forall w (m :: * -&gt; *) a. Monad m =&gt; Heap w (m a) -&gt; m (Heap w a)
-forall w (f :: * -&gt; *) a.
+forall w (m :: Type -&gt; Type) a.
+Monad m =&gt;
+Heap w (m a) -&gt; m (Heap w a)
+forall w (f :: Type -&gt; Type) a.
 Applicative f =&gt;
 Heap w (f a) -&gt; f (Heap w a)
-forall w (m :: * -&gt; *) a b.
+forall w (m :: Type -&gt; Type) a b.
 Monad m =&gt;
 (a -&gt; m b) -&gt; Heap w a -&gt; m (Heap w b)
-forall w (f :: * -&gt; *) a b.
+forall w (f :: Type -&gt; Type) a b.
 Applicative f =&gt;
 (a -&gt; f b) -&gt; Heap w a -&gt; f (Heap w b)
-forall (t :: * -&gt; *).
+forall (t :: Type -&gt; Type).
 Functor t
 -&gt; Foldable t
--&gt; (forall (f :: * -&gt; *) a b.
+-&gt; (forall (f :: Type -&gt; Type) a b.
     Applicative f =&gt;
     (a -&gt; f b) -&gt; t a -&gt; f (t b))
--&gt; (forall (f :: * -&gt; *) a. Applicative f =&gt; t (f a) -&gt; f (t a))
--&gt; (forall (m :: * -&gt; *) a b.
+-&gt; (forall (f :: Type -&gt; Type) a.
+    Applicative f =&gt;
+    t (f a) -&gt; f (t a))
+-&gt; (forall (m :: Type -&gt; Type) a b.
     Monad m =&gt;
     (a -&gt; m b) -&gt; t a -&gt; m (t b))
--&gt; (forall (m :: * -&gt; *) a. Monad m =&gt; t (m a) -&gt; m (t a))
+-&gt; (forall (m :: Type -&gt; Type) a. Monad m =&gt; t (m a) -&gt; m (t a))
 -&gt; Traversable t
-forall (m :: * -&gt; *) a. Monad m =&gt; Heap w (m a) -&gt; m (Heap w a)
-forall (f :: * -&gt; *) a.
+forall (m :: Type -&gt; Type) a.
+Monad m =&gt;
+Heap w (m a) -&gt; m (Heap w a)
+forall (f :: Type -&gt; Type) a.
 Applicative f =&gt;
 Heap w (f a) -&gt; f (Heap w a)
-forall (m :: * -&gt; *) a b.
+forall (m :: Type -&gt; Type) a b.
 Monad m =&gt;
 (a -&gt; m b) -&gt; Heap w a -&gt; m (Heap w b)
-forall (f :: * -&gt; *) a b.
+forall (f :: Type -&gt; Type) a b.
 Applicative f =&gt;
 (a -&gt; f b) -&gt; Heap w a -&gt; f (Heap w b)
-sequence :: forall (m :: * -&gt; *) a. Monad m =&gt; Heap w (m a) -&gt; m (Heap w a)
-$csequence :: forall w (m :: * -&gt; *) a. Monad m =&gt; Heap w (m a) -&gt; m (Heap w a)
-mapM :: forall (m :: * -&gt; *) a b.
+sequence :: forall (m :: Type -&gt; Type) a.
+Monad m =&gt;
+Heap w (m a) -&gt; m (Heap w a)
+$csequence :: forall w (m :: Type -&gt; Type) a.
+Monad m =&gt;
+Heap w (m a) -&gt; m (Heap w a)
+mapM :: forall (m :: Type -&gt; Type) a b.
 Monad m =&gt;
 (a -&gt; m b) -&gt; Heap w a -&gt; m (Heap w b)
-$cmapM :: forall w (m :: * -&gt; *) a b.
+$cmapM :: forall w (m :: Type -&gt; Type) a b.
 Monad m =&gt;
 (a -&gt; m b) -&gt; Heap w a -&gt; m (Heap w b)
-sequenceA :: forall (f :: * -&gt; *) a.
+sequenceA :: forall (f :: Type -&gt; Type) a.
 Applicative f =&gt;
 Heap w (f a) -&gt; f (Heap w a)
-$csequenceA :: forall w (f :: * -&gt; *) a.
+$csequenceA :: forall w (f :: Type -&gt; Type) a.
 Applicative f =&gt;
 Heap w (f a) -&gt; f (Heap w a)
-traverse :: forall (f :: * -&gt; *) a b.
+traverse :: forall (f :: Type -&gt; Type) a b.
 Applicative f =&gt;
 (a -&gt; f b) -&gt; Heap w a -&gt; f (Heap w b)
-$ctraverse :: forall w (f :: * -&gt; *) a b.
+$ctraverse :: forall w (f :: Type -&gt; Type) a b.
 Applicative f =&gt;
 (a -&gt; f b) -&gt; Heap w a -&gt; f (Heap w b)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Traversable</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094135"><span id="local-6989586621679094137"><span id="local-6989586621679094139"><span id="local-6989586621679094141"><span id="local-6989586621679094143"><span id="local-6989586621679094145"><span id="local-6989586621679094147"><span id="local-6989586621679094149"><span id="local-6989586621679094156"><span id="local-6989586621679094158"><span id="local-6989586621679094160"><span id="local-6989586621679094162"><span id="local-6989586621679094168"><span id="local-6989586621679094175"><span class="annot"><span class="annottext">Typeable (Heap w a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Traversable</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101486"><span id="local-6989586621679101488"><span id="local-6989586621679101490"><span id="local-6989586621679101492"><span id="local-6989586621679101494"><span id="local-6989586621679101496"><span id="local-6989586621679101498"><span id="local-6989586621679101500"><span id="local-6989586621679101507"><span id="local-6989586621679101509"><span id="local-6989586621679101511"><span id="local-6989586621679101513"><span id="local-6989586621679101519"><span id="local-6989586621679101526"><span class="annot"><span class="annottext">Typeable (Heap w a)
 Typeable (Heap w a)
--&gt; (forall (c :: * -&gt; *).
+-&gt; (forall (c :: Type -&gt; Type).
     (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
     -&gt; (forall g. g -&gt; c g) -&gt; Heap w a -&gt; c (Heap w a))
--&gt; (forall (c :: * -&gt; *).
+-&gt; (forall (c :: Type -&gt; Type).
     (forall b r. Data b =&gt; c (b -&gt; r) -&gt; c r)
     -&gt; (forall r. r -&gt; c r) -&gt; Constr -&gt; c (Heap w a))
 -&gt; (Heap w a -&gt; Constr)
 -&gt; (Heap w a -&gt; DataType)
--&gt; (forall (t :: * -&gt; *) (c :: * -&gt; *).
+-&gt; (forall (t :: Type -&gt; Type) (c :: Type -&gt; Type).
     Typeable t =&gt;
     (forall d. Data d =&gt; c (t d)) -&gt; Maybe (c (Heap w a)))
--&gt; (forall (t :: * -&gt; * -&gt; *) (c :: * -&gt; *).
+-&gt; (forall (t :: Type -&gt; Type -&gt; Type) (c :: Type -&gt; Type).
     Typeable t =&gt;
     (forall d e. (Data d, Data e) =&gt; c (t d e))
     -&gt; Maybe (c (Heap w a)))
@@ -325,13 +335,13 @@ Typeable (Heap w a)
     -&gt; r -&gt; (forall d. Data d =&gt; d -&gt; r') -&gt; Heap w a -&gt; r)
 -&gt; (forall u. (forall d. Data d =&gt; d -&gt; u) -&gt; Heap w a -&gt; [u])
 -&gt; (forall u. Int -&gt; (forall d. Data d =&gt; d -&gt; u) -&gt; Heap w a -&gt; u)
--&gt; (forall (m :: * -&gt; *).
+-&gt; (forall (m :: Type -&gt; Type).
     Monad m =&gt;
     (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a))
--&gt; (forall (m :: * -&gt; *).
+-&gt; (forall (m :: Type -&gt; Type).
     MonadPlus m =&gt;
     (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a))
--&gt; (forall (m :: * -&gt; *).
+-&gt; (forall (m :: Type -&gt; Type).
     MonadPlus m =&gt;
     (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a))
 -&gt; Data (Heap w a)
@@ -340,18 +350,18 @@ Heap w a -&gt; Constr
 (forall b. Data b =&gt; b -&gt; b) -&gt; Heap w a -&gt; Heap w a
 forall a.
 Typeable a
--&gt; (forall (c :: * -&gt; *).
+-&gt; (forall (c :: Type -&gt; Type).
     (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
     -&gt; (forall g. g -&gt; c g) -&gt; a -&gt; c a)
--&gt; (forall (c :: * -&gt; *).
+-&gt; (forall (c :: Type -&gt; Type).
     (forall b r. Data b =&gt; c (b -&gt; r) -&gt; c r)
     -&gt; (forall r. r -&gt; c r) -&gt; Constr -&gt; c a)
 -&gt; (a -&gt; Constr)
 -&gt; (a -&gt; DataType)
--&gt; (forall (t :: * -&gt; *) (c :: * -&gt; *).
+-&gt; (forall (t :: Type -&gt; Type) (c :: Type -&gt; Type).
     Typeable t =&gt;
     (forall d. Data d =&gt; c (t d)) -&gt; Maybe (c a))
--&gt; (forall (t :: * -&gt; * -&gt; *) (c :: * -&gt; *).
+-&gt; (forall (t :: Type -&gt; Type -&gt; Type) (c :: Type -&gt; Type).
     Typeable t =&gt;
     (forall d e. (Data d, Data e) =&gt; c (t d e)) -&gt; Maybe (c a))
 -&gt; ((forall b. Data b =&gt; b -&gt; b) -&gt; a -&gt; a)
@@ -361,13 +371,13 @@ Typeable a
     (r' -&gt; r -&gt; r) -&gt; r -&gt; (forall d. Data d =&gt; d -&gt; r') -&gt; a -&gt; r)
 -&gt; (forall u. (forall d. Data d =&gt; d -&gt; u) -&gt; a -&gt; [u])
 -&gt; (forall u. Int -&gt; (forall d. Data d =&gt; d -&gt; u) -&gt; a -&gt; u)
--&gt; (forall (m :: * -&gt; *).
+-&gt; (forall (m :: Type -&gt; Type).
     Monad m =&gt;
     (forall d. Data d =&gt; d -&gt; m d) -&gt; a -&gt; m a)
--&gt; (forall (m :: * -&gt; *).
+-&gt; (forall (m :: Type -&gt; Type).
     MonadPlus m =&gt;
     (forall d. Data d =&gt; d -&gt; m d) -&gt; a -&gt; m a)
--&gt; (forall (m :: * -&gt; *).
+-&gt; (forall (m :: Type -&gt; Type).
     MonadPlus m =&gt;
     (forall d. Data d =&gt; d -&gt; m d) -&gt; a -&gt; m a)
 -&gt; Data a
@@ -393,24 +403,24 @@ forall w a r r'.
 (Data w, Data a) =&gt;
 (r' -&gt; r -&gt; r)
 -&gt; r -&gt; (forall d. Data d =&gt; d -&gt; r') -&gt; Heap w a -&gt; r
-forall w a (m :: * -&gt; *).
+forall w a (m :: Type -&gt; Type).
 (Data w, Data a, Monad m) =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-forall w a (m :: * -&gt; *).
+forall w a (m :: Type -&gt; Type).
 (Data w, Data a, MonadPlus m) =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-forall w a (c :: * -&gt; *).
+forall w a (c :: Type -&gt; Type).
 (Data w, Data a) =&gt;
 (forall b r. Data b =&gt; c (b -&gt; r) -&gt; c r)
 -&gt; (forall r. r -&gt; c r) -&gt; Constr -&gt; c (Heap w a)
-forall w a (c :: * -&gt; *).
+forall w a (c :: Type -&gt; Type).
 (Data w, Data a) =&gt;
 (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
 -&gt; (forall g. g -&gt; c g) -&gt; Heap w a -&gt; c (Heap w a)
-forall w a (t :: * -&gt; *) (c :: * -&gt; *).
+forall w a (t :: Type -&gt; Type) (c :: Type -&gt; Type).
 (Data w, Data a, Typeable t) =&gt;
 (forall d. Data d =&gt; c (t d)) -&gt; Maybe (c (Heap w a))
-forall w a (t :: * -&gt; * -&gt; *) (c :: * -&gt; *).
+forall w a (t :: Type -&gt; Type -&gt; Type) (c :: Type -&gt; Type).
 (Data w, Data a, Typeable t) =&gt;
 (forall d e. (Data d, Data e) =&gt; c (t d e)) -&gt; Maybe (c (Heap w a))
 forall r r'.
@@ -419,40 +429,40 @@ forall r r'.
 forall r r'.
 (r' -&gt; r -&gt; r)
 -&gt; r -&gt; (forall d. Data d =&gt; d -&gt; r') -&gt; Heap w a -&gt; r
-forall (m :: * -&gt; *).
+forall (m :: Type -&gt; Type).
 Monad m =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-forall (m :: * -&gt; *).
+forall (m :: Type -&gt; Type).
 MonadPlus m =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-forall (c :: * -&gt; *).
+forall (c :: Type -&gt; Type).
 (forall b r. Data b =&gt; c (b -&gt; r) -&gt; c r)
 -&gt; (forall r. r -&gt; c r) -&gt; Constr -&gt; c (Heap w a)
-forall (c :: * -&gt; *).
+forall (c :: Type -&gt; Type).
 (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
 -&gt; (forall g. g -&gt; c g) -&gt; Heap w a -&gt; c (Heap w a)
-forall (t :: * -&gt; *) (c :: * -&gt; *).
+forall (t :: Type -&gt; Type) (c :: Type -&gt; Type).
 Typeable t =&gt;
 (forall d. Data d =&gt; c (t d)) -&gt; Maybe (c (Heap w a))
-forall (t :: * -&gt; * -&gt; *) (c :: * -&gt; *).
+forall (t :: Type -&gt; Type -&gt; Type) (c :: Type -&gt; Type).
 Typeable t =&gt;
 (forall d e. (Data d, Data e) =&gt; c (t d e)) -&gt; Maybe (c (Heap w a))
-gmapMo :: forall (m :: * -&gt; *).
+gmapMo :: forall (m :: Type -&gt; Type).
 MonadPlus m =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-$cgmapMo :: forall w a (m :: * -&gt; *).
+$cgmapMo :: forall w a (m :: Type -&gt; Type).
 (Data w, Data a, MonadPlus m) =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-gmapMp :: forall (m :: * -&gt; *).
+gmapMp :: forall (m :: Type -&gt; Type).
 MonadPlus m =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-$cgmapMp :: forall w a (m :: * -&gt; *).
+$cgmapMp :: forall w a (m :: Type -&gt; Type).
 (Data w, Data a, MonadPlus m) =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-gmapM :: forall (m :: * -&gt; *).
+gmapM :: forall (m :: Type -&gt; Type).
 Monad m =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
-$cgmapM :: forall w a (m :: * -&gt; *).
+$cgmapM :: forall w a (m :: Type -&gt; Type).
 (Data w, Data a, Monad m) =&gt;
 (forall d. Data d =&gt; d -&gt; m d) -&gt; Heap w a -&gt; m (Heap w a)
 gmapQi :: forall u. Int -&gt; (forall d. Data d =&gt; d -&gt; u) -&gt; Heap w a -&gt; u
@@ -481,33 +491,33 @@ gmapT :: (forall b. Data b =&gt; b -&gt; b) -&gt; Heap w a -&gt; Heap w a
 $cgmapT :: forall w a.
 (Data w, Data a) =&gt;
 (forall b. Data b =&gt; b -&gt; b) -&gt; Heap w a -&gt; Heap w a
-dataCast2 :: forall (t :: * -&gt; * -&gt; *) (c :: * -&gt; *).
+dataCast2 :: forall (t :: Type -&gt; Type -&gt; Type) (c :: Type -&gt; Type).
 Typeable t =&gt;
 (forall d e. (Data d, Data e) =&gt; c (t d e)) -&gt; Maybe (c (Heap w a))
-$cdataCast2 :: forall w a (t :: * -&gt; * -&gt; *) (c :: * -&gt; *).
+$cdataCast2 :: forall w a (t :: Type -&gt; Type -&gt; Type) (c :: Type -&gt; Type).
 (Data w, Data a, Typeable t) =&gt;
 (forall d e. (Data d, Data e) =&gt; c (t d e)) -&gt; Maybe (c (Heap w a))
-dataCast1 :: forall (t :: * -&gt; *) (c :: * -&gt; *).
+dataCast1 :: forall (t :: Type -&gt; Type) (c :: Type -&gt; Type).
 Typeable t =&gt;
 (forall d. Data d =&gt; c (t d)) -&gt; Maybe (c (Heap w a))
-$cdataCast1 :: forall w a (t :: * -&gt; *) (c :: * -&gt; *).
+$cdataCast1 :: forall w a (t :: Type -&gt; Type) (c :: Type -&gt; Type).
 (Data w, Data a, Typeable t) =&gt;
 (forall d. Data d =&gt; c (t d)) -&gt; Maybe (c (Heap w a))
 dataTypeOf :: Heap w a -&gt; DataType
 $cdataTypeOf :: forall w a. (Data w, Data a) =&gt; Heap w a -&gt; DataType
 toConstr :: Heap w a -&gt; Constr
 $ctoConstr :: forall w a. (Data w, Data a) =&gt; Heap w a -&gt; Constr
-gunfold :: forall (c :: * -&gt; *).
+gunfold :: forall (c :: Type -&gt; Type).
 (forall b r. Data b =&gt; c (b -&gt; r) -&gt; c r)
 -&gt; (forall r. r -&gt; c r) -&gt; Constr -&gt; c (Heap w a)
-$cgunfold :: forall w a (c :: * -&gt; *).
+$cgunfold :: forall w a (c :: Type -&gt; Type).
 (Data w, Data a) =&gt;
 (forall b r. Data b =&gt; c (b -&gt; r) -&gt; c r)
 -&gt; (forall r. r -&gt; c r) -&gt; Constr -&gt; c (Heap w a)
-gfoldl :: forall (c :: * -&gt; *).
+gfoldl :: forall (c :: Type -&gt; Type).
 (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
 -&gt; (forall g. g -&gt; c g) -&gt; Heap w a -&gt; c (Heap w a)
-$cgfoldl :: forall w a (c :: * -&gt; *).
+$cgfoldl :: forall w a (c :: Type -&gt; Type).
 (Data w, Data a) =&gt;
 (forall d b. Data d =&gt; c (d -&gt; b) -&gt; d -&gt; c b)
 -&gt; (forall g. g -&gt; c g) -&gt; Heap w a -&gt; c (Heap w a)
@@ -527,407 +537,415 @@ forall a. Rep1 (Heap w) a -&gt; Heap w a
 forall a. Heap w a -&gt; Rep1 (Heap w) a
 forall w a. Rep1 (Heap w) a -&gt; Heap w a
 forall w a. Heap w a -&gt; Rep1 (Heap w) a
-forall k (f :: k -&gt; *).
+forall k (f :: k -&gt; Type).
 (forall (a :: k). f a -&gt; Rep1 f a)
 -&gt; (forall (a :: k). Rep1 f a -&gt; f a) -&gt; Generic1 f
 $cto1 :: forall w a. Rep1 (Heap w) a -&gt; Heap w a
 $cfrom1 :: forall w a. Heap w a -&gt; Rep1 (Heap w) a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic1</span></span><span class="hs-special">)</span><span>
 </span><span id="line-36"></span><span>
-</span><span id="line-37"></span><span id="local-6989586621679094592"><span id="local-6989586621679094593"><span class="hs-keyword">instance</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="annot"><a href="#local-6989586621679094593"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="annot"><a href="#local-6989586621679094592"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094593"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094592"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-38"></span><span>  </span><span id="local-6989586621679094114"><span class="annot"><span class="annottext">rnf :: Heap w a -&gt; ()
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">rnf</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094112"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679094112"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094111"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094111"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094110"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679094110"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; ()
+</span><span id="line-37"></span><span id="local-6989586621679101943"><span id="local-6989586621679101944"><span class="hs-keyword">instance</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="annot"><a href="#local-6989586621679101944"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="annot"><a href="#local-6989586621679101943"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101944"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101943"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-38"></span><span>  </span><span id="local-6989586621679101465"><span class="annot"><span class="annottext">rnf :: Heap w a -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">rnf</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101463"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101463"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101462"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101462"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101461"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101461"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; ()
 forall a. NFData a =&gt; a -&gt; ()
 </span><span class="hs-identifier hs-var">rnf</span></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679094112"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">() -&gt; () -&gt; ()
+</span><a href="#local-6989586621679101463"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">() -&gt; () -&gt; ()
 </span><span class="hs-operator hs-var">`seq`</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; ()
 forall a. NFData a =&gt; a -&gt; ()
 </span><span class="hs-identifier hs-var">rnf</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094111"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">() -&gt; () -&gt; ()
+</span><a href="#local-6989586621679101462"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">() -&gt; () -&gt; ()
 </span><span class="hs-operator hs-var">`seq`</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a] -&gt; ()
 forall a. NFData a =&gt; a -&gt; ()
 </span><span class="hs-identifier hs-var">rnf</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679094110"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><a href="#local-6989586621679101461"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-39"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">rnf</span></span><span> </span><span class="hs-pragma">#-}</span></span></span><span>
 </span><span id="line-40"></span><span>
-</span><span id="line-41"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679094105"><span id="local-6989586621679094107"><span class="annot"><span class="hs-identifier hs-type">Bifunctor</span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-42"></span><span>  </span><span id="local-6989586621679094102"><span class="annot"><span class="annottext">bimap :: forall a b c d. (a -&gt; b) -&gt; (c -&gt; d) -&gt; Heap a c -&gt; Heap b d
-</span><a href="#local-6989586621679094102"><span class="hs-identifier hs-var hs-var hs-var hs-var">bimap</span></a></span></span><span> </span><span id="local-6989586621679094101"><span class="annot"><span class="annottext">a -&gt; b
-</span><a href="#local-6989586621679094101"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679094100"><span class="annot"><span class="annottext">c -&gt; d
-</span><a href="#local-6989586621679094100"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094099"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094099"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094098"><span class="annot"><span class="annottext">c
-</span><a href="#local-6989586621679094098"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094097"><span class="annot"><span class="annottext">[Heap a c]
-</span><a href="#local-6989586621679094097"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b -&gt; d -&gt; [Heap b d] -&gt; Heap b d
+</span><span id="line-41"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679101456"><span id="local-6989586621679101458"><span class="annot"><span class="hs-identifier hs-type">Bifunctor</span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-42"></span><span>  </span><span id="local-6989586621679101453"><span class="annot"><span class="annottext">bimap :: forall a b c d. (a -&gt; b) -&gt; (c -&gt; d) -&gt; Heap a c -&gt; Heap b d
+</span><a href="#local-6989586621679101453"><span class="hs-identifier hs-var hs-var hs-var hs-var">bimap</span></a></span></span><span> </span><span id="local-6989586621679101452"><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679101452"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679101451"><span class="annot"><span class="annottext">c -&gt; d
+</span><a href="#local-6989586621679101451"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101450"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101450"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101449"><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679101449"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101448"><span class="annot"><span class="annottext">[Heap a c]
+</span><a href="#local-6989586621679101448"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b -&gt; d -&gt; [Heap b d] -&gt; Heap b d
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; b
-</span><a href="#local-6989586621679094101"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094099"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">c -&gt; d
-</span><a href="#local-6989586621679094100"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">c
-</span><a href="#local-6989586621679094098"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a c -&gt; Heap b d) -&gt; [Heap a c] -&gt; [Heap b d]
+</span><a href="#local-6989586621679101452"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101450"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">c -&gt; d
+</span><a href="#local-6989586621679101451"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679101449"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a c -&gt; Heap b d) -&gt; [Heap a c] -&gt; [Heap b d]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; b) -&gt; (c -&gt; d) -&gt; Heap a c -&gt; Heap b d
-forall (p :: * -&gt; * -&gt; *) a b c d.
+forall (p :: Type -&gt; Type -&gt; Type) a b c d.
 Bifunctor p =&gt;
 (a -&gt; b) -&gt; (c -&gt; d) -&gt; p a c -&gt; p b d
 </span><span class="hs-identifier hs-var">bimap</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b
-</span><a href="#local-6989586621679094101"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">c -&gt; d
-</span><a href="#local-6989586621679094100"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a c]
-</span><a href="#local-6989586621679094097"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101452"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">c -&gt; d
+</span><a href="#local-6989586621679101451"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a c]
+</span><a href="#local-6989586621679101448"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-43"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">bimap</span></span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-44"></span><span>
 </span><span id="line-45"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bifoldable</span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-46"></span><span>  </span><span id="local-6989586621679094081"><span class="annot"><span class="annottext">bifold :: forall m. Monoid m =&gt; Heap m m -&gt; m
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifold</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094079"><span class="annot"><span class="annottext">m
-</span><a href="#local-6989586621679094079"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094078"><span class="annot"><span class="annottext">m
-</span><a href="#local-6989586621679094078"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094077"><span class="annot"><span class="annottext">[Heap m m]
-</span><a href="#local-6989586621679094077"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">m
-</span><a href="#local-6989586621679094079"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
+</span><span id="line-46"></span><span>  </span><span id="local-6989586621679101432"><span class="annot"><span class="annottext">bifold :: forall m. Monoid m =&gt; Heap m m -&gt; m
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifold</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101430"><span class="annot"><span class="annottext">m
+</span><a href="#local-6989586621679101430"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101429"><span class="annot"><span class="annottext">m
+</span><a href="#local-6989586621679101429"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101428"><span class="annot"><span class="annottext">[Heap m m]
+</span><a href="#local-6989586621679101428"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">m
+</span><a href="#local-6989586621679101430"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">m
-</span><a href="#local-6989586621679094078"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
+</span><a href="#local-6989586621679101429"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">(Heap m m -&gt; m) -&gt; [Heap m m] -&gt; m
-forall (t :: * -&gt; *) m a.
+forall (t :: Type -&gt; Type) m a.
 (Foldable t, Monoid m) =&gt;
 (a -&gt; m) -&gt; t a -&gt; m
 </span><span class="hs-identifier hs-var">foldMap</span></span><span> </span><span class="annot"><span class="annottext">Heap m m -&gt; m
-forall (p :: * -&gt; * -&gt; *) m. (Bifoldable p, Monoid m) =&gt; p m m -&gt; m
+forall (p :: Type -&gt; Type -&gt; Type) m.
+(Bifoldable p, Monoid m) =&gt;
+p m m -&gt; m
 </span><span class="hs-identifier hs-var">bifold</span></span><span> </span><span class="annot"><span class="annottext">[Heap m m]
-</span><a href="#local-6989586621679094077"><span class="hs-identifier hs-var">xs</span></a></span><span>
-</span><span id="line-47"></span><span>  </span><span id="local-6989586621679094067"><span class="annot"><span class="annottext">bifoldMap :: forall m a b. Monoid m =&gt; (a -&gt; m) -&gt; (b -&gt; m) -&gt; Heap a b -&gt; m
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifoldMap</span></span></span><span> </span><span id="local-6989586621679094065"><span class="annot"><span class="annottext">a -&gt; m
-</span><a href="#local-6989586621679094065"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679094064"><span class="annot"><span class="annottext">b -&gt; m
-</span><a href="#local-6989586621679094064"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094063"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094063"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094062"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094062"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094061"><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094061"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; m
-</span><a href="#local-6989586621679094065"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094063"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
+</span><a href="#local-6989586621679101428"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-47"></span><span>  </span><span id="local-6989586621679101418"><span class="annot"><span class="annottext">bifoldMap :: forall m a b. Monoid m =&gt; (a -&gt; m) -&gt; (b -&gt; m) -&gt; Heap a b -&gt; m
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifoldMap</span></span></span><span> </span><span id="local-6989586621679101416"><span class="annot"><span class="annottext">a -&gt; m
+</span><a href="#local-6989586621679101416"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679101415"><span class="annot"><span class="annottext">b -&gt; m
+</span><a href="#local-6989586621679101415"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101414"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101414"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101413"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101413"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101412"><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101412"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; m
+</span><a href="#local-6989586621679101416"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101414"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">b -&gt; m
-</span><a href="#local-6989586621679094064"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094062"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
+</span><a href="#local-6989586621679101415"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101413"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">m -&gt; m -&gt; m
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">(Heap a b -&gt; m) -&gt; [Heap a b] -&gt; m
-forall (t :: * -&gt; *) m a.
+forall (t :: Type -&gt; Type) m a.
 (Foldable t, Monoid m) =&gt;
 (a -&gt; m) -&gt; t a -&gt; m
 </span><span class="hs-identifier hs-var">foldMap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; m) -&gt; (b -&gt; m) -&gt; Heap a b -&gt; m
-forall (p :: * -&gt; * -&gt; *) m a b.
+forall (p :: Type -&gt; Type -&gt; Type) m a b.
 (Bifoldable p, Monoid m) =&gt;
 (a -&gt; m) -&gt; (b -&gt; m) -&gt; p a b -&gt; m
 </span><span class="hs-identifier hs-var">bifoldMap</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; m
-</span><a href="#local-6989586621679094065"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; m
-</span><a href="#local-6989586621679094064"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094061"><span class="hs-identifier hs-var">xs</span></a></span><span>
-</span><span id="line-48"></span><span>  </span><span id="local-6989586621679094058"><span class="annot"><span class="annottext">bifoldr :: forall a c b. (a -&gt; c -&gt; c) -&gt; (b -&gt; c -&gt; c) -&gt; c -&gt; Heap a b -&gt; c
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifoldr</span></span></span><span> </span><span id="local-6989586621679094056"><span class="annot"><span class="annottext">a -&gt; c -&gt; c
-</span><a href="#local-6989586621679094056"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679094055"><span class="annot"><span class="annottext">b -&gt; c -&gt; c
-</span><a href="#local-6989586621679094055"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span id="local-6989586621679094054"><span class="annot"><span class="annottext">c
-</span><a href="#local-6989586621679094054"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094053"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094053"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094052"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094052"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094051"><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094051"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; c -&gt; c
-</span><a href="#local-6989586621679094056"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094053"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">b -&gt; c -&gt; c
-</span><a href="#local-6989586621679094055"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094052"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a b -&gt; c -&gt; c) -&gt; c -&gt; [Heap a b] -&gt; c
-forall (t :: * -&gt; *) a b.
+</span><a href="#local-6989586621679101416"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; m
+</span><a href="#local-6989586621679101415"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101412"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-48"></span><span>  </span><span id="local-6989586621679101409"><span class="annot"><span class="annottext">bifoldr :: forall a c b. (a -&gt; c -&gt; c) -&gt; (b -&gt; c -&gt; c) -&gt; c -&gt; Heap a b -&gt; c
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifoldr</span></span></span><span> </span><span id="local-6989586621679101407"><span class="annot"><span class="annottext">a -&gt; c -&gt; c
+</span><a href="#local-6989586621679101407"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679101406"><span class="annot"><span class="annottext">b -&gt; c -&gt; c
+</span><a href="#local-6989586621679101406"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span id="local-6989586621679101405"><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679101405"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101404"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101404"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101403"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101403"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101402"><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101402"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; c -&gt; c
+</span><a href="#local-6989586621679101407"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101404"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">b -&gt; c -&gt; c
+</span><a href="#local-6989586621679101406"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101403"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a b -&gt; c -&gt; c) -&gt; c -&gt; [Heap a b] -&gt; c
+forall (t :: Type -&gt; Type) a b.
 Foldable t =&gt;
 (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b
 </span><span class="hs-identifier hs-var">foldr</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(c -&gt; Heap a b -&gt; c) -&gt; Heap a b -&gt; c -&gt; c
 forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c
 </span><span class="hs-identifier hs-var">flip</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; c -&gt; c) -&gt; (b -&gt; c -&gt; c) -&gt; c -&gt; Heap a b -&gt; c
-forall (p :: * -&gt; * -&gt; *) a c b.
+forall (p :: Type -&gt; Type -&gt; Type) a c b.
 Bifoldable p =&gt;
 (a -&gt; c -&gt; c) -&gt; (b -&gt; c -&gt; c) -&gt; c -&gt; p a b -&gt; c
 </span><span class="hs-identifier hs-var">bifoldr</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; c -&gt; c
-</span><a href="#local-6989586621679094056"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; c -&gt; c
-</span><a href="#local-6989586621679094055"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">c
-</span><a href="#local-6989586621679094054"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094051"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-49"></span><span>  </span><span id="local-6989586621679094046"><span class="annot"><span class="annottext">bifoldl :: forall c a b. (c -&gt; a -&gt; c) -&gt; (c -&gt; b -&gt; c) -&gt; c -&gt; Heap a b -&gt; c
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifoldl</span></span></span><span> </span><span id="local-6989586621679094044"><span class="annot"><span class="annottext">c -&gt; a -&gt; c
-</span><a href="#local-6989586621679094044"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679094043"><span class="annot"><span class="annottext">c -&gt; b -&gt; c
-</span><a href="#local-6989586621679094043"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span id="local-6989586621679094042"><span class="annot"><span class="annottext">c
-</span><a href="#local-6989586621679094042"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094041"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094041"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094040"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094040"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094039"><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094039"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(c -&gt; Heap a b -&gt; c) -&gt; c -&gt; [Heap a b] -&gt; c
-forall (t :: * -&gt; *) b a.
+</span><a href="#local-6989586621679101407"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; c -&gt; c
+</span><a href="#local-6989586621679101406"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679101405"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101402"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-49"></span><span>  </span><span id="local-6989586621679101397"><span class="annot"><span class="annottext">bifoldl :: forall c a b. (c -&gt; a -&gt; c) -&gt; (c -&gt; b -&gt; c) -&gt; c -&gt; Heap a b -&gt; c
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bifoldl</span></span></span><span> </span><span id="local-6989586621679101395"><span class="annot"><span class="annottext">c -&gt; a -&gt; c
+</span><a href="#local-6989586621679101395"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679101394"><span class="annot"><span class="annottext">c -&gt; b -&gt; c
+</span><a href="#local-6989586621679101394"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span id="local-6989586621679101393"><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679101393"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101392"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101392"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101391"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101391"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101390"><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101390"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(c -&gt; Heap a b -&gt; c) -&gt; c -&gt; [Heap a b] -&gt; c
+forall (t :: Type -&gt; Type) b a.
 Foldable t =&gt;
 (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b
 </span><span class="hs-identifier hs-var">foldl</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(c -&gt; a -&gt; c) -&gt; (c -&gt; b -&gt; c) -&gt; c -&gt; Heap a b -&gt; c
-forall (p :: * -&gt; * -&gt; *) c a b.
+forall (p :: Type -&gt; Type -&gt; Type) c a b.
 Bifoldable p =&gt;
 (c -&gt; a -&gt; c) -&gt; (c -&gt; b -&gt; c) -&gt; c -&gt; p a b -&gt; c
 </span><span class="hs-identifier hs-var">bifoldl</span></span><span> </span><span class="annot"><span class="annottext">c -&gt; a -&gt; c
-</span><a href="#local-6989586621679094044"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">c -&gt; b -&gt; c
-</span><a href="#local-6989586621679094043"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">c -&gt; b -&gt; c
-</span><a href="#local-6989586621679094043"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">c -&gt; a -&gt; c
-</span><a href="#local-6989586621679094044"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">c
-</span><a href="#local-6989586621679094042"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094041"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094040"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094039"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><a href="#local-6989586621679101395"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">c -&gt; b -&gt; c
+</span><a href="#local-6989586621679101394"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">c -&gt; b -&gt; c
+</span><a href="#local-6989586621679101394"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">c -&gt; a -&gt; c
+</span><a href="#local-6989586621679101395"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679101393"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101392"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101391"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101390"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-50"></span><span>  </span><span>
 </span><span id="line-51"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bitraversable</span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-52"></span><span>  </span><span id="local-6989586621679094024"><span class="annot"><span class="annottext">bitraverse :: forall (f :: * -&gt; *) a c b d.
+</span><span id="line-52"></span><span>  </span><span id="local-6989586621679101375"><span class="annot"><span class="annottext">bitraverse :: forall (f :: Type -&gt; Type) a c b d.
 Applicative f =&gt;
 (a -&gt; f c) -&gt; (b -&gt; f d) -&gt; Heap a b -&gt; f (Heap c d)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bitraverse</span></span></span><span> </span><span id="local-6989586621679094022"><span class="annot"><span class="annottext">a -&gt; f c
-</span><a href="#local-6989586621679094022"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679094021"><span class="annot"><span class="annottext">b -&gt; f d
-</span><a href="#local-6989586621679094021"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679094020"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094020"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679094019"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094019"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679094018"><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094018"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(c -&gt; d -&gt; [Heap c d] -&gt; Heap c d)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">bitraverse</span></span></span><span> </span><span id="local-6989586621679101373"><span class="annot"><span class="annottext">a -&gt; f c
+</span><a href="#local-6989586621679101373"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679101372"><span class="annot"><span class="annottext">b -&gt; f d
+</span><a href="#local-6989586621679101372"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101371"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101371"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101370"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101370"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101369"><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101369"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(c -&gt; d -&gt; [Heap c d] -&gt; Heap c d)
 -&gt; f c -&gt; f d -&gt; f [Heap c d] -&gt; f (Heap c d)
-forall (f :: * -&gt; *) a b c d.
+forall (f :: Type -&gt; Type) a b c d.
 Applicative f =&gt;
 (a -&gt; b -&gt; c -&gt; d) -&gt; f a -&gt; f b -&gt; f c -&gt; f d
 </span><span class="hs-identifier hs-var">liftA3</span></span><span> </span><span class="annot"><span class="annottext">c -&gt; d -&gt; [Heap c d] -&gt; Heap c d
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; f c
-</span><a href="#local-6989586621679094022"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679094020"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">b -&gt; f d
-</span><a href="#local-6989586621679094021"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679094019"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a b -&gt; f (Heap c d)) -&gt; [Heap a b] -&gt; f [Heap c d]
-forall (t :: * -&gt; *) (f :: * -&gt; *) a b.
+</span><a href="#local-6989586621679101373"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101371"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">b -&gt; f d
+</span><a href="#local-6989586621679101372"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101370"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a b -&gt; f (Heap c d)) -&gt; [Heap a b] -&gt; f [Heap c d]
+forall (t :: Type -&gt; Type) (f :: Type -&gt; Type) a b.
 (Traversable t, Applicative f) =&gt;
 (a -&gt; f b) -&gt; t a -&gt; f (t b)
 </span><span class="hs-identifier hs-var">traverse</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; f c) -&gt; (b -&gt; f d) -&gt; Heap a b -&gt; f (Heap c d)
-forall (t :: * -&gt; * -&gt; *) (f :: * -&gt; *) a c b d.
+forall (t :: Type -&gt; Type -&gt; Type) (f :: Type -&gt; Type) a c b d.
 (Bitraversable t, Applicative f) =&gt;
 (a -&gt; f c) -&gt; (b -&gt; f d) -&gt; t a b -&gt; f (t c d)
 </span><span class="hs-identifier hs-var">bitraverse</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; f c
-</span><a href="#local-6989586621679094022"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; f d
-</span><a href="#local-6989586621679094021"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679094018"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101373"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; f d
+</span><a href="#local-6989586621679101372"><span class="hs-identifier hs-var">g</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101369"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-53"></span><span>
 </span><span id="line-54"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary2</span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-55"></span><span>  </span><span id="local-6989586621679094000"><span class="annot"><span class="annottext">liftArbitrary2 :: forall a b. Gen a -&gt; Gen b -&gt; Gen (Heap a b)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftArbitrary2</span></span></span><span> </span><span id="local-6989586621679093998"><span class="annot"><span class="annottext">Gen a
-</span><a href="#local-6989586621679093998"><span class="hs-identifier hs-var">la</span></a></span></span><span> </span><span id="local-6989586621679093997"><span class="annot"><span class="annottext">Gen b
-</span><a href="#local-6989586621679093997"><span class="hs-identifier hs-var">ra</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Gen (Heap a b)) -&gt; Gen (Heap a b)
+</span><span id="line-55"></span><span>  </span><span id="local-6989586621679101351"><span class="annot"><span class="annottext">liftArbitrary2 :: forall a b. Gen a -&gt; Gen b -&gt; Gen (Heap a b)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftArbitrary2</span></span></span><span> </span><span id="local-6989586621679101349"><span class="annot"><span class="annottext">Gen a
+</span><a href="#local-6989586621679101349"><span class="hs-identifier hs-var">la</span></a></span></span><span> </span><span id="local-6989586621679101348"><span class="annot"><span class="annottext">Gen b
+</span><a href="#local-6989586621679101348"><span class="hs-identifier hs-var">ra</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Gen (Heap a b)) -&gt; Gen (Heap a b)
 forall a. (Int -&gt; Gen a) -&gt; Gen a
 </span><span class="hs-identifier hs-var">sized</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Gen (Heap a b)
-</span><a href="#local-6989586621679093996"><span class="hs-identifier hs-var">go</span></a></span><span>
+</span><a href="#local-6989586621679101347"><span class="hs-identifier hs-var">go</span></a></span><span>
 </span><span id="line-56"></span><span>    </span><span class="hs-keyword">where</span><span>
-</span><span id="line-57"></span><span>      </span><span id="local-6989586621679093996"><span class="annot"><span class="annottext">go :: Int -&gt; Gen (Heap a b)
-</span><a href="#local-6989586621679093996"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span id="local-6989586621679093995"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679093995"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; [Heap a b] -&gt; Heap a b
+</span><span id="line-57"></span><span>      </span><span id="local-6989586621679101347"><span class="annot"><span class="annottext">go :: Int -&gt; Gen (Heap a b)
+</span><a href="#local-6989586621679101347"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span id="local-6989586621679101346"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679101346"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; [Heap a b] -&gt; Heap a b
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">(a -&gt; b -&gt; [Heap a b] -&gt; Heap a b)
 -&gt; Gen a -&gt; Gen (b -&gt; [Heap a b] -&gt; Heap a b)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+forall (f :: Type -&gt; Type) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Gen a
-</span><a href="#local-6989586621679093998"><span class="hs-identifier hs-var">la</span></a></span><span> </span><span class="annot"><span class="annottext">Gen (b -&gt; [Heap a b] -&gt; Heap a b)
+</span><a href="#local-6989586621679101349"><span class="hs-identifier hs-var">la</span></a></span><span> </span><span class="annot"><span class="annottext">Gen (b -&gt; [Heap a b] -&gt; Heap a b)
 -&gt; Gen b -&gt; Gen ([Heap a b] -&gt; Heap a b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+forall (f :: Type -&gt; Type) a b.
+Applicative f =&gt;
+f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Gen b
-</span><a href="#local-6989586621679093997"><span class="hs-identifier hs-var">ra</span></a></span><span> </span><span class="annot"><span class="annottext">Gen ([Heap a b] -&gt; Heap a b) -&gt; Gen [Heap a b] -&gt; Gen (Heap a b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="#local-6989586621679101348"><span class="hs-identifier hs-var">ra</span></a></span><span> </span><span class="annot"><span class="annottext">Gen ([Heap a b] -&gt; Heap a b) -&gt; Gen [Heap a b] -&gt; Gen (Heap a b)
+forall (f :: Type -&gt; Type) a b.
+Applicative f =&gt;
+f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Gen [Int]
 </span><a href="MonusWeightedSearch.Internal.TestHelpers.html#sumsTo"><span class="hs-identifier hs-var">sumsTo</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679093995"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679101346"><span class="hs-identifier hs-var">n</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Gen [Int] -&gt; ([Int] -&gt; Gen [Heap a b]) -&gt; Gen [Heap a b]
-forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+forall (m :: Type -&gt; Type) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Gen (Heap a b)) -&gt; [Int] -&gt; Gen [Heap a b]
-forall (t :: * -&gt; *) (f :: * -&gt; *) a b.
+forall (t :: Type -&gt; Type) (f :: Type -&gt; Type) a b.
 (Traversable t, Applicative f) =&gt;
 (a -&gt; f b) -&gt; t a -&gt; f (t b)
 </span><span class="hs-identifier hs-var">traverse</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Gen (Heap a b)
-</span><a href="#local-6989586621679093996"><span class="hs-identifier hs-var">go</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101347"><span class="hs-identifier hs-var">go</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-58"></span><span>
-</span><span id="line-59"></span><span>  </span><span id="local-6989586621679093987"><span class="annot"><span class="annottext">liftShrink2 :: forall a b. (a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; Heap a b -&gt; [Heap a b]
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShrink2</span></span></span><span> </span><span id="local-6989586621679093985"><span class="annot"><span class="annottext">a -&gt; [a]
-</span><a href="#local-6989586621679093985"><span class="hs-identifier hs-var">ls</span></a></span></span><span> </span><span id="local-6989586621679093984"><span class="annot"><span class="annottext">b -&gt; [b]
-</span><a href="#local-6989586621679093984"><span class="hs-identifier hs-var">rs</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093983"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093983"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679093982"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679093982"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679093981"><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679093981"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-59"></span><span>  </span><span id="local-6989586621679101338"><span class="annot"><span class="annottext">liftShrink2 :: forall a b. (a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; Heap a b -&gt; [Heap a b]
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShrink2</span></span></span><span> </span><span id="local-6989586621679101336"><span class="annot"><span class="annottext">a -&gt; [a]
+</span><a href="#local-6989586621679101336"><span class="hs-identifier hs-var">ls</span></a></span></span><span> </span><span id="local-6989586621679101335"><span class="annot"><span class="annottext">b -&gt; [b]
+</span><a href="#local-6989586621679101335"><span class="hs-identifier hs-var">rs</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101334"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101334"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101333"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101333"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101332"><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101332"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-60"></span><span>    </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679093981"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap a b] -&gt; [Heap a b] -&gt; [Heap a b]
+</span><a href="#local-6989586621679101332"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap a b] -&gt; [Heap a b] -&gt; [Heap a b]
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">a -&gt; b -&gt; [Heap a b] -&gt; Heap a b
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093980"><span class="hs-identifier hs-var">w'</span></a></span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679093979"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679093978"><span class="hs-identifier hs-var">xs'</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span id="local-6989586621679093980"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093980"><span class="hs-identifier hs-var">w'</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679093979"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679093979"><span class="hs-identifier hs-var">x'</span></a></span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span id="local-6989586621679093978"><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679093978"><span class="hs-identifier hs-var">xs'</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((a, b) -&gt; [(a, b)])
+</span><a href="#local-6989586621679101331"><span class="hs-identifier hs-var">w'</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101330"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101329"><span class="hs-identifier hs-var">xs'</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span id="local-6989586621679101331"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101331"><span class="hs-identifier hs-var">w'</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101330"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101330"><span class="hs-identifier hs-var">x'</span></a></span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span id="local-6989586621679101329"><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101329"><span class="hs-identifier hs-var">xs'</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((a, b) -&gt; [(a, b)])
 -&gt; ([Heap a b] -&gt; [[Heap a b]])
 -&gt; ((a, b), [Heap a b])
 -&gt; [((a, b), [Heap a b])]
-forall (f :: * -&gt; * -&gt; *) a b.
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 Arbitrary2 f =&gt;
 (a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; f a b -&gt; [f a b]
 </span><span class="hs-identifier hs-var">liftShrink2</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; (a, b) -&gt; [(a, b)]
-forall (f :: * -&gt; * -&gt; *) a b.
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 Arbitrary2 f =&gt;
 (a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; f a b -&gt; [f a b]
 </span><span class="hs-identifier hs-var">liftShrink2</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; [a]
-</span><a href="#local-6989586621679093985"><span class="hs-identifier hs-var">ls</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; [b]
-</span><a href="#local-6989586621679093984"><span class="hs-identifier hs-var">rs</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a b -&gt; [Heap a b]) -&gt; [Heap a b] -&gt; [[Heap a b]]
-forall (f :: * -&gt; *) a. Arbitrary1 f =&gt; (a -&gt; [a]) -&gt; f a -&gt; [f a]
+</span><a href="#local-6989586621679101336"><span class="hs-identifier hs-var">ls</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; [b]
+</span><a href="#local-6989586621679101335"><span class="hs-identifier hs-var">rs</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap a b -&gt; [Heap a b]) -&gt; [Heap a b] -&gt; [[Heap a b]]
+forall (f :: Type -&gt; Type) a.
+Arbitrary1 f =&gt;
+(a -&gt; [a]) -&gt; f a -&gt; [f a]
 </span><span class="hs-identifier hs-var">liftShrink</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; Heap a b -&gt; [Heap a b]
-forall (f :: * -&gt; * -&gt; *) a b.
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 Arbitrary2 f =&gt;
 (a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; f a b -&gt; [f a b]
 </span><span class="hs-identifier hs-var">liftShrink2</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; [a]
-</span><a href="#local-6989586621679093985"><span class="hs-identifier hs-var">ls</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; [b]
-</span><a href="#local-6989586621679093984"><span class="hs-identifier hs-var">rs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093983"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679093982"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
-</span><a href="#local-6989586621679093981"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679101336"><span class="hs-identifier hs-var">ls</span></a></span><span> </span><span class="annot"><span class="annottext">b -&gt; [b]
+</span><a href="#local-6989586621679101335"><span class="hs-identifier hs-var">rs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101334"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679101333"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[Heap a b]
+</span><a href="#local-6989586621679101332"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
 </span><span id="line-61"></span><span>
-</span><span id="line-62"></span><span id="local-6989586621679094497"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679094497"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary1</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094497"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-63"></span><span>  </span><span id="local-6989586621679093969"><span class="annot"><span class="annottext">liftArbitrary :: forall a. Gen a -&gt; Gen (Heap w a)
+</span><span id="line-62"></span><span id="local-6989586621679101848"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679101848"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary1</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101848"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-63"></span><span>  </span><span id="local-6989586621679101320"><span class="annot"><span class="annottext">liftArbitrary :: forall a. Gen a -&gt; Gen (Heap w a)
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftArbitrary</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen w -&gt; Gen a -&gt; Gen (Heap w a)
-forall (f :: * -&gt; * -&gt; *) a b.
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 Arbitrary2 f =&gt;
 Gen a -&gt; Gen b -&gt; Gen (f a b)
 </span><span class="hs-identifier hs-var">liftArbitrary2</span></span><span> </span><span class="annot"><span class="annottext">Gen w
 forall a. Arbitrary a =&gt; Gen a
 </span><span class="hs-identifier hs-var">arbitrary</span></span><span>
-</span><span id="line-64"></span><span>  </span><span id="local-6989586621679093964"><span class="annot"><span class="annottext">liftShrink :: forall a. (a -&gt; [a]) -&gt; Heap w a -&gt; [Heap w a]
-</span><a href="#local-6989586621679093964"><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShrink</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(w -&gt; [w]) -&gt; (a -&gt; [a]) -&gt; Heap w a -&gt; [Heap w a]
-forall (f :: * -&gt; * -&gt; *) a b.
+</span><span id="line-64"></span><span>  </span><span id="local-6989586621679101315"><span class="annot"><span class="annottext">liftShrink :: forall a. (a -&gt; [a]) -&gt; Heap w a -&gt; [Heap w a]
+</span><a href="#local-6989586621679101315"><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShrink</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(w -&gt; [w]) -&gt; (a -&gt; [a]) -&gt; Heap w a -&gt; [Heap w a]
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 Arbitrary2 f =&gt;
 (a -&gt; [a]) -&gt; (b -&gt; [b]) -&gt; f a b -&gt; [f a b]
 </span><span class="hs-identifier hs-var">liftShrink2</span></span><span> </span><span class="annot"><span class="annottext">w -&gt; [w]
 forall a. Arbitrary a =&gt; a -&gt; [a]
 </span><span class="hs-identifier hs-var">shrink</span></span></span><span>
 </span><span id="line-65"></span><span>  </span><span>
-</span><span id="line-66"></span><span id="local-6989586621679094490"><span id="local-6989586621679094491"><span class="hs-keyword">instance</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679094491"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679094490"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094491"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094490"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-67"></span><span>  </span><span id="local-6989586621679093953"><span class="annot"><span class="annottext">arbitrary :: Gen (Heap w a)
-</span><a href="#local-6989586621679093953"><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen (Heap w a)
-forall (f :: * -&gt; * -&gt; *) a b.
+</span><span id="line-66"></span><span id="local-6989586621679101841"><span id="local-6989586621679101842"><span class="hs-keyword">instance</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679101842"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="#local-6989586621679101841"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101842"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101841"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-67"></span><span>  </span><span id="local-6989586621679101304"><span class="annot"><span class="annottext">arbitrary :: Gen (Heap w a)
+</span><a href="#local-6989586621679101304"><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen (Heap w a)
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 (Arbitrary2 f, Arbitrary a, Arbitrary b) =&gt;
 Gen (f a b)
 </span><span class="hs-identifier hs-var">arbitrary2</span></span><span>
-</span><span id="line-68"></span><span>  </span><span id="local-6989586621679093949"><span class="annot"><span class="annottext">shrink :: Heap w a -&gt; [Heap w a]
-</span><a href="#local-6989586621679093949"><span class="hs-identifier hs-var hs-var hs-var hs-var">shrink</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a]
-forall (f :: * -&gt; * -&gt; *) a b.
+</span><span id="line-68"></span><span>  </span><span id="local-6989586621679101300"><span class="annot"><span class="annottext">shrink :: Heap w a -&gt; [Heap w a]
+</span><a href="#local-6989586621679101300"><span class="hs-identifier hs-var hs-var hs-var hs-var">shrink</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a]
+forall (f :: Type -&gt; Type -&gt; Type) a b.
 (Arbitrary2 f, Arbitrary a, Arbitrary b) =&gt;
 f a b -&gt; [f a b]
 </span><span class="hs-identifier hs-var">shrink2</span></span></span></span><span>
 </span><span id="line-69"></span><span>
-</span><span id="line-70"></span><span id="local-6989586621679094481"><span id="local-6989586621679094483"><span class="annot"><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-type">(&lt;+&gt;)</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094483"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094483"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094481"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094483"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094481"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094483"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094481"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
-</span><span id="line-71"></span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093942"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093942"><span class="hs-identifier hs-var">xw</span></a></span></span><span> </span><span id="local-6989586621679093941"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093941"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679093940"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093940"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span id="%3C%2B%3E"><span class="annot"><span class="annottext">&lt;+&gt; :: forall w a. Monus w =&gt; Heap w a -&gt; Heap w a -&gt; Heap w a
-</span><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-var hs-var">&lt;+&gt;</span></a></span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093939"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093939"><span class="hs-identifier hs-var">yw</span></a></span></span><span> </span><span id="local-6989586621679093938"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093938"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span id="local-6989586621679093937"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093937"><span class="hs-identifier hs-var">ys</span></a></span></span><span>
+</span><span id="line-70"></span><span id="local-6989586621679101832"><span id="local-6989586621679101834"><span class="annot"><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-type">(&lt;+&gt;)</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101834"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101834"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101832"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101834"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101832"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101834"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101832"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-71"></span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101293"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101293"><span class="hs-identifier hs-var">xw</span></a></span></span><span> </span><span id="local-6989586621679101292"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101292"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101291"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101291"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span id="%3C%2B%3E"><span class="annot"><span class="annottext">&lt;+&gt; :: forall w a. Monus w =&gt; Heap w a -&gt; Heap w a -&gt; Heap w a
+</span><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-var hs-var">&lt;+&gt;</span></a></span></span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101290"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101290"><span class="hs-identifier hs-var">yw</span></a></span></span><span> </span><span id="local-6989586621679101289"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101289"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span id="local-6989586621679101288"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101288"><span class="hs-identifier hs-var">ys</span></a></span></span><span>
 </span><span id="line-72"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093942"><span class="hs-identifier hs-var">xw</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; Bool
+</span><a href="#local-6989586621679101293"><span class="hs-identifier hs-var">xw</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093939"><span class="hs-identifier hs-var">yw</span></a></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
+</span><a href="#local-6989586621679101290"><span class="hs-identifier hs-var">yw</span></a></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093942"><span class="hs-identifier hs-var">xw</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093941"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
+</span><a href="#local-6989586621679101293"><span class="hs-identifier hs-var">xw</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101292"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093939"><span class="hs-identifier hs-var">yw</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; w
+</span><a href="#local-6989586621679101290"><span class="hs-identifier hs-var">yw</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; w
 forall a. Monus a =&gt; a -&gt; a -&gt; a
 </span><a href="Data.Monus.html#%7C-%7C"><span class="hs-operator hs-var">|-|</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093942"><span class="hs-identifier hs-var">xw</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093938"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093937"><span class="hs-identifier hs-var">ys</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a] -&gt; [Heap w a]
+</span><a href="#local-6989586621679101293"><span class="hs-identifier hs-var">xw</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101289"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101288"><span class="hs-identifier hs-var">ys</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a] -&gt; [Heap w a]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093940"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101291"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-73"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093939"><span class="hs-identifier hs-var">yw</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093938"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
+</span><a href="#local-6989586621679101290"><span class="hs-identifier hs-var">yw</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101289"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093942"><span class="hs-identifier hs-var">xw</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; w
+</span><a href="#local-6989586621679101293"><span class="hs-identifier hs-var">xw</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; w
 forall a. Monus a =&gt; a -&gt; a -&gt; a
 </span><a href="Data.Monus.html#%7C-%7C"><span class="hs-operator hs-var">|-|</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093939"><span class="hs-identifier hs-var">yw</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093941"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093940"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a] -&gt; [Heap w a]
+</span><a href="#local-6989586621679101290"><span class="hs-identifier hs-var">yw</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101292"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101291"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a] -&gt; [Heap w a]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093937"><span class="hs-identifier hs-var">ys</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101288"><span class="hs-identifier hs-var">ys</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-74"></span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">&lt;+&gt;</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-75"></span><span>
-</span><span id="line-76"></span><span id="local-6989586621679094476"><span id="local-6989586621679094477"><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-type">mergeHeaps</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094477"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NonEmpty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094477"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094476"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094477"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094476"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-76"></span><span id="local-6989586621679101827"><span id="local-6989586621679101828"><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-type">mergeHeaps</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101828"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NonEmpty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101828"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101827"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101828"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101827"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
 </span><span id="line-77"></span><span id="mergeHeaps"><span class="annot"><span class="annottext">mergeHeaps :: forall w a. Monus w =&gt; NonEmpty (Heap w a) -&gt; Heap w a
-</span><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var hs-var">mergeHeaps</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679093929"><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093929"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="annot"><span class="hs-operator hs-type">:|</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span class="hs-special">)</span><span>           </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093929"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-78"></span><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var">mergeHeaps</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679093927"><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093927"><span class="hs-identifier hs-var">x1</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:|</span></span><span> </span><span id="local-6989586621679093926"><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093926"><span class="hs-identifier hs-var">x2</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span class="hs-special">)</span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093927"><span class="hs-identifier hs-var">x1</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Heap w a
+</span><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var hs-var">mergeHeaps</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679101280"><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101280"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="annot"><span class="hs-operator hs-type">:|</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span class="hs-special">)</span><span>           </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101280"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-78"></span><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var">mergeHeaps</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679101278"><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101278"><span class="hs-identifier hs-var">x1</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:|</span></span><span> </span><span id="local-6989586621679101277"><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101277"><span class="hs-identifier hs-var">x2</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span class="hs-special">)</span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101278"><span class="hs-identifier hs-var">x1</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Heap w a
 forall w a. Monus w =&gt; Heap w a -&gt; Heap w a -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-var">&lt;+&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093926"><span class="hs-identifier hs-var">x2</span></a></span><span>
-</span><span id="line-79"></span><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var">mergeHeaps</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679093925"><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093925"><span class="hs-identifier hs-var">x1</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:|</span></span><span> </span><span id="local-6989586621679093924"><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093924"><span class="hs-identifier hs-var">x2</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679093923"><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093923"><span class="hs-identifier hs-var">x3</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679093922"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093922"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093925"><span class="hs-identifier hs-var">x1</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Heap w a
+</span><a href="#local-6989586621679101277"><span class="hs-identifier hs-var">x2</span></a></span><span>
+</span><span id="line-79"></span><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var">mergeHeaps</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679101276"><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101276"><span class="hs-identifier hs-var">x1</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:|</span></span><span> </span><span id="local-6989586621679101275"><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101275"><span class="hs-identifier hs-var">x2</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679101274"><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101274"><span class="hs-identifier hs-var">x3</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679101273"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101273"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101276"><span class="hs-identifier hs-var">x1</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Heap w a
 forall w a. Monus w =&gt; Heap w a -&gt; Heap w a -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-var">&lt;+&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093924"><span class="hs-identifier hs-var">x2</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Heap w a
+</span><a href="#local-6989586621679101275"><span class="hs-identifier hs-var">x2</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w a -&gt; Heap w a
 forall w a. Monus w =&gt; Heap w a -&gt; Heap w a -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#%3C%2B%3E"><span class="hs-operator hs-var">&lt;+&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">NonEmpty (Heap w a) -&gt; Heap w a
 forall w a. Monus w =&gt; NonEmpty (Heap w a) -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var">mergeHeaps</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093923"><span class="hs-identifier hs-var">x3</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a] -&gt; NonEmpty (Heap w a)
+</span><a href="#local-6989586621679101274"><span class="hs-identifier hs-var">x3</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; [Heap w a] -&gt; NonEmpty (Heap w a)
 forall a. a -&gt; [a] -&gt; NonEmpty a
 </span><span class="hs-operator hs-var">:|</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093922"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101273"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-80"></span><span class="hs-pragma">{-# INLINABLE</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-pragma hs-type">mergeHeaps</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-81"></span><span>
-</span><span id="line-82"></span><span id="local-6989586621679094470"><span id="local-6989586621679094471"><span class="annot"><a href="Control.Comonad.Heap.html#%3C%3E%3C"><span class="hs-operator hs-type">(&lt;&gt;&lt;)</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="annot"><a href="#local-6989586621679094471"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679094471"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094471"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094470"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094471"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094470"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-82"></span><span id="local-6989586621679101821"><span id="local-6989586621679101822"><span class="annot"><a href="Control.Comonad.Heap.html#%3C%3E%3C"><span class="hs-operator hs-type">(&lt;&gt;&lt;)</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="annot"><a href="#local-6989586621679101822"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679101822"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101822"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101821"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101822"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101821"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
 </span><span id="line-83"></span><span id="%3C%3E%3C"><span class="annot"><span class="annottext">&lt;&gt;&lt; :: forall w a. Semigroup w =&gt; w -&gt; Heap w a -&gt; Heap w a
-</span><a href="Control.Comonad.Heap.html#%3C%3E%3C"><span class="hs-operator hs-var hs-var">(&lt;&gt;&lt;)</span></a></span></span><span> </span><span id="local-6989586621679093919"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093919"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093918"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093918"><span class="hs-identifier hs-var">ws</span></a></span></span><span> </span><span id="local-6989586621679093917"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093917"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679093916"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093916"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
+</span><a href="Control.Comonad.Heap.html#%3C%3E%3C"><span class="hs-operator hs-var hs-var">(&lt;&gt;&lt;)</span></a></span></span><span> </span><span id="local-6989586621679101270"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101270"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101269"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101269"><span class="hs-identifier hs-var">ws</span></a></span></span><span> </span><span id="local-6989586621679101268"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101268"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101267"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101267"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093919"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; w
+</span><a href="#local-6989586621679101270"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; w -&gt; w
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093918"><span class="hs-identifier hs-var">ws</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093917"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093916"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><a href="#local-6989586621679101269"><span class="hs-identifier hs-var">ws</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101268"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101267"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-84"></span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">&lt;&gt;&lt;</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-85"></span><span>
-</span><span id="line-86"></span><span id="local-6989586621679094466"><span id="local-6989586621679094467"><span class="annot"><a href="Control.Comonad.Heap.html#popMin"><span class="hs-identifier hs-type">popMin</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094467"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094467"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094466"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679094467"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679094466"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094467"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094466"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span></span></span><span>
+</span><span id="line-86"></span><span id="local-6989586621679101817"><span id="local-6989586621679101818"><span class="annot"><a href="Control.Comonad.Heap.html#popMin"><span class="hs-identifier hs-type">popMin</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Data.Monus.html#Monus"><span class="hs-identifier hs-type">Monus</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101818"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101818"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101817"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679101818"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679101817"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101818"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101817"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span></span></span><span>
 </span><span id="line-87"></span><span id="popMin"><span class="annot"><span class="annottext">popMin :: forall w a. Monus w =&gt; Heap w a -&gt; ((w, a), Maybe (Heap w a))
-</span><a href="Control.Comonad.Heap.html#popMin"><span class="hs-identifier hs-var hs-var">popMin</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093907"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093907"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679093906"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093906"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679093905"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093905"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093907"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093906"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(NonEmpty (Heap w a) -&gt; Heap w a)
+</span><a href="Control.Comonad.Heap.html#popMin"><span class="hs-identifier hs-var hs-var">popMin</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101258"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101258"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101257"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101257"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101256"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101256"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101258"><span class="hs-identifier hs-var">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101257"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">(NonEmpty (Heap w a) -&gt; Heap w a)
 -&gt; Maybe (NonEmpty (Heap w a)) -&gt; Maybe (Heap w a)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+forall (f :: Type -&gt; Type) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093907"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; Heap w a -&gt; Heap w a
+</span><a href="#local-6989586621679101258"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">w -&gt; Heap w a -&gt; Heap w a
 forall w a. Semigroup w =&gt; w -&gt; Heap w a -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#%3C%3E%3C"><span class="hs-operator hs-var">&lt;&gt;&lt;</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Heap w a -&gt; Heap w a)
 -&gt; (NonEmpty (Heap w a) -&gt; Heap w a)
@@ -939,18 +957,18 @@ forall w a. Monus w =&gt; NonEmpty (Heap w a) -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#mergeHeaps"><span class="hs-identifier hs-var">mergeHeaps</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Heap w a] -&gt; Maybe (NonEmpty (Heap w a))
 forall a. [a] -&gt; Maybe (NonEmpty a)
 </span><span class="hs-identifier hs-var">nonEmpty</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093905"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101256"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-88"></span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#popMin"><span class="hs-pragma hs-type">popMin</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-89"></span><span>
-</span><span id="line-90"></span><span id="local-6989586621679094458"><span id="local-6989586621679094459"><span class="annot"><a href="Control.Comonad.Heap.html#singleton"><span class="hs-identifier hs-type">singleton</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="#local-6989586621679094459"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679094458"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094459"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094458"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-90"></span><span id="local-6989586621679101809"><span id="local-6989586621679101810"><span class="annot"><a href="Control.Comonad.Heap.html#singleton"><span class="hs-identifier hs-type">singleton</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="#local-6989586621679101810"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679101809"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101810"><span class="hs-identifier hs-type">w</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101809"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
 </span><span id="line-91"></span><span id="singleton"><span class="annot"><span class="annottext">singleton :: forall w a. w -&gt; a -&gt; Heap w a
-</span><a href="Control.Comonad.Heap.html#singleton"><span class="hs-identifier hs-var hs-var">singleton</span></a></span></span><span> </span><span id="local-6989586621679093903"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093903"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679093902"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093902"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
+</span><a href="Control.Comonad.Heap.html#singleton"><span class="hs-identifier hs-var hs-var">singleton</span></a></span></span><span> </span><span id="local-6989586621679101254"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101254"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101253"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101253"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093903"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093902"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679101254"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101253"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
 </span><span id="line-92"></span><span>
 </span><span id="line-93"></span><span class="hs-comment">-- instance Monus w =&gt; Applicative (Heap w) where</span><span>
 </span><span id="line-94"></span><span class="hs-comment">--   pure x = Root mempty x []</span><span>
@@ -959,57 +977,59 @@ forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><span id="line-97"></span><span class="hs-comment">-- instance Monus w =&gt; Monad (Heap w) where</span><span>
 </span><span id="line-98"></span><span class="hs-comment">--   Root w x xs &gt;&gt;= k = w &lt;&gt;&lt; mergeHeaps (k x :| map (&gt;&gt;= k) xs)</span><span>
 </span><span id="line-99"></span><span>
-</span><span id="line-100"></span><span id="local-6989586621679094448"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Comonad</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094448"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-101"></span><span>  </span><span id="local-6989586621679093894"><span class="annot"><span class="annottext">extract :: forall a. Heap w a -&gt; a
+</span><span id="line-100"></span><span id="local-6989586621679101799"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Comonad</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101799"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-101"></span><span>  </span><span id="local-6989586621679101245"><span class="annot"><span class="annottext">extract :: forall a. Heap w a -&gt; a
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">extract</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679093892"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093892"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679101243"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101243"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093892"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679101243"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-102"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">extract</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-103"></span><span>  </span><span id="local-6989586621679093890"><span class="annot"><span class="annottext">duplicate :: forall a. Heap w a -&gt; Heap w (Heap w a)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">duplicate</span></span></span><span> </span><span id="local-6989586621679093888"><span class="annot"><span class="annottext">xh :: Heap w a
-</span><a href="#local-6989586621679093888"><span class="hs-identifier hs-var">xh</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093887"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093887"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679093886"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093886"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679093885"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093885"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; Heap w a -&gt; [Heap w (Heap w a)] -&gt; Heap w (Heap w a)
+</span><span id="line-103"></span><span>  </span><span id="local-6989586621679101241"><span class="annot"><span class="annottext">duplicate :: forall a. Heap w a -&gt; Heap w (Heap w a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">duplicate</span></span></span><span> </span><span id="local-6989586621679101239"><span class="annot"><span class="annottext">xh :: Heap w a
+</span><a href="#local-6989586621679101239"><span class="hs-identifier hs-var">xh</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101238"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101238"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101237"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101237"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101236"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101236"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; Heap w a -&gt; [Heap w (Heap w a)] -&gt; Heap w (Heap w a)
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093887"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093888"><span class="hs-identifier hs-var">xh</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap w a -&gt; Heap w (Heap w a))
+</span><a href="#local-6989586621679101238"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101239"><span class="hs-identifier hs-var">xh</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap w a -&gt; Heap w (Heap w a))
 -&gt; [Heap w a] -&gt; [Heap w (Heap w a)]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; Heap w (Heap w a)
-forall (w :: * -&gt; *) a. Comonad w =&gt; w a -&gt; w (w a)
+forall (w :: Type -&gt; Type) a. Comonad w =&gt; w a -&gt; w (w a)
 </span><span class="hs-identifier hs-var">duplicate</span></span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093885"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101236"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-104"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">duplicate</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-105"></span><span>  </span><span id="local-6989586621679093883"><span class="annot"><span class="annottext">extend :: forall a b. (Heap w a -&gt; b) -&gt; Heap w a -&gt; Heap w b
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">extend</span></span></span><span> </span><span id="local-6989586621679093881"><span class="annot"><span class="annottext">Heap w a -&gt; b
-</span><a href="#local-6989586621679093881"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679093880"><span class="annot"><span class="annottext">xh :: Heap w a
-</span><a href="#local-6989586621679093880"><span class="hs-identifier hs-var">xh</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093879"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093879"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span class="annot"><span class="annottext">a
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679093878"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093878"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; b -&gt; [Heap w b] -&gt; Heap w b
+</span><span id="line-105"></span><span>  </span><span id="local-6989586621679101234"><span class="annot"><span class="annottext">extend :: forall a b. (Heap w a -&gt; b) -&gt; Heap w a -&gt; Heap w b
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">extend</span></span></span><span> </span><span id="local-6989586621679101232"><span class="annot"><span class="annottext">Heap w a -&gt; b
+</span><a href="#local-6989586621679101232"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679101231"><span class="annot"><span class="annottext">xh :: Heap w a
+</span><a href="#local-6989586621679101231"><span class="hs-identifier hs-var">xh</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101230"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101230"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span class="annot"><span class="annottext">a
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679101229"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101229"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">w -&gt; b -&gt; [Heap w b] -&gt; Heap w b
 forall w a. w -&gt; a -&gt; [Heap w a] -&gt; Heap w a
 </span><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-var">Root</span></a></span><span> </span><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093879"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Heap w a -&gt; b
-</span><a href="#local-6989586621679093881"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a
-</span><a href="#local-6989586621679093880"><span class="hs-identifier hs-var">xh</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap w a -&gt; Heap w b) -&gt; [Heap w a] -&gt; [Heap w b]
+</span><a href="#local-6989586621679101230"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Heap w a -&gt; b
+</span><a href="#local-6989586621679101232"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">Heap w a
+</span><a href="#local-6989586621679101231"><span class="hs-identifier hs-var">xh</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap w a -&gt; Heap w b) -&gt; [Heap w a] -&gt; [Heap w b]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Heap w a -&gt; b) -&gt; Heap w a -&gt; Heap w b
-forall (w :: * -&gt; *) a b. Comonad w =&gt; (w a -&gt; b) -&gt; w a -&gt; w b
+forall (w :: Type -&gt; Type) a b.
+Comonad w =&gt;
+(w a -&gt; b) -&gt; w a -&gt; w b
 </span><span class="hs-identifier hs-var">extend</span></span><span> </span><span class="annot"><span class="annottext">Heap w a -&gt; b
-</span><a href="#local-6989586621679093881"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093878"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679101232"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101229"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-106"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">extend</span></span><span> </span><span class="hs-pragma">#-}</span></span><span>
 </span><span id="line-107"></span><span>
-</span><span id="line-108"></span><span id="local-6989586621679094438"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ComonadCofree</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679094438"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-109"></span><span>  </span><span id="local-6989586621679093870"><span class="annot"><span class="annottext">unwrap :: forall a. Heap w a -&gt; [Heap w a]
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">unwrap</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679093868"><span class="annot"><span class="annottext">w
-</span><a href="#local-6989586621679093868"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679093867"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679093867"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679093866"><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093866"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Heap w a]
-</span><a href="#local-6989586621679093866"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-108"></span><span id="local-6989586621679101789"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ComonadCofree</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Heap"><span class="hs-identifier hs-type">Heap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679101789"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-109"></span><span>  </span><span id="local-6989586621679101221"><span class="annot"><span class="annottext">unwrap :: forall a. Heap w a -&gt; [Heap w a]
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">unwrap</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Control.Comonad.Heap.html#Root"><span class="hs-identifier hs-type">Root</span></a></span><span> </span><span id="local-6989586621679101219"><span class="annot"><span class="annottext">w
+</span><a href="#local-6989586621679101219"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679101218"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679101218"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679101217"><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101217"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Heap w a]
+</span><a href="#local-6989586621679101217"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-110"></span><span>  </span><span class="hs-pragma">{-# INLINE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">unwrap</span></span><span> </span><span class="hs-pragma">#-}</span></span><span>
 </span><span id="line-111"></span></pre></body></html>
