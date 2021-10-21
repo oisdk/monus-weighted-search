@@ -10,6 +10,7 @@ import Control.Arrow ((&&&), (|||))
 import Data.Functor.Compose
 import Control.Comonad
 import Control.Monad
+import Data.List.NonEmpty (NonEmpty(..), nonEmpty, toList)
 
 type (+) = Either
 type (*) = (,)
@@ -88,9 +89,62 @@ prun :: Pairing w a -> Maybe (CoHeap w a)
 prun xs = xs Nothing
 
 popMin :: Monus w => CoHeap w a -> NEListF w a (CoHeap w a)
-popMin = Compose . fmap  (CofreeF . fmap (prun . foldr pcons pnil) . runCofreeF). getCompose . unFix
+popMin = Compose . fmap  (CofreeF . fmap (prun . foldr pcons pnil) . runCofreeF) . getCompose . unFix
 
 (<+>) :: Monus w => CoHeap w a -> CoHeap w a -> CoHeap w a
 Root xw x xs <+> Root yw y ys
   | xw <= yw  = Root xw x (Root (yw |-| xw) y ys : xs)
   | otherwise = Root yw y (Root (xw |-| yw) x xs : ys)
+
+
+-- Action   :: m -> a -> a
+-- coaction :: a -> (m, a)
+
+-- | A class for things that can be decomposed in a coassiciative way.
+--
+-- split x == (y :| []) ==> x == y
+-- all unital (unfoldr split x) where unital x = snd x == Nothing
+    
+class Comonoid a where
+  split :: a -> (a, Maybe a)
+  
+class Comonoid' a where
+  split' :: a -> NonEmpty a
+
+instance Comonoid (NonEmpty a) where
+  split (x :| xs) = (x :| [], nonEmpty xs)
+  
+instance Comonoid' (NonEmpty a) where
+  split' = fmap pure
+
+instance Comonoid Word where
+  split 0 = (0, Nothing)
+  split n = (0, Just (n-1))
+  
+instance Comonoid' Word where
+  split' n = 0 :| replicate (fromEnum n) 0
+
+
+instance Comonoid (CoHeap w a) where
+  split (Root w x xs) = (Root w x [], go xs)
+    where
+      go [] = Nothing
+      go (Root w x xs : xss) = Just (Root w x (xs ++ xss))
+  
+-- instance Comonoid' (CoHeap w a) where
+--   split' (Root w x xs) = Root w x [] :| xs
+
+-- -- instance Comonoid [a] where
+-- --   split (x1:x2:xs) = ([x1], Just (x2:xs))
+-- --   split xs = (xs, Nothing)
+
+-- law :: (Comonoid' a, Eq a) => a -> Either Bool ()
+-- law xs = either id (const False) $ do
+--     (y1,y2:| ys) <- split'' xs
+    
+    
+--   where
+--     split'' x = case split' x of
+--       (y :| []) -> Left (x == y)
+--       (y1 :| y2 : ys) -> Right (y1, y2 :| ys)
+  
