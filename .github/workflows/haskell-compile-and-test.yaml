@@ -71,5 +71,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3.7.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist-newstyle/build/x86_64-linux/ghc-${{ matrix.ghc-ver }}/monus-weighted-search-0.2.0.0/opt/doc/html/monus-weighted-search
+        publish_dir: dist-newstyle/build/x86_64-linux/ghc-${{ matrix.ghc-ver }}/monus-weighted-search-0.1.0.0/opt/doc/html/monus-weighted-search
         destination_dir: docs
