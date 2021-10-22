@@ -29,8 +29,6 @@ import Data.Bitraversable
 
 import Data.List (unfoldr)
 
-import Data.List.NonEmpty (nonEmpty)
-
 import Data.Monus
 import Data.Monus.Dist
 import Data.Monus.Max
@@ -108,7 +106,7 @@ singleton w x = Node (Root w x [])
 {-# INLINE singleton #-}
 
 fromList :: Monus w => [(w, a)] -> Heap w a
-fromList = node . fmap NonEmpty.mergeHeaps . nonEmpty . map (uncurry NonEmpty.singleton)
+fromList = node . NonEmpty.mergeHeaps . map (uncurry NonEmpty.singleton)
 {-# INLINE fromList #-}
 
 -- | An implementation of Dijkstra's algorithm on 'Graph's.

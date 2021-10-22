@@ -1,4 +1,15 @@
--- | 
+--------------------------------------------------------------------------------
+-- |
+-- Module      : Control.Comonad.Heap
+-- Copyright   : (c) Donnacha Oisín Kidney 2021
+-- Maintainer  : mail@doisinkidney.com
+-- Stability   : experimental
+-- Portability : non-portable
+--
+-- The Heap comonad: a comonad for efficient weighted search.
+--
+-- This module provides the 'Heap' *comonad*.
+--------------------------------------------------------------------------------
 
 module Control.Comonad.Heap
   (Heap(..)
@@ -15,7 +26,6 @@ import Data.Bitraversable ( Bitraversable(..) )
 import Control.Comonad.Cofree.Class ( ComonadCofree(..) )
 import Control.Comonad ( Comonad(..) )
 import Data.Monus ( Monus(..) )
-import Data.List.NonEmpty (NonEmpty(..), nonEmpty)
 import MonusWeightedSearch.Internal.TestHelpers ( sumsTo )
 import Test.QuickCheck
     ( shrink2,
@@ -73,22 +83,24 @@ Root xw x xs <+> Root yw y ys
   | otherwise = Root yw y (Root (xw |-| yw) x xs : ys)
 {-# INLINE (<+>) #-}
 
-mergeHeaps :: Monus w => NonEmpty (Heap w a) -> Heap w a
-mergeHeaps (x  :| [])           = x
-mergeHeaps (x1 :| x2 : [])      = x1 <+> x2
-mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
-{-# INLINABLE mergeHeaps #-}
+mergeHeaps :: Monus w => [Heap w a] -> Maybe (Heap w a)
+mergeHeaps xs = foldr pair id xs Nothing
+  where
+    pair x  k Nothing   = k (Just x)
+    pair x2 k (Just x1) = Just (maybe (x1 <+> x2) ((x1 <+> x2) <+>) (k Nothing))
+{-# INLINE mergeHeaps #-}
 
 (<><) :: Semigroup w => w -> Heap w a -> Heap w a
 (<><) w (Root ws x xs) = Root (w <> ws) x xs
 {-# INLINE (<><) #-}
 
 popMin :: Monus w => Heap w a -> ((w, a), Maybe (Heap w a))
-popMin (Root w x xs) = ((w, x), fmap ((w <><) . mergeHeaps) (nonEmpty xs))
+popMin (Root w x xs) = ((w, x), fmap (w <><) (mergeHeaps xs))
 {-# INLINE popMin #-}
 
 singleton :: w -> a -> Heap w a
 singleton w x = Root w x []
+{-# INLINE singleton #-}
 
 -- instance Monus w => Applicative (Heap w) where
 --   pure x = Root mempty x []
