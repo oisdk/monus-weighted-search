@@ -11,116 +11,155 @@
 -- This module provides the 'Heap' *comonad*.
 --------------------------------------------------------------------------------
 
+{-# LANGUAGE UndecidableInstances #-}
+
 module Control.Comonad.Heap
-  (Heap(..)
-  ,popMin
+  (HeapT(..)
+  ,Heap
+  ,popMinT
   ,(<+>)
   ,(<><)
   ,mergeHeaps
   ,singleton)
   where
 
-import Data.Bifunctor ( Bifunctor(bimap) )
+import Data.Bifunctor
 import Data.Bifoldable ( Bifoldable(..) )
 import Data.Bitraversable ( Bitraversable(..) )
-import Control.Comonad.Cofree.Class ( ComonadCofree(..) )
-import Control.Comonad ( Comonad(..) )
-import Data.Monus ( Monus(..) )
 import MonusWeightedSearch.Internal.TestHelpers ( sumsTo )
 import Test.QuickCheck
-    ( shrink2,
-      arbitrary2,
-      sized,
-      Arbitrary(..),
-      Arbitrary1(..),
-      Arbitrary2(..) )
-import Control.Applicative ( liftA3 )
+import Control.Applicative ( liftA2 )
 import Data.Typeable (Typeable)
 import Data.Data (Data)
 import GHC.Generics (Generic, Generic1)
 import Control.DeepSeq (NFData(..))
-import Control.Monad (ap)
+import Data.Monus
 import Data.List.NonEmpty (NonEmpty(..), nonEmpty)
+import Data.Functor.Identity
+import Control.Monad (ap, join)
+import Control.Comonad
+import Control.Comonad.Cofree.Class
 
-data Heap w a
-  = Root !w a [Heap w a]
-  deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
+data HeapT w m a
+  = !w :< m (RootF a (HeapT w m a))
+  deriving (Typeable, Generic)
 
-instance (NFData w, NFData a) => NFData (Heap w a) where
-  rnf (Root w x xs) = rnf w `seq` rnf x `seq` rnf xs
+type Heap w = HeapT w Identity
+
+deriving instance (Show a, Show w, forall x. Show x => Show (m x)) => Show (HeapT w m a)
+deriving instance (Eq a, Eq w, forall x. Eq x => Eq (m x)) => Eq (HeapT w m a)
+deriving instance ( Ord w, Ord a
+                  , forall x. Ord x => Ord (m x)
+                  , Eq (HeapT w m a)
+                  ) => Ord (HeapT w m a)
+
+deriving instance (Data w, Data a, forall x. Data x => Data (m x), Typeable m) => Data (HeapT w m a)
+
+data RootF a b
+  = a :> [b]
+  deriving (Functor, Foldable, Traversable, Typeable, Generic, Eq, Ord, Show, Read, Generic1, Data)
+
+
+instance Bifunctor RootF where
+  bimap f g (x :> y) = f x :> map g y
+  first f (x :> y) = f x :> y
+  second f (x :> y) = x :> map f y
+
+instance Bifoldable RootF where
+  bifoldr f g b (x :> xs) = f x (foldr g b xs)
+
+instance Bitraversable RootF where
+  bitraverse f g (x :> xs) = liftA2 (:>) (f x) (traverse g xs)
+
+instance (NFData a, NFData b) => NFData (RootF a b) where
+  rnf (x :> xs) = rnf x `seq` rnf xs
+  {-# INLINE rnf #-}
+  
+instance (NFData w, NFData a, forall x. NFData x => NFData (m x)) => NFData (HeapT w m a) where
+  rnf (x :< xs) = rnf x `seq` rnf xs
   {-# INLINE rnf #-}
 
-instance Bifunctor Heap where
-  bimap f g (Root w x xs) = Root (f w) (g x) (map (bimap f g) xs)
-  {-# INLINE bimap #-}
-
-instance Bifoldable Heap where
-  bifold (Root w x xs) = w <> x <> foldMap bifold xs
-  bifoldMap f g (Root w x xs) = f w <> g x <> foldMap (bifoldMap f g) xs
-  bifoldr f g b (Root w x xs) = f w (g x (foldr (flip (bifoldr f g)) b xs))
-  bifoldl f g b (Root w x xs) = foldl (bifoldl f g) (g (f b w) x) xs
+instance Arbitrary2 RootF where
+  liftArbitrary2 la ra = sized (\n -> liftA2 (:>) la (sumsTo (n-1) >>= traverse (`resize` ra)))
+  liftShrink2 ls rs (x :> xs) = map (uncurry (:>)) (liftShrink2 ls (liftShrink rs) (x, xs))
   
-instance Bitraversable Heap where
-  bitraverse f g (Root w x xs) = liftA3 Root (f w) (g x) (traverse (bitraverse f g) xs)
-
-instance Arbitrary2 Heap where
-  liftArbitrary2 la ra = sized go
-    where
-      go n = Root <$> la <*> ra <*> (sumsTo (n-1) >>= traverse go)
-
-  liftShrink2 ls rs (Root w x xs) =
-    xs ++ [Root w' x' xs' | ((w', x'), xs') <- liftShrink2 (liftShrink2 ls rs) (liftShrink (liftShrink2 ls rs)) ((w, x), xs) ]
-
-instance Arbitrary w => Arbitrary1 (Heap w) where
+instance Arbitrary a => Arbitrary1 (RootF a) where
   liftArbitrary = liftArbitrary2 arbitrary
   liftShrink = liftShrink2 shrink
   
-instance (Arbitrary w, Arbitrary a) => Arbitrary (Heap w a) where
-  arbitrary = arbitrary2
-  shrink = shrink2
+instance (Arbitrary a, Arbitrary b) => Arbitrary (RootF a b) where
+  arbitrary = liftArbitrary arbitrary
+  shrink = liftShrink shrink
 
-(<+>) :: Monus w => Heap w a -> Heap w a -> Heap w a
-Root xw x xs <+> Root yw y ys
-  | xw <= yw  = Root xw x (Root (yw |-| xw) y ys : xs)
-  | otherwise = Root yw y (Root (xw |-| yw) x xs : ys)
+instance (Arbitrary w, Arbitrary1 m) => Arbitrary1 (HeapT w m) where
+  liftArbitrary ra = sized go
+    where
+      go n = liftA2 (:<) arbitrary (resize (max 0 (n-1)) (liftArbitrary (liftA2 (:>) ra (sumsTo (n-2) >>= traverse go))))
+
+  liftShrink rs (w :< xs) =
+    map (uncurry (:<)) (liftShrink2 shrink (liftShrink (map (uncurry (:>)) . liftShrink2 rs (liftShrink (liftShrink rs)) . toPair)) (w, xs))
+      where
+        toPair (x :> xs) = (x, xs)
+
+instance (Arbitrary w, Arbitrary a, forall x. Arbitrary x => Arbitrary (m x)) => Arbitrary (HeapT w m a) where
+  arbitrary = sized go
+    where
+      go n = liftA2 (:<) arbitrary (resize (max 0 (n-1)) arbitrary)
+  
+instance Functor m => Functor (HeapT w m) where
+  fmap f (w :< xs) = w :< fmap (bimap f (fmap f)) xs
+
+instance Foldable m => Foldable (HeapT w m) where
+  foldr f b (_ :< xs) = foldr (\(y :> ys) z -> f y (foldr (flip (foldr f)) z ys)) b xs
+  foldMap f (_ :< xs) = foldMap (\(y :> ys) -> f y <> foldMap (foldMap f) ys) xs
+  foldl f b (_ :< xs) = foldl (\z (y :> ys) -> foldl (foldl f) (f z y) ys) b xs
+
+instance Traversable m => Traversable (HeapT w m) where
+  traverse f (w :< xs) = fmap (w :<) (traverse (bitraverse f (traverse f)) xs)
+
+(<+>) :: (Monus w, Functor m) => HeapT w m a -> HeapT w m a -> HeapT w m a
+(xw :< xh) <+> (yw :< yh)
+  | xw <= yw  = xw :< fmap (\(x :> xs) -> x :> (((yw |-| xw) :< yh) : xs)) xh
+  | otherwise = yw :< fmap (\(y :> ys) -> y :> (((xw |-| yw) :< xh) : ys)) yh
 {-# INLINE (<+>) #-}
 
-mergeHeaps :: Monus w => NonEmpty (Heap w a) -> Heap w a
+mergeHeaps :: (Monus w, Functor m) => NonEmpty (HeapT w m a) -> HeapT w m a
 mergeHeaps (x  :| [])           = x
 mergeHeaps (x1 :| x2 : [])      = x1 <+> x2
 mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
 {-# INLINE mergeHeaps #-}
 
-(<><) :: Semigroup w => w -> Heap w a -> Heap w a
-(<><) w (Root ws x xs) = Root (w <> ws) x xs
+(<><) :: Semigroup w => w -> HeapT w m a -> HeapT w m a
+(<><) w (ws :< xs) = (w <> ws) :< xs
 {-# INLINE (<><) #-}
 
-popMin :: Monus w => Heap w a -> ((w, a), Maybe (Heap w a))
-popMin (Root w x xs) = ((w, x), fmap ((w <><) . mergeHeaps) (nonEmpty xs))
-{-# INLINE popMin #-}
+popMinT :: (Monus w, Functor m) => HeapT w m a -> (w,  m (a, Maybe (HeapT w m a)))
+popMinT (w :< xh) = (w,  fmap (\(x :> xs) -> (x, fmap ((w <><) . mergeHeaps) (nonEmpty xs))) xh)
+{-# INLINE popMinT #-}
 
-singleton :: w -> a -> Heap w a
-singleton w x = Root w x []
+singleton :: Applicative m => w -> a -> HeapT w m a
+singleton w x = w :< pure (x :> [])
 {-# INLINE singleton #-}
 
-instance Monoid w => Applicative (Heap w) where
-  pure x = Root mempty x []
+instance (Monoid w, Monad m, Traversable m) => Applicative (HeapT w m) where
+  pure x = mempty :< pure (x :> [])
   {-# INLINE pure #-}
   (<*>) = ap
 
-instance Monoid w => Monad (Heap w) where
-  Root w1 x xs >>= k = case k x of
-    Root w2 y ys -> Root (w1 <> w2) y (ys ++ map (>>= k) xs)
+instance (Monoid w, Monad m, Traversable m) => Monad (HeapT w m) where
+  (w1 :< xs) >>= k =
+    let (w2, ys) = traverse (\(x :> xs) -> let w2 :< ys = k x in (w2, fmap (\(z :> zs) -> z :> (zs ++ map (>>= k) xs)) ys)) xs
+    in (w1 <> w2) :< join ys
   {-# INLINE (>>=) #-}
 
-instance Comonad (Heap w) where
-  extract (Root _ x _) = x
+instance Comonad m => Comonad (HeapT w m) where
+  extract (_ :< xs) = case extract xs of
+    x :> _ -> x
   {-# INLINE extract #-}
-  duplicate xh@(Root w x xs) = Root w xh (map duplicate xs)
-  {-# INLINE duplicate #-}
-  extend f xh@(Root w _ xs) = Root w (f xh) (map (extend f) xs)
+
+  extend f xh@(w :< xc) = w :< extend (\yc -> f (w :< yc) :> fmap (extend f) (let _ :> ys = extract yc in ys)) xc
   {-# INLINE extend #-}
 
-instance ComonadCofree [] (Heap w) where
-  unwrap (Root w x xs) = xs
+instance Comonad m => ComonadCofree [] (HeapT w m) where
+  unwrap (w :< xs) = let _ :> ys = extract xs in ys
   {-# INLINE unwrap #-}
