@@ -41,11 +41,14 @@ import Control.Comonad
 import Control.Comonad.Cofree.Class
 import Data.Foldable (Foldable(foldl', foldr'))
 
-import Control.Monad.State.Strict
+import Control.Monad.State.Strict (modify', runState)
 
 data HeapT w m a
   = !w :< m (RootF a (HeapT w m a))
   deriving (Typeable, Generic)
+
+heapUnwrap :: HeapT w m a -> m (RootF a (HeapT w m a))
+heapUnwrap (_ :< xs) = xs
 
 type Heap w = HeapT w Identity
 
@@ -61,6 +64,12 @@ deriving instance (Data w, Data a, forall x. Data x => Data (m x), Typeable m) =
 data RootF a b
   = a :> [b]
   deriving (Functor, Foldable, Traversable, Typeable, Generic, Eq, Ord, Show, Read, Generic1, Data)
+
+extractF :: RootF a b -> a
+extractF (x :> _) = x
+
+tailF :: RootF a b -> [b]
+tailF (_ :> x) = x
 
 instance Bifunctor RootF where
   bimap f g (x :> y) = f x :> map g y
@@ -122,12 +131,12 @@ instance Functor m => Functor (HeapT w m) where
   {-# INLINE fmap #-}
 
 instance Foldable m => Foldable (HeapT w m) where
-  foldr f b (_ :< xs) = foldr (\(y :> ys) z -> f y (foldr (flip (foldr f)) z ys)) b xs
-  foldMap f (_ :< xs) = foldMap (\(y :> ys) -> f y <> foldMap (foldMap f) ys) xs
-  foldl f b (_ :< xs) = foldl (\z (y :> ys) -> foldl (foldl f) (f z y) ys) b xs
+  foldr f b = foldr (\(y :> ys) z -> f y (foldr (flip (foldr f)) z ys)) b . heapUnwrap
+  foldMap f = foldMap (\(y :> ys) -> f y <> foldMap (foldMap f) ys) . heapUnwrap
+  foldl f b = foldl (\z (y :> ys) -> foldl (foldl f) (f z y) ys) b . heapUnwrap
   
-  foldl' f !b (_ :< xs) = foldl' (\ !z (y :> ys) -> case f z y of !z' -> foldl' (foldl' f) z' ys) b xs
-  foldr' f !b (_ :< xs) = foldr' (\(y :> ys) !z -> f y $! foldr (flip (foldr f)) z ys) b xs
+  foldl' f !b = foldl' (\ !z (y :> ys) -> case f z y of !z' -> foldl' (foldl' f) z' ys) b . heapUnwrap
+  foldr' f !b = foldr' (\(y :> ys) !z -> f y $! foldr (flip (foldr f)) z ys) b . heapUnwrap
 
 instance Traversable m => Traversable (HeapT w m) where
   traverse f (w :< xs) = fmap (w :<) (traverse (bitraverse f (traverse f)) xs)
@@ -177,13 +186,12 @@ instance (Monoid w, Monad m, Traversable m) => Monad (HeapT w m) where
   {-# INLINE (>>=) #-}
 
 instance Comonad m => Comonad (HeapT w m) where
-  extract (_ :< xs) = case extract xs of
-    x :> _ -> x
+  extract = extractF . extract . heapUnwrap
   {-# INLINE extract #-}
 
-  extend f xh@(w :< xc) = w :< extend (\yc -> f (w :< yc) :> fmap (extend f) (let _ :> ys = extract yc in ys)) xc
+  extend f xh@(w :< xc) = w :< extend (\yc -> f (w :< yc) :> fmap (extend f) (tailF (extract yc))) xc
   {-# INLINE extend #-}
 
 instance Comonad m => ComonadCofree [] (HeapT w m) where
-  unwrap (w :< xs) = let _ :> ys = extract xs in ys
+  unwrap = tailF . extract . heapUnwrap
   {-# INLINE unwrap #-}
