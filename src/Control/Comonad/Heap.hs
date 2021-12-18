@@ -39,6 +39,8 @@ import Data.Typeable (Typeable)
 import Data.Data (Data)
 import GHC.Generics (Generic, Generic1)
 import Control.DeepSeq (NFData(..))
+import Control.Monad (ap)
+import Data.List.NonEmpty (NonEmpty(..), nonEmpty)
 
 data Heap w a
   = Root !w a [Heap w a]
@@ -83,11 +85,10 @@ Root xw x xs <+> Root yw y ys
   | otherwise = Root yw y (Root (xw |-| yw) x xs : ys)
 {-# INLINE (<+>) #-}
 
-mergeHeaps :: Monus w => [Heap w a] -> Maybe (Heap w a)
-mergeHeaps xs = foldr pair id xs Nothing
-  where
-    pair x  k Nothing   = k (Just x)
-    pair x2 k (Just x1) = Just (maybe (x1 <+> x2) ((x1 <+> x2) <+>) (k Nothing))
+mergeHeaps :: Monus w => NonEmpty (Heap w a) -> Heap w a
+mergeHeaps (x  :| [])           = x
+mergeHeaps (x1 :| x2 : [])      = x1 <+> x2
+mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
 {-# INLINE mergeHeaps #-}
 
 (<><) :: Semigroup w => w -> Heap w a -> Heap w a
@@ -95,19 +96,22 @@ mergeHeaps xs = foldr pair id xs Nothing
 {-# INLINE (<><) #-}
 
 popMin :: Monus w => Heap w a -> ((w, a), Maybe (Heap w a))
-popMin (Root w x xs) = ((w, x), fmap (w <><) (mergeHeaps xs))
+popMin (Root w x xs) = ((w, x), fmap ((w <><) . mergeHeaps) (nonEmpty xs))
 {-# INLINE popMin #-}
 
 singleton :: w -> a -> Heap w a
 singleton w x = Root w x []
 {-# INLINE singleton #-}
 
--- instance Monus w => Applicative (Heap w) where
---   pure x = Root mempty x []
---   (<*>) = ap
+instance Monoid w => Applicative (Heap w) where
+  pure x = Root mempty x []
+  {-# INLINE pure #-}
+  (<*>) = ap
 
--- instance Monus w => Monad (Heap w) where
---   Root w x xs >>= k = w <>< mergeHeaps (k x :| map (>>= k) xs)
+instance Monoid w => Monad (Heap w) where
+  Root w1 x xs >>= k = case k x of
+    Root w2 y ys -> Root (w1 <> w2) y (ys ++ map (>>= k) xs)
+  {-# INLINE (>>=) #-}
 
 instance Comonad (Heap w) where
   extract (Root _ x _) = x
