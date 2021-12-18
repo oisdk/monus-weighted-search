@@ -154,7 +154,7 @@ mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
 {-# INLINE mergeHeaps #-}
 
 (<><) :: Semigroup w => w -> HeapT w m a -> HeapT w m a
-(<><) w (ws :< xs) = (w <> ws) :< xs
+w <>< (ws :< xs) = (w <> ws) :< xs
 {-# INLINE (<><) #-}
 
 popMinT :: (Monus w, Functor m) => HeapT w m a -> (w,  m (a, Maybe (HeapT w m a)))
