@@ -13,7 +13,6 @@ module Control.Comonad.Heap.Pointed
   where
 
 import qualified Control.Comonad.Heap as NonEmpty
-import Control.Comonad.Heap (pattern Root)
 
 import qualified Data.Set as Set
 
@@ -21,11 +20,8 @@ import Data.Data ( Data, Typeable )
 import GHC.Generics ( Generic, Generic1 )
 import Control.DeepSeq (NFData(..))
 
-import Control.Applicative
 import Test.QuickCheck
-import Data.Bifunctor
-import Data.Bifoldable
-import Data.Bitraversable
+import Data.Functor.Identity
 
 import Data.List (unfoldr)
 
@@ -33,13 +29,18 @@ import Data.Monus
 import Data.Monus.Dist
 import Data.Monus.Max
 import Data.Tuple (swap)
+import Data.List.NonEmpty (nonEmpty)
 
-type Root = NonEmpty.Heap
+type Root w = NonEmpty.Heap w
+
+pattern Root :: w -> a -> [NonEmpty.HeapT w Identity a] -> NonEmpty.HeapT w Identity a
+pattern Root w x xs = w NonEmpty.:< Identity (x NonEmpty.:> xs)
+{-# COMPLETE Root #-}
 
 data Heap w a
   = Leaf
   | Node {-# UNPACK #-} !(Root w a)
-  deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
+  deriving (Show, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
 
 heap :: b -> (Root w a -> b) -> Heap w a -> b
 heap b k = \case
@@ -58,33 +59,9 @@ root = heap Nothing Just
 instance (NFData w, NFData a) => NFData (Heap w a) where
   rnf = heap () rnf
 
-instance Bifunctor Heap where
-  bimap f g = heap Leaf (Node . bimap f g)
-
-instance Bifoldable Heap where
-  bifold = heap mempty bifold
-  
-  bifoldMap f g = heap mempty (bifoldMap f g)
-
-  bifoldr f g b = heap b (bifoldr f g b)
-  bifoldl f g b = heap b (bifoldl f g b)
-
-instance Bitraversable Heap where
-  bitraverse f g Leaf = pure Leaf
-  bitraverse f g (Node (Root w x xs)) = liftA3 (\w' x' xs' -> Node (Root w' x' xs')) (f w) (g x) (traverse (bitraverse f g) xs)
-
-instance Arbitrary2 Heap where
-  liftArbitrary2 ls rs = sized (\n -> frequency [(1, pure Leaf), (n, fmap Node (liftArbitrary2 ls rs))])
-  liftShrink2 _ _ Leaf = []
-  liftShrink2 ls rs (Node x) = Leaf : map Node (liftShrink2 ls rs x)
-  
-instance Arbitrary w => Arbitrary1 (Heap w) where
-  liftArbitrary = liftArbitrary2 arbitrary
-  liftShrink = liftShrink2 shrink
-  
 instance (Arbitrary w, Arbitrary a) => Arbitrary (Heap w a) where
-  arbitrary = liftArbitrary2 arbitrary arbitrary
-  shrink = liftShrink2 shrink shrink
+  arbitrary = fmap node arbitrary
+  shrink = map node . shrink . root
 
 (<+>) :: Monus w => Heap w a -> Heap w a -> Heap w a
 Leaf <+> ys = ys
@@ -106,7 +83,7 @@ singleton w x = Node (Root w x [])
 {-# INLINE singleton #-}
 
 fromList :: Monus w => [(w, a)] -> Heap w a
-fromList = node . NonEmpty.mergeHeaps . map (uncurry NonEmpty.singleton)
+fromList = node . fmap NonEmpty.mergeHeaps . nonEmpty . map (uncurry NonEmpty.singleton)
 {-# INLINE fromList #-}
 
 -- | An implementation of Dijkstra's algorithm on 'Graph's.
