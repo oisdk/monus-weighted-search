@@ -38,7 +38,7 @@ import Control.Applicative ( liftA3 )
 import Data.Typeable (Typeable)
 import Data.Data (Data)
 import GHC.Generics (Generic, Generic1)
-import Control.DeepSeq (NFData(..))
+import Control.DeepSeq (NFData(..), NFData1(..), NFData2(..))
 import Control.Monad (ap)
 import Data.List.NonEmpty (NonEmpty(..), nonEmpty)
 import Data.Functor.Classes
@@ -90,6 +90,14 @@ instance Read w => Read1 (Heap w) where liftReadPrec = liftReadPrec2 readPrec re
 instance (NFData w, NFData a) => NFData (Heap w a) where
   rnf (Root w x xs) = rnf w `seq` rnf x `seq` rnf xs
   {-# INLINE rnf #-}
+
+instance NFData2 Heap where
+  liftRnf2 r1 r2 (Root w x xs) = r1 w `seq` r2 x `seq` liftRnf (liftRnf2 r1 r2) xs
+  {-# INLINE liftRnf2 #-}
+  
+instance NFData w => NFData1 (Heap w) where
+  liftRnf = liftRnf2 rnf
+  {-# INLINE liftRnf #-}
 
 instance Bifunctor Heap where
   bimap f g (Root w x xs) = Root (f w) (g x) (map (bimap f g) xs)
