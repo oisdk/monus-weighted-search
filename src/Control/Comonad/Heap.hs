@@ -66,7 +66,7 @@ instance Bitraversable Heap where
 instance Arbitrary2 Heap where
   liftArbitrary2 la ra = sized go
     where
-      go n = Root <$> la <*> ra <*> (sumsTo (n-1) >>= traverse go)
+      go n = liftA3 Root la ra (sumsTo (n-1) >>= traverse go)
 
   liftShrink2 ls rs (Root w x xs) =
     xs ++ [Root w' x' xs' | ((w', x'), xs') <- liftShrink2 (liftShrink2 ls rs) (liftShrink (liftShrink2 ls rs)) ((w, x), xs) ]

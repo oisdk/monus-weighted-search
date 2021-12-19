@@ -33,6 +33,7 @@ import Data.Monus
 import Data.Monus.Dist
 import Data.Monus.Max
 import Data.Tuple (swap)
+import Data.List.NonEmpty (nonEmpty)
 
 type Root = NonEmpty.Heap
 
@@ -106,7 +107,7 @@ singleton w x = Node (Root w x [])
 {-# INLINE singleton #-}
 
 fromList :: Monus w => [(w, a)] -> Heap w a
-fromList = node . NonEmpty.mergeHeaps . map (uncurry NonEmpty.singleton)
+fromList = node . fmap (NonEmpty.mergeHeaps . fmap (uncurry NonEmpty.singleton)) . nonEmpty
 {-# INLINE fromList #-}
 
 -- | An implementation of Dijkstra's algorithm on 'Graph's.
