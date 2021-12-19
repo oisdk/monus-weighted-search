@@ -14,9 +14,9 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 module Control.Comonad.Heap
-  (HeapT(..), RootF(..)
+  (HeapT(..)
   ,Heap
-  ,popMinT,popMin
+  ,popMinT
   ,(<+>)
   ,(<><)
   ,mergeHeaps
@@ -136,11 +136,6 @@ mergeHeaps (x1 :| x2 : x3 : xs) = (x1 <+> x2) <+> mergeHeaps (x3 :| xs)
 popMinT :: (Monus w, Functor m) => HeapT w m a -> (w,  m (a, Maybe (HeapT w m a)))
 popMinT (w :< xh) = (w,  fmap (\(x :> xs) -> (x, fmap ((w <><) . mergeHeaps) (nonEmpty xs))) xh)
 {-# INLINE popMinT #-}
-
-popMin :: Monus w => Heap w a -> ((w, a), Maybe (Heap w a))
-popMin xs = case popMinT xs of
-  (w, Identity (x, xs)) -> ((w, x), xs)
-{-# INLINE popMin #-}
 
 singleton :: Applicative m => w -> a -> HeapT w m a
 singleton w x = w :< pure (x :> [])
