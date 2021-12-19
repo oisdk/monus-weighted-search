@@ -40,7 +40,8 @@ import Control.Monad (ap, join)
 import Control.Comonad
 import Control.Comonad.Cofree.Class
 import Data.Foldable (Foldable(foldl', foldr'))
-import Data.Traversable (mapAccumL)
+
+import Control.Monad.State.Strict (modify', runState)
 
 data HeapT w m a
   = !w :< m (RootF a (HeapT w m a))
@@ -175,11 +176,13 @@ instance (Monoid w, Monad m, Traversable m) => Applicative (HeapT w m) where
   (<*>) = ap
 
 instance (Monoid w, Monad m, Traversable m) => Monad (HeapT w m) where
-  (w :< xs) >>= k = uncurry (:<) (second join (mapAccumL act w xs))
+  (w1 :< xs) >>= k = w2 :< join ys
     where
-      act !w1 (x :> xs) = case k x of
-        w2 :< ys -> case w1 <> w2 of
-          !ws -> (ws, fmap (\(z :> zs) -> z :> (zs ++ map (>>= k) xs)) ys)
+      (ys, w2) = runState (traverse act xs) w1
+      act (x :> xs) = do
+        let w :< ys = k x
+        modify' (<> w)
+        return (fmap (\(z :> zs) -> z :> (zs ++ map (>>= k) xs)) ys)
   {-# INLINE (>>=) #-}
 
 instance Comonad m => Comonad (HeapT w m) where
