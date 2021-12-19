@@ -41,10 +41,51 @@ import GHC.Generics (Generic, Generic1)
 import Control.DeepSeq (NFData(..))
 import Control.Monad (ap)
 import Data.List.NonEmpty (NonEmpty(..), nonEmpty)
+import Data.Functor.Classes
+    ( Eq1(..),
+      Ord1(..),
+      Read1(liftReadPrec),
+      Show1(liftShowsPrec),
+      Eq2(..),
+      Ord2(..),
+      Read2(liftReadListPrec2, liftReadPrec2),
+      Show2(..) )
+import Text.Read
+    ( Read(readListPrec, readPrec),
+      Lexeme(Ident),
+      lexP,
+      parens,
+      prec,
+      step )
 
 data Heap w a
   = Root !w a [Heap w a]
   deriving (Show, Read, Eq, Ord, Functor, Foldable, Traversable, Data, Typeable, Generic, Generic1)
+
+instance Eq2 Heap where
+  liftEq2 e1 e2 (Root wx x xs) (Root wy y ys) = e1 wx wy && e2 x y && liftEq (liftEq2 e1 e2) xs ys
+  
+instance Ord2 Heap where
+  liftCompare2 c1 c2 (Root wx x xs) (Root wy y ys) =
+    c1 wx wy <> c2 x y <> liftCompare (liftCompare2 c1 c2) xs ys
+
+instance Show2 Heap where
+  liftShowsPrec2 s1 sl1 s2 sl2 = go where
+    go d (Root w x xs) =
+      showParen (d > 10) $ showString "Root " . s1 11 w . showString " " . s2 11 x . showString " " . liftShowsPrec go (liftShowList2 s1 sl1 s2 sl2) 11 xs
+
+instance Read2 Heap where
+  liftReadPrec2 r1 rl1 r2 rl2 = parens $ prec 10 $ do
+    Ident "Root" <- lexP
+    w <- step r1
+    x <- step r2
+    xs <- step (liftReadListPrec2 r1 rl1 r2 rl2)
+    return (Root w x xs)
+
+instance Eq w => Eq1 (Heap w) where liftEq = liftEq2 (==)
+instance Ord w => Ord1 (Heap w) where liftCompare = liftCompare2 compare
+instance Show w => Show1 (Heap w) where liftShowsPrec = liftShowsPrec2 showsPrec showList
+instance Read w => Read1 (Heap w) where liftReadPrec = liftReadPrec2 readPrec readListPrec
 
 instance (NFData w, NFData a) => NFData (Heap w a) where
   rnf (Root w x xs) = rnf w `seq` rnf x `seq` rnf xs
