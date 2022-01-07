@@ -17,8 +17,12 @@ module Control.Monad.Heap.List
   , ListCons(..)
     -- * Building the list
   , unfoldrM
+  , cons
+  , nil
+  , fromListT
     -- * Running the list
   , toListT
+  , foldListT
     -- * Transforming lists
   , catMaybesT
   , listMmap
@@ -187,6 +191,10 @@ cons :: Applicative m => a -> ListT m a -> ListT m a
 cons x xs = ListT (pure (x :- xs))
 {-# INLINE cons #-}
 
+nil :: Applicative m => ListT m a
+nil = ListT (pure Nil)
+{-# INLINE nil #-}
+
 instance Monad m => Applicative (ListT m) where
   pure x = ListT (pure (x :- ListT (pure Nil)))
   {-# INLINE pure #-}
@@ -236,6 +244,10 @@ instance Traversable m => Traversable (ListT m) where
 toListT :: Monad m => ListT m a -> m [a]
 toListT xs = foldListT (\ks xs k -> xs >>= flip ks k) (\x ks k -> ks (k . (:) x)) (\k -> k []) xs return
 {-# INLINE toListT #-}
+
+fromListT :: Applicative m => [a] -> ListT m a
+fromListT = foldr cons nil
+{-# INLINE fromListT #-}
 
 instance Monad m => Alternative (ListT m) where
   (<|>) = flip (mapListT cons)
