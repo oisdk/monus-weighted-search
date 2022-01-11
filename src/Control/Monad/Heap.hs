@@ -397,7 +397,7 @@ flattenT = runWriterT #. go
 --
 -- >>> flatten (fromList [('a',5), ('b', 3), ('c',6)])
 -- [('a',5),('b',3),('c',6)]
-flatten :: Monus w => Heap w a -> [(a, w)]
+flatten :: Monoid w => Heap w a -> [(a, w)]
 flatten = runIdentity #. toListT . flattenT
 {-# INLINE flatten #-}
 
@@ -415,7 +415,7 @@ search :: Monus w => Heap w a -> [(a, w)]
 search = runIdentity #. searchT
 {-# INLINE search #-}
 
-instance (Monus w, m ~ Identity) => IsList (HeapT w m a) where
+instance (Monoid w, m ~ Identity) => IsList (HeapT w m a) where
   type Item (HeapT w m a) = (a, w)
   fromList = fromList
   {-# INLINE fromList #-}

@@ -26,6 +26,7 @@ module Control.Monad.Heap.List
     -- * Transforming lists
   , catMaybesT
   , listMmap
+  , scanl1M
   ) where
 
 import Data.Bifunctor ( Bifunctor(first, bimap) )
@@ -61,6 +62,7 @@ import GHC.Exts (IsList)
 import qualified GHC.Exts as IsList
 import Data.List (unfoldr)
 import Data.Functor.Identity (Identity(..))
+import Data.Coerce (coerce)
 
 infixr 5 :-
 -- | The list constructor.
@@ -124,13 +126,10 @@ deriving newtype instance (forall x. NFData x => NFData (m x), NFData a) => NFDa
 
 -- | Unfold, monadically, a list from a seed.
 unfoldrM :: Functor m => (b -> m (Maybe (a, b))) -> b -> ListT m a
-unfoldrM f = go
+unfoldrM f = ListT #. fmap h . f
   where
-    go = ListT #. fmap h . f
-
     h Nothing = Nil
-    h (Just (x, xs)) = x :- go xs
-    {-# INLINE h #-}
+    h (Just (x, xs)) = x :- ListT (fmap h (f xs))
 {-# INLINE unfoldrM #-}
 
 instance (forall x. Show x => Show (m x), Show a) => Show (ListT m a) where
@@ -183,8 +182,13 @@ foldListT r c n = r h .# runListT
     h (x :- ListT xs) = c x (r h xs)
 {-# INLINE foldListT #-}
 
-mapListT :: Monad m => (a -> ListT m b -> ListT m b) -> ListT m b -> ListT m a -> ListT m b
-mapListT = foldListT (\k xs -> ListT (xs >>= (runListT #. k)))
+mapListT :: forall a m b. Monad m => (a -> ListT m b -> ListT m b) -> ListT m b -> ListT m a -> ListT m b
+mapListT =
+  foldListT 
+  ((coerce :: 
+ ((ListCons a (ListT m a) -> m (ListCons b (ListT m b))) -> m (ListCons a (ListT m a)) -> m (ListCons b (ListT m b))) ->
+ ((ListCons a (ListT m a) -> ListT m b) -> m (ListCons a (ListT m a)) -> ListT m b))
+  (=<<))
 {-# INLINE mapListT #-}
 
 cons :: Applicative m => a -> ListT m a -> ListT m a
@@ -196,7 +200,7 @@ nil = ListT (pure Nil)
 {-# INLINE nil #-}
 
 instance Monad m => Applicative (ListT m) where
-  pure x = ListT (pure (x :- ListT (pure Nil)))
+  pure x = cons x nil
   {-# INLINE pure #-}
   liftA2 f xs ys = mapListT (\x zs -> mapListT (cons . f x) zs ys) empty xs
   {-# INLINE liftA2 #-}
@@ -242,7 +246,7 @@ instance Traversable m => Traversable (ListT m) where
 
 -- | Flatten all of the effects in the list and collect the results.
 toListT :: Monad m => ListT m a -> m [a]
-toListT xs = foldListT (\ks xs k -> xs >>= flip ks k) (\x ks k -> ks (k . (:) x)) (\k -> k []) xs return
+toListT xs = foldListT (\k mx xs -> mx >>= flip k xs) (\x k xs -> k (x : xs)) (return . reverse) xs []
 {-# INLINE toListT #-}
 
 fromListT :: Applicative m => [a] -> ListT m a
@@ -313,3 +317,10 @@ instance MonadCont m => MonadCont (ListT m) where
 catMaybesT :: Monad m => (a -> Maybe b) -> ListT m a -> ListT m b
 catMaybesT f = mapListT (maybe id cons . f) empty
 {-# INLINE catMaybesT #-}
+
+scanl1M :: Functor m => (a -> a -> a) -> ListT m a -> ListT m a
+scanl1M f xs = foldListT (\k mx x -> ListT (fmap (`k` x) mx)) h (const Nil) xs Nothing
+  where
+    h x k Nothing  = x :- k (Just x)
+    h x k (Just y) = let z = f y x in z :- k (Just z)
+{-# INLINE scanl1M #-}
