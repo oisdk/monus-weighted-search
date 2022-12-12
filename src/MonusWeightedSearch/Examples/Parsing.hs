@@ -23,6 +23,7 @@ import Control.Monad.Heap
 import Control.Monad.State
 import Data.Monus.Prob
 import Control.Monad.Writer
+import Control.Monad (guard)
 
 -- | A standard parser type.
 --

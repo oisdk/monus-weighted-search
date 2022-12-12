@@ -39,7 +39,8 @@ import Control.Monad.Trans ( MonadTrans(..) )
 import Control.Monad.State ( MonadState(..) )
 import Control.Monad.Except ( MonadError(..) )
 import Control.Monad.Reader ( MonadReader(..) )
-import Control.Monad.Writer ( Alt(Alt), MonadWriter(..) )
+import Control.Monad.Writer ( MonadWriter(..) )
+import Data.Monoid (Alt(Alt))
 import Control.Monad.Cont ( MonadCont(..) )
 import Test.QuickCheck
     ( Arbitrary(..),

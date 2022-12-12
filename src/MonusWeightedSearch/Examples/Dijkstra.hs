@@ -33,6 +33,7 @@ import Prelude hiding (head)
 import Control.Monad.State.Strict
 import Control.Applicative
 import Control.Monad.Writer
+import Control.Monad
 import Data.Foldable
 
 import Data.Monus.Dist
