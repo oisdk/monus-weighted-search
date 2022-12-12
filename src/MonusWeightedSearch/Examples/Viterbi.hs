@@ -18,6 +18,7 @@ module MonusWeightedSearch.Examples.Viterbi where
 import Control.Monad.Heap
 import Data.Monus.Prob
 import Control.Monad.Writer
+import Control.Monad (guard)
 import Data.Maybe
 
 -- $setup
