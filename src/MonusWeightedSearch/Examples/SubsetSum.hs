@@ -14,6 +14,7 @@ import Control.Monad.Heap
 import Data.Monus.Dist
 import Control.Monad.Writer
 import Data.Maybe
+import Control.Monad (filterM, guard)
 
 -- | A weight for the inclusion or exclusion of an element.
 --
